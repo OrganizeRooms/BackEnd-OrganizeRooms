@@ -1,5 +1,6 @@
 package br.com.organizerooms.security;
 
+import br.com.organizerooms.services.JwtUserDetailsServiceImpl;
 import java.io.IOException;
 
 import javax.servlet.FilterChain;
@@ -24,6 +25,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
 	
 	@Autowired
 	private UserDetailsService userDetailsService;
+        
 	@Autowired
 	private JwtTokenUtil jwtTokenUtil;
 

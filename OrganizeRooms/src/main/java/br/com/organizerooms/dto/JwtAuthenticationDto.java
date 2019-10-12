@@ -5,34 +5,34 @@ import javax.validation.constraints.NotEmpty;
 
 public class JwtAuthenticationDto {
 
-	private String email;
-	private String senha;
+	private String pesEmail;
+	private String pesSenha;
 
 	public JwtAuthenticationDto() {
 	}
 
 	@NotEmpty(message = "Email não pode ser vazio.")
 	//@Email(message = "Email inválido.")
-	public String getEmail() {
-		return email;
+	public String getPesEmail() {
+		return pesEmail;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setPesEmail(String pesEmail) {
+		this.pesEmail = pesEmail;
 	}
 
 	@NotEmpty(message = "Senha não pode ser vazia.")
-	public String getSenha() {
-		return senha;
+	public String getPesSenha() {
+		return pesSenha;
 	}
 
-	public void setSenha(String senha) {
-		this.senha = senha;
+	public void setPesSenha(String pesSenha) {
+		this.pesSenha = pesSenha;
 	}
 
 	@Override
 	public String toString() {
-		return "JwtAuthenticationRequestDto [email=" + email + ", senha=" + senha + "]";
+		return "JwtAuthenticationRequestDto [pesEmail=" + pesEmail + ", pesSenha=" + pesSenha + "]";
 	}
 
 }

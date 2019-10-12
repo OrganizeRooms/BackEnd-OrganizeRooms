@@ -13,7 +13,7 @@ public class Response<T> {
 
     private HashMap<?, ?> dadosMap;
 
-    private Optional<Usuario> usuario;
+    private Optional<Pessoa> pessoa;
 
     public Response(List<String> erros, HashMap<?, ?> dadosMap) {
         this.erros = erros;
@@ -55,12 +55,12 @@ public class Response<T> {
         this.dadosMap = dadosMap;
     }
 
-    public Optional<Usuario> getUsuario() {
-        return usuario;
+    public Optional<Pessoa> getPessoa() {
+        return pessoa;
     }
 
-    public void setUsuario(Optional<Usuario> usuario) {
-        this.usuario = usuario;
+    public void setPessoa(Optional<Pessoa> pessoa) {
+        this.pessoa = pessoa;
     }
 
 }

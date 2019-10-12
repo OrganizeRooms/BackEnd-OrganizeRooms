@@ -26,8 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.organizerooms.dto.JwtAuthenticationDto;
 import br.com.organizerooms.dto.TokenDto;
 import br.com.organizerooms.models.Response;
-import br.com.organizerooms.services.UsuarioService;
-import br.com.organizerooms.services.UsuarioServiceImpl;
+import br.com.organizerooms.services.PessoaService;
 import br.com.organizerooms.utils.JwtTokenUtil;
 import java.util.HashMap;
 import org.springframework.http.HttpHeaders;
@@ -51,7 +50,7 @@ public class AuthenticationController {
     private UserDetailsService userDetailsService;
     
     @Autowired
-    private UsuarioServiceImpl usuarioServiceImpl;
+    private PessoaService pessoaService;
 
     /**
      * Gera e retorna um novo token JWT.
@@ -75,17 +74,17 @@ public class AuthenticationController {
             responseHeaders.setAll(resp);
             return ResponseEntity.badRequest().body(response);
         }
-        log.info("Gerando token para o email {}.", authenticationDto.getEmail());
+        log.info("Gerando token para o email {}.", authenticationDto.getPesEmail());
         Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(authenticationDto.getEmail(), authenticationDto.getSenha()));
+                new UsernamePasswordAuthenticationToken(authenticationDto.getPesEmail(), authenticationDto.getPesSenha()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationDto.getEmail());
+        UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationDto.getPesEmail());
         String token = jwtTokenUtil.obterToken(userDetails);
         response.setData(new TokenDto(token));
         
         
 
-        response.setUsuario(usuarioServiceImpl.buscarPorEmail(userDetails.getUsername()));
+        response.setPessoa(pessoaService.buscarPessoaPorEmail(userDetails.getUsername()));
         
         return ResponseEntity.ok(response);
     }

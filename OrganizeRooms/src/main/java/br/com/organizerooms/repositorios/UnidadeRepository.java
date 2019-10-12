@@ -5,7 +5,7 @@
  */
 package br.com.organizerooms.repositorios;
 
-import br.com.organizerooms.models.Ingrediente;
+import br.com.organizerooms.models.Unidade;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -13,14 +13,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
- * @author Leandro Prado
+ * @author Lucas Jansen
  */
 @Repository
 @Transactional(readOnly = true )
-public interface IngrendienteRepository extends JpaRepository <Ingrediente, Long >{
+public interface UnidadeRepository extends JpaRepository <Unidade, Long >{
     
-    public List<Ingrediente> findAllByOrderByNome(); 
-    
-    public Ingrediente findByNome(String nome); 
+    public List<Unidade> findAllByOrderByUniNome(); 
+   
     
 }

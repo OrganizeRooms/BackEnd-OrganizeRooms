@@ -10,7 +10,7 @@
     <packaging>jar</packaging>
 
     <name>OrganizeRooms</name>
-    <description>Curso Api Rest Full </description>
+    <description>OrganizeRooms </description>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
