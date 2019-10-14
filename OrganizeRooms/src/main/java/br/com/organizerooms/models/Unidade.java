@@ -48,7 +48,8 @@ public class Unidade implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     @CreatedDate
     private Date uniDtCadastro;
-
+    
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "uniPesCadastro")
     @CreatedBy
@@ -58,7 +59,8 @@ public class Unidade implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     @LastModifiedDate
     private Date uniDtAtualizacao;
-
+    
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "uniPesAtualizacao")
     @LastModifiedBy

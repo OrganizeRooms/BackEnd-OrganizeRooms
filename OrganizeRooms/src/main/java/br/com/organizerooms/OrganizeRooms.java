@@ -11,6 +11,7 @@ import br.com.organizerooms.repositorios.PessoaRepository;
 import br.com.organizerooms.repositorios.UnidadeRepository;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Optional;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @SpringBootApplication
@@ -39,81 +40,7 @@ public class OrganizeRooms implements CommandLineRunner {
                 null,
                 null,
                 null);
-        Unidade unidade2 = new Unidade(null,
-                "Rio de Janeiro",
-                true,
-                null,
-                null,
-                null,
-                null);
-        Unidade unidade3 = new Unidade(null,
-                "Blumenau",
-                true,
-                null,
-                null,
-                null,
-                null);
-        Unidade unidade4 = new Unidade(null,
-                "Apiuna",
-                true,
-                null,
-                null,
-                null,
-                null);
-        Unidade unidade5 = new Unidade(null,
-                "Florianópolis",
-                true,
-                null,
-                null,
-                null,
-                null);
-        Unidade unidade6 = new Unidade(null,
-                "Bahia",
-                true,
-                null,
-                null,
-                null,
-                null);
-        Unidade unidade7 = new Unidade(null,
-                "Lontras",
-                true,
-                null,
-                null,
-                null,
-                null);
-        Unidade unidade8 = new Unidade(null,
-                "Pomerode",
-                true,
-                null,
-                null,
-                null,
-                null);
-        Unidade unidade9 = new Unidade(null,
-                "Belo Horizonte",
-                true,
-                null,
-                null,
-                null,
-                null);
-        Unidade unidade10 = new Unidade(null,
-                "Acre",
-                true,
-                null,
-                null,
-                null,
-                null);
-
         unidadeRepository.save(unidade1);
-        unidadeRepository.save(unidade2);
-        unidadeRepository.save(unidade3);
-        unidadeRepository.save(unidade4);
-        unidadeRepository.save(unidade5);
-        unidadeRepository.save(unidade6);
-        unidadeRepository.save(unidade7);
-        unidadeRepository.save(unidade8);
-        unidadeRepository.save(unidade9);
-        unidadeRepository.save(unidade10);
-        
 
         Pessoa pes = new Pessoa(null,
                 "ADIM",
@@ -128,8 +55,92 @@ public class OrganizeRooms implements CommandLineRunner {
                 null,
                 null,
                 null);
-
         pessoaRepository.save(pes);
+        
+        Optional<Unidade> optUni = unidadeRepository.findById(1L);
+        Unidade uni = optUni.get();
+        unidade1 = new Unidade(uni.getUniId(),
+                uni.getUniNome(),
+                uni.getUniAtiva(),
+                uni.getUniDtCadastro(),
+                pes,
+                uni.getUniDtAtualizacao(),
+                pes);
+        unidadeRepository.save(unidade1);
+
+        Unidade unidade2 = new Unidade(null,
+                "Rio de Janeiro",
+                true,
+                null,
+                pes,
+                null,
+                pes);
+        Unidade unidade3 = new Unidade(null,
+                "Blumenau",
+                true,
+                null,
+                pes,
+                null,
+                pes);
+        Unidade unidade4 = new Unidade(null,
+                "Apiuna",
+                false,
+                null,
+                pes,
+                null,
+                pes);
+        Unidade unidade5 = new Unidade(null,
+                "Florianópolis",
+                false,
+                null,
+                pes,
+                null,
+                pes);
+        Unidade unidade6 = new Unidade(null,
+                "Bahia",
+                true,
+                null,
+                pes,
+                null,
+                pes);
+        Unidade unidade7 = new Unidade(null,
+                "Lontras",
+                false,
+                null,
+                pes,
+                null,
+                pes);
+        Unidade unidade8 = new Unidade(null,
+                "Pomerode",
+                true,
+                null,
+                pes,
+                null,
+                pes);
+        Unidade unidade9 = new Unidade(null,
+                "Belo Horizonte",
+                false,
+                null,
+                pes,
+                null,
+                pes);
+        Unidade unidade10 = new Unidade(null,
+                "Acre",
+                true,
+                null,
+                pes,
+                null,
+                pes);
+
+        unidadeRepository.save(unidade2);
+        unidadeRepository.save(unidade3);
+        unidadeRepository.save(unidade4);
+        unidadeRepository.save(unidade5);
+        unidadeRepository.save(unidade6);
+        unidadeRepository.save(unidade7);
+        unidadeRepository.save(unidade8);
+        unidadeRepository.save(unidade9);
+        unidadeRepository.save(unidade10);
 
     }
 }

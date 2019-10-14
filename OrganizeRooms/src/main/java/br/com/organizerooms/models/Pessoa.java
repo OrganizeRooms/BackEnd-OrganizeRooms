@@ -50,7 +50,7 @@ public class Pessoa implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(name = "pesPermissao")
     private PerfilEnum pesPermissao;
-
+    
     @ManyToOne
     @JoinColumn(name = "uniId")
     private Unidade unidade;
@@ -91,6 +91,7 @@ public class Pessoa implements Serializable {
 
     @Column
     @Temporal(TemporalType.TIMESTAMP)
+    @LastModifiedDate
     private Date pesDtAtualizacao;
 
     public Pessoa() {
