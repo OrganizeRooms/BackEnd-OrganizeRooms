@@ -34,8 +34,8 @@ public class UnidadeService {
         return this.unidadeRepository.save(unidade);
     }
 
-    public Optional<Unidade> buscarUnidadePorId(Long id) {
-        return this.unidadeRepository.findById(id);
+    public Unidade buscarUnidadePorId(Long id) {
+        return this.unidadeRepository.findById(id).get();
     }
 
 }

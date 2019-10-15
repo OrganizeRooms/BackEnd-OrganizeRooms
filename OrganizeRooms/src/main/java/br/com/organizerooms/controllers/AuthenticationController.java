@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.organizerooms.dto.JwtAuthenticationDto;
 import br.com.organizerooms.dto.TokenDto;
+import br.com.organizerooms.models.Pessoa;
 import br.com.organizerooms.models.Response;
 import br.com.organizerooms.services.PessoaService;
 import br.com.organizerooms.utils.JwtTokenUtil;
@@ -48,7 +49,7 @@ public class AuthenticationController {
 
     @Autowired
     private UserDetailsService userDetailsService;
-    
+
     @Autowired
     private PessoaService pessoaService;
 
@@ -57,9 +58,8 @@ public class AuthenticationController {
      *
      * @param authenticationDto
      * @param result
-     * @return ResponseEntity<Response<TokenDto>>
-	 * @thr
-     * ows AuthenticationException
+     * @return ResponseEntity<Response<TokenDto>> @thr ows
+     * AuthenticationException
      */
     @PostMapping
     public ResponseEntity<Response<TokenDto>> gerarTokenJwt(@Valid @RequestBody JwtAuthenticationDto authenticationDto,
@@ -74,6 +74,7 @@ public class AuthenticationController {
             responseHeaders.setAll(resp);
             return ResponseEntity.badRequest().body(response);
         }
+
         log.info("Gerando token para o email {}.", authenticationDto.getPesEmail());
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(authenticationDto.getPesEmail(), authenticationDto.getPesSenha()));
@@ -81,11 +82,9 @@ public class AuthenticationController {
         UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationDto.getPesEmail());
         String token = jwtTokenUtil.obterToken(userDetails);
         response.setData(new TokenDto(token));
-        
-        
 
         response.setPessoa(pessoaService.buscarPessoaPorEmail(userDetails.getUsername()));
-        
+
         return ResponseEntity.ok(response);
     }
 
@@ -115,6 +114,38 @@ public class AuthenticationController {
         response.setData(new TokenDto(refreshedToken));
 
         return ResponseEntity.ok(response);
+    }
+
+    @PostMapping(value = "/verificarEmail")
+    public ResponseEntity<Response> addPessoa(@RequestBody JwtAuthenticationDto email) {
+        Optional<Pessoa> pessoa = pessoaService.buscarPessoaPorEmail(email.getPesEmail());
+
+        Boolean resposta = false;
+        if (pessoa.isPresent()) {
+            resposta = true;
+        }
+
+        Response response = new Response(resposta);
+        return ResponseEntity.ok().body(response);
+    }
+
+    @PostMapping(value = "/novaSenha")
+    public ResponseEntity<Response> novaSenha(@RequestBody JwtAuthenticationDto novaSenha) {
+        Optional<Pessoa> pessoa = pessoaService.buscarPessoaPorEmail(novaSenha.getPesEmail());
+
+        Pessoa novaPessoa = new Pessoa();
+        Boolean resposta = false;
+        if (pessoa.get().getPesSenha().equals(novaSenha.getPesSenha())) {
+            
+            pessoa.get().setPesSenha(novaSenha.getPesNovaSenha());
+            novaPessoa = this.pessoaService.addPessoa(pessoa.get()); 
+            if(novaPessoa != null && !novaPessoa.getPesSenha().equals(novaSenha.getPesSenha())){
+                resposta = true;
+            }
+        }
+        
+        Response response = new Response(resposta);
+        return ResponseEntity.ok().body(response);
     }
 
 }
