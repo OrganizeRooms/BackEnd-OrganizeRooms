@@ -58,7 +58,7 @@ public class UnidadeController {
     @PreAuthorize("hasAnyRole('ADMIN', 'PESSOA')")
     public ResponseEntity<Response> buscarUnidadePorId(@PathVariable String id) {
 
-        Optional<Unidade> lista = unidadeService.buscarUnidadePorId(Long.parseLong(id));
+        Unidade lista = unidadeService.buscarUnidadePorId(Long.parseLong(id));
         Response response = new Response(lista);
         return ResponseEntity.ok().body(response);
     }

@@ -44,13 +44,15 @@ public class Pessoa implements Serializable {
     @Column
     private String pesEmail;
 
-    @Column(updatable = false)
+    @JsonIgnore
+    //@Column(updatable = false)
+    @Column
     private String pesSenha;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "pesPermissao")
     private PerfilEnum pesPermissao;
-    
+
     @ManyToOne
     @JoinColumn(name = "uniId")
     private Unidade unidade;
@@ -64,7 +66,7 @@ public class Pessoa implements Serializable {
     private List<Unidade> unidadeAtualizacao;
 
     @Column
-    private Integer pesDdd;
+    private String pesDdd;
 
     @Column
     private String pesTelefone;
@@ -98,11 +100,15 @@ public class Pessoa implements Serializable {
     }
 
     public Pessoa(Long pesId, String pesNome, String pesEmail, String pesSenha, PerfilEnum pesPermissao, Unidade unidade,
-            Integer pesDdd, String pesTelefone, String pesTipoInclusao, Pessoa pesCadastro, Date pesDtCadastro, Pessoa pesAtualizacao, Date pesDtAtualizacao) {
+            String pesDdd, String pesTelefone, String pesTipoInclusao, Pessoa pesCadastro, Date pesDtCadastro, Pessoa pesAtualizacao, Date pesDtAtualizacao) {
         this.pesId = pesId;
         this.pesNome = pesNome;
         this.pesEmail = pesEmail;
-        this.pesSenha = SenhaUtils.gerarBCrypt(pesSenha);
+        if (pesSenha.equalsIgnoreCase("senha")) {
+            this.pesSenha = pesSenha;
+        } else {
+            this.pesSenha = SenhaUtils.gerarBCrypt(pesSenha);
+        }
         this.pesPermissao = pesPermissao;
         this.unidade = unidade;
         this.pesDdd = pesDdd;
@@ -151,7 +157,11 @@ public class Pessoa implements Serializable {
     }
 
     public void setPesSenha(String pesSenha) {
-        this.pesSenha = pesSenha;
+        if (pesSenha.equalsIgnoreCase("senha")) {
+            this.pesSenha = pesSenha;
+        } else {
+            this.pesSenha = SenhaUtils.gerarBCrypt(pesSenha);
+        }
     }
 
     public String getPesNome() {
@@ -184,7 +194,7 @@ public class Pessoa implements Serializable {
 
     public void setUnidade(Unidade unidade) {
         this.unidade = unidade;
-    } 
+    }
 
     public List<Unidade> getUnidadeAtualizacao() {
         return unidadeAtualizacao;
@@ -194,11 +204,11 @@ public class Pessoa implements Serializable {
         this.unidadeAtualizacao = unidadeAtualizacao;
     }
 
-    public Integer getPesDdd() {
+    public String getPesDdd() {
         return pesDdd;
     }
 
-    public void setPesDdd(Integer pesDdd) {
+    public void setPesDdd(String pesDdd) {
         this.pesDdd = pesDdd;
     }
 

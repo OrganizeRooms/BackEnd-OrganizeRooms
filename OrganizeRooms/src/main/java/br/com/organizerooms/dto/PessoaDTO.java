@@ -26,7 +26,7 @@ public class PessoaDTO {
 
     private Unidade unidade;
 
-    private Integer pesDdd;
+    private String pesDdd;
 
     private String pesTelefone;
 
@@ -46,7 +46,7 @@ public class PessoaDTO {
     }
 
     public PessoaDTO(Long pesId, String pesNome, String pesEmail, String pesSenha, PerfilEnum pesPermissao,
-            String pesDescricaoPermissao, Unidade unidade, Integer pesDdd, String pesTelefone, String pesTipoInclusao,
+            String pesDescricaoPermissao, Unidade unidade, String pesDdd, String pesTelefone, String pesTipoInclusao,
             Pessoa pesCadastro, Date pesDtCadastro, Pessoa pesAtualizacao, Date pesDtAtualizacao) {
         this.pesId = pesId;
         this.pesNome = pesNome;
@@ -143,11 +143,11 @@ public class PessoaDTO {
         this.unidade = unidade;
     }
 
-    public Integer getPesDdd() {
+    public String getPesDdd() {
         return pesDdd;
     }
 
-    public void setPesDdd(Integer pesDdd) {
+    public void setPesDdd(String pesDdd) {
         this.pesDdd = pesDdd;
     }
 
