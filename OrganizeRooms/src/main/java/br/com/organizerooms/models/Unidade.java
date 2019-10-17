@@ -67,7 +67,7 @@ public class Unidade implements Serializable {
     private Pessoa uniPesAtualizacao;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "unidade")
+    @OneToMany(mappedBy = "pesUnidade")
     private List<Pessoa> pessoas;
 
     public Unidade() {

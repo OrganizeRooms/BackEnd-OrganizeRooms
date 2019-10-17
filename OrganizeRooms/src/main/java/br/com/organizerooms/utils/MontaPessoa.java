@@ -50,7 +50,7 @@ public class MontaPessoa {
             PessoaDTO pessoaMonta = new PessoaDTO(null, // id
                     pessoa[pessoa.length-6],  // nome
                     pessoa[pessoa.length-5],  // email
-                    pessoa[pessoa.length-4],  // senha
+                   // pessoa[pessoa.length-4],  // senha
                     "admin".equals(pessoa[pessoa.length-3]) ? PerfilEnum.ROLE_ADMIN : PerfilEnum.ROLE_USUARIO, // pesPermissao
                     "admin".equals(pessoa[pessoa.length-3]) ? "Administrador" : "Usuario", //PesDescricaoPermisao
                     unidade, //Unidade

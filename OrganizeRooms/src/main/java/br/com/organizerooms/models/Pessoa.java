@@ -55,7 +55,7 @@ public class Pessoa implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "uniId")
-    private Unidade unidade;
+    private Unidade pesUnidade;
 
     @JsonIgnore
     @OneToMany(mappedBy = "uniPesCadastro")
@@ -99,7 +99,7 @@ public class Pessoa implements Serializable {
     public Pessoa() {
     }
 
-    public Pessoa(Long pesId, String pesNome, String pesEmail, String pesSenha, PerfilEnum pesPermissao, Unidade unidade,
+    public Pessoa(Long pesId, String pesNome, String pesEmail, String pesSenha, PerfilEnum pesPermissao, Unidade pesUnidade,
             String pesDdd, String pesTelefone, String pesTipoInclusao, Pessoa pesCadastro, Date pesDtCadastro, Pessoa pesAtualizacao, Date pesDtAtualizacao) {
         this.pesId = pesId;
         this.pesNome = pesNome;
@@ -110,7 +110,7 @@ public class Pessoa implements Serializable {
             this.pesSenha = SenhaUtils.gerarBCrypt(pesSenha);
         }
         this.pesPermissao = pesPermissao;
-        this.unidade = unidade;
+        this.pesUnidade = pesUnidade;
         this.pesDdd = pesDdd;
         this.pesTelefone = pesTelefone;
         this.pesTipoInclusao = pesTipoInclusao;
@@ -124,7 +124,6 @@ public class Pessoa implements Serializable {
         this.pesId = obj.getPesId();
         this.pesNome = obj.getPesNome();
         this.pesEmail = obj.getPesEmail();
-        this.pesSenha = obj.getPesSenha();
         this.pesPermissao = obj.getPesPermissao();
         this.pesDdd = obj.getPesDdd();
         this.pesTelefone = obj.getPesTelefone();
@@ -133,15 +132,7 @@ public class Pessoa implements Serializable {
         this.pesDtCadastro = obj.getPesDtCadastro();
         this.pesAtualizacao = obj.getPesAtualizacao();
         this.pesDtAtualizacao = obj.getPesDtAtualizacao();
-    }
-
-    private String obterSenhaCrypt(PessoaDTO obj) {
-
-        if (obj.getPesId() == null) {
-            return SenhaUtils.gerarBCrypt(obj.getPesSenha());
-        } else {
-            return obj.getPesSenha();
-        }
+        this.pesUnidade = obj.getPesUnidade();
     }
 
     public Long getPesId() {
@@ -188,13 +179,15 @@ public class Pessoa implements Serializable {
         this.pesPermissao = pesPermissao;
     }
 
-    public Unidade getUnidade() {
-        return unidade;
+    public Unidade getPesUnidade() {
+        return pesUnidade;
     }
 
-    public void setUnidade(Unidade unidade) {
-        this.unidade = unidade;
+    public void setPesUnidade(Unidade pesUnidade) {
+        this.pesUnidade = pesUnidade;
     }
+
+
 
     public List<Unidade> getUnidadeAtualizacao() {
         return unidadeAtualizacao;
@@ -292,7 +285,7 @@ public class Pessoa implements Serializable {
 
     @Override
     public String toString() {
-        return "Pessoa{" + "pesId=" + pesId + ", pesNome=" + pesNome + ", pesEmail=" + pesEmail + ", pesSenha=" + pesSenha + ", pesPermissao=" + pesPermissao + ", unidade=" + unidade + ", unidadeCadastro=" + unidadeCadastro + ", unidadeAtualizacao=" + unidadeAtualizacao + ", pesDdd=" + pesDdd + ", pesTelefone=" + pesTelefone + ", pesTipoInclusao=" + pesTipoInclusao + ", pesCadastro=" + pesCadastro + ", pesDtCadastro=" + pesDtCadastro + ", pesAtualizacao=" + pesAtualizacao + ", pesDtAtualizacao=" + pesDtAtualizacao + '}';
+        return "Pessoa{" + "pesId=" + pesId + ", pesNome=" + pesNome + ", pesEmail=" + pesEmail + ", pesSenha=" + pesSenha + ", pesPermissao=" + pesPermissao + ", pesUnidade=" + pesUnidade + ", unidadeCadastro=" + unidadeCadastro + ", unidadeAtualizacao=" + unidadeAtualizacao + ", pesDdd=" + pesDdd + ", pesTelefone=" + pesTelefone + ", pesTipoInclusao=" + pesTipoInclusao + ", pesCadastro=" + pesCadastro + ", pesDtCadastro=" + pesDtCadastro + ", pesAtualizacao=" + pesAtualizacao + ", pesDtAtualizacao=" + pesDtAtualizacao + '}';
     }
 
 }
