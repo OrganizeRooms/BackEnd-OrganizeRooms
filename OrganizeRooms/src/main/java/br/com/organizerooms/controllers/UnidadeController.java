@@ -37,7 +37,7 @@ public class UnidadeController {
     UnidadeService unidadeService;
 
     @GetMapping
-    @PreAuthorize("hasAnyRole('ADMIN', 'PESSOA')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
     public ResponseEntity<Response> buscarTodasUnidades() {
         List<Unidade> list = unidadeService.buscarTodasUnidades();
         List<UnidadeDTO> listDto = list.stream().map(obj -> new UnidadeDTO(obj)).collect(Collectors.toList());
@@ -46,7 +46,7 @@ public class UnidadeController {
     }
 
     @PostMapping
-    @PreAuthorize("hasAnyRole('ADMIN', 'PESSOA')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public ResponseEntity<Response> addOrUpdateUnidade(@RequestBody UnidadeDTO unidade) {
         Unidade newUnidade = new Unidade(unidade);
         UnidadeDTO uniDTO = new UnidadeDTO(unidadeService.addUnidade(newUnidade));
@@ -55,7 +55,7 @@ public class UnidadeController {
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAnyRole('ADMIN', 'PESSOA')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
     public ResponseEntity<Response> buscarUnidadePorId(@PathVariable String id) {
 
         Unidade lista = unidadeService.buscarUnidadePorId(Long.parseLong(id));

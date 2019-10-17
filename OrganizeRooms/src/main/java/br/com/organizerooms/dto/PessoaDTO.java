@@ -18,13 +18,12 @@ public class PessoaDTO {
 
     private String pesEmail;
 
-    private String pesSenha;
-
+   // private String pesSenha;
     private PerfilEnum pesPermissao;
 
     private String pesDescricaoPermissao;
 
-    private Unidade unidade;
+    private Unidade pesUnidade;
 
     private String pesDdd;
 
@@ -45,16 +44,15 @@ public class PessoaDTO {
     public PessoaDTO() {
     }
 
-    public PessoaDTO(Long pesId, String pesNome, String pesEmail, String pesSenha, PerfilEnum pesPermissao,
+    public PessoaDTO(Long pesId, String pesNome, String pesEmail, PerfilEnum pesPermissao,
             String pesDescricaoPermissao, Unidade unidade, String pesDdd, String pesTelefone, String pesTipoInclusao,
             Pessoa pesCadastro, Date pesDtCadastro, Pessoa pesAtualizacao, Date pesDtAtualizacao) {
         this.pesId = pesId;
         this.pesNome = pesNome;
         this.pesEmail = pesEmail;
-        this.pesSenha = pesSenha;
         this.pesPermissao = pesPermissao;
         this.pesDescricaoPermissao = pesDescricaoPermissao;
-        this.unidade = unidade;
+        this.pesUnidade = pesUnidade;
         this.pesDdd = pesDdd;
         this.pesTelefone = pesTelefone;
         this.pesTipoInclusao = pesTipoInclusao;
@@ -68,10 +66,9 @@ public class PessoaDTO {
         this.pesId = obj.getPesId();
         this.pesNome = obj.getPesNome();
         this.pesEmail = obj.getPesEmail();
-        this.pesSenha = obj.getPesSenha();
         this.pesPermissao = obj.getPesPermissao();
         this.pesDescricaoPermissao = this.getPesDescricaoPermissao();
-        this.unidade = obj.getUnidade();
+        this.pesUnidade = obj.getPesUnidade();
         this.pesDdd = obj.getPesDdd();
         this.pesTelefone = obj.getPesTelefone();
         this.pesTipoInclusao = obj.getPesTipoInclusao();
@@ -119,14 +116,6 @@ public class PessoaDTO {
         this.pesEmail = pesEmail;
     }
 
-    public String getPesSenha() {
-        return pesSenha;
-    }
-
-    public void setPesSenha(String pesSenha) {
-        this.pesSenha = pesSenha;
-    }
-
     public PerfilEnum getPesPermissao() {
         return pesPermissao;
     }
@@ -135,12 +124,12 @@ public class PessoaDTO {
         this.pesPermissao = pesPermissao;
     }
 
-    public Unidade getUnidade() {
-        return unidade;
+    public Unidade getPesUnidade() {
+        return pesUnidade;
     }
 
-    public void setUnidade(Unidade unidade) {
-        this.unidade = unidade;
+    public void setPesUnidade(Unidade pesUnidade) {
+        this.pesUnidade = pesUnidade;
     }
 
     public String getPesDdd() {
@@ -223,7 +212,7 @@ public class PessoaDTO {
 
     @Override
     public String toString() {
-        return "PessoaDTO{" + "pesId=" + pesId + ", pesNome=" + pesNome + ", pesEmail=" + pesEmail + ", pesSenha=" + pesSenha + ", pesPermissao=" + pesPermissao + ", pesDescricaoPermissao=" + pesDescricaoPermissao + ", unidade=" + unidade + ", pesDdd=" + pesDdd + ", pesTelefone=" + pesTelefone + ", pesTipoInclusao=" + pesTipoInclusao + ", pesCadastro=" + pesCadastro + ", pesDtCadastro=" + pesDtCadastro + ", pesAtualizacao=" + pesAtualizacao + ", pesDtAtualizacao=" + pesDtAtualizacao + '}';
+        return "PessoaDTO{" + "pesId=" + pesId + ", pesNome=" + pesNome + ", pesEmail=" + pesEmail + ", pesPermissao=" + pesPermissao + ", pesDescricaoPermissao=" + pesDescricaoPermissao + ", pesUnidade=" + pesUnidade + ", pesDdd=" + pesDdd + ", pesTelefone=" + pesTelefone + ", pesTipoInclusao=" + pesTipoInclusao + ", pesCadastro=" + pesCadastro + ", pesDtCadastro=" + pesDtCadastro + ", pesAtualizacao=" + pesAtualizacao + ", pesDtAtualizacao=" + pesDtAtualizacao + '}';
     }
 
 }

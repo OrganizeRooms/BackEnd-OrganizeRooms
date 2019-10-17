@@ -39,7 +39,7 @@ public class PessoaController {
     SenhaUtils senhaUtils;
 
     @GetMapping
-    @PreAuthorize("hasAnyRole('ADMIN', 'PESSOA')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
     public ResponseEntity<Response> buscarTodasPessoas() {
         List<Pessoa> list = pessoaService.buscarTodasPessoas();
         List<PessoaDTO> listDto = list.stream().map(obj -> new PessoaDTO(obj)).collect(Collectors.toList());
@@ -48,11 +48,33 @@ public class PessoaController {
     }
 
     @PostMapping
-    @PreAuthorize("hasAnyRole('ADMIN', 'PESSOA')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public ResponseEntity<Response> addPessoa(@RequestBody PessoaDTO pessoa) {
         Pessoa newPessoa = new Pessoa(pessoa);
+
+        if (newPessoa.getPesId() == 0) {
+            newPessoa.setPesSenha("senha");
+        }
+
         PessoaDTO pesDTO = new PessoaDTO(pessoaService.addPessoa(newPessoa));
         Response response = new Response(pesDTO);
+        return ResponseEntity.ok().body(response);
+    }
+
+    @PostMapping(value = "/resetarSenha") 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
+    public ResponseEntity<Response> resetarSenha(@RequestBody PessoaDTO pessoa) {
+        Pessoa newPessoa = new Pessoa(pessoa);
+ 
+        newPessoa.setPesSenha("senha");
+
+        newPessoa = pessoaService.addPessoa(newPessoa);
+        Boolean resposta = false;
+        if (newPessoa.getPesSenha().equals("senha")) {
+            resposta = true;
+        }
+
+        Response response = new Response(resposta);
         return ResponseEntity.ok().body(response);
     }
 

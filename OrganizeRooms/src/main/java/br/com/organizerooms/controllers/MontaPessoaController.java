@@ -30,7 +30,7 @@ public class MontaPessoaController {
     UnidadeService unidadeService;
     
     @PostMapping
-    @PreAuthorize("hasAnyRole('ADMIN', 'PESSOA')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public void enviaArquivo(String arquivo, Long id) throws IOException{
          Unidade unidade = unidadeService.buscarUnidadePorId(id);
          monta.run(arquivo, unidade);
