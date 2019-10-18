@@ -6,6 +6,7 @@
 package br.com.organizerooms.controllers;
 
 import br.com.organizerooms.dto.UnidadeDTO;
+import br.com.organizerooms.models.Equipamento;
 import br.com.organizerooms.models.Response;
 import br.com.organizerooms.models.Unidade;
 import java.util.List;
@@ -60,6 +61,14 @@ public class UnidadeController {
 
         Unidade lista = unidadeService.buscarUnidadePorId(Long.parseLong(id));
         Response response = new Response(lista);
+        return ResponseEntity.ok().body(response);
+    }
+    
+    @GetMapping("/ativo")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
+    public ResponseEntity<Response> buscarAtivo() {
+        List<Unidade> unidades = unidadeService.buscaPorSituacao();
+        Response response = new Response(unidades);
         return ResponseEntity.ok().body(response);
     }
 

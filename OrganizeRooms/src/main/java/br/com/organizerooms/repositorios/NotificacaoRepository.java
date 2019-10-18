@@ -5,24 +5,20 @@
  */
 package br.com.organizerooms.repositorios;
 
-import br.com.organizerooms.models.Equipamento;
-import br.com.organizerooms.models.Unidade;
-import java.util.List;
+import br.com.organizerooms.models.Notificacao;
+import br.com.organizerooms.models.Pessoa;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
- * @author Lucas Jansen
+ * @author Aluno
  */
 @Repository
 @Transactional(readOnly = true )
-public interface UnidadeRepository extends JpaRepository <Unidade, Long >{
-    
-    public List<Unidade> findAllByOrderByUniNome(); 
-    
-    public  List<Unidade> findByUniAtiva(boolean ativo);
-   
+public interface NotificacaoRepository extends JpaRepository<Notificacao, Long> {
+
+    public Notificacao findByPessoaId(Pessoa pessoa);
     
 }
