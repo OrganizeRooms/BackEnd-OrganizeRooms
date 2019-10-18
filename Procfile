@@ -1,0 +1,1 @@
+web: java -jar target/BackEnd-OrganizeRooms-1.0.jar
