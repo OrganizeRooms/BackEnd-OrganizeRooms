@@ -5,6 +5,7 @@
  */
 package br.com.organizerooms.services;
 
+import br.com.organizerooms.models.Equipamento;
 import br.com.organizerooms.models.Unidade;
 import br.com.organizerooms.repositorios.UnidadeRepository;
 import java.util.List;
@@ -20,22 +21,25 @@ import org.springframework.stereotype.Service;
 public class UnidadeService {
 
     @Autowired
-    UnidadeRepository unidadeRepository;
+    UnidadeRepository repository;
 
     public List<Unidade> buscarTodasUnidades() {
-        return this.unidadeRepository.findAllByOrderByUniNome();
+        return this.repository.findAllByOrderByUniNome();
     }
 
     public void remover(Long id) {
-        this.unidadeRepository.deleteById(id);
+        this.repository.deleteById(id);
     }
 
     public Unidade addUnidade(Unidade unidade) {
-        return this.unidadeRepository.save(unidade);
+        return this.repository.save(unidade);
     }
 
     public Unidade buscarUnidadePorId(Long id) {
-        return this.unidadeRepository.findById(id).get();
+        return this.repository.findById(id).get();
     }
 
+    public  List<Unidade> buscaPorSituacao (){
+        return this.repository.findByUniAtiva(true);
+    };
 }

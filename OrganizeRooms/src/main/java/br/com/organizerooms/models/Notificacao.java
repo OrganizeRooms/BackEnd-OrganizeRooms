@@ -61,13 +61,13 @@ public class Notificacao {
     
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "uniPesAtualizacao")
+    @JoinColumn(name = "notPesAtualizacao")
     @LastModifiedBy
     private Pessoa notPesAtualizacao;
     
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "pesUnidade")
+    @JoinColumn(name = "pesId")
     private Pessoa pessoaId;
 
     public Notificacao(Long notId, String notDescricao, boolean notAtiva, Date notDtCadastro, Date notDtAtualizacao, Pessoa notPesAtualizacao, Pessoa pessoaId) {

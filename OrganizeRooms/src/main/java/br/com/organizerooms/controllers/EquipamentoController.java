@@ -5,12 +5,15 @@
  */
 package br.com.organizerooms.controllers;
 
+import br.com.organizerooms.dto.EquipamentoDTO;
 import br.com.organizerooms.dto.NotificacaoDTO;
 import br.com.organizerooms.dto.PessoaDTO;
+import br.com.organizerooms.models.Equipamento;
 import br.com.organizerooms.models.Notificacao;
 import br.com.organizerooms.models.Pessoa;
 import br.com.organizerooms.models.Response;
 import br.com.organizerooms.models.Unidade;
+import br.com.organizerooms.services.EquipamentoService;
 import br.com.organizerooms.services.NotificacaoService;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -30,35 +33,42 @@ import org.springframework.web.bind.annotation.RestController;
  */
 
 @RestController
-@RequestMapping("/notificacao")
-public class NotificacaoController {
+@RequestMapping("/equipamento")
+public class EquipamentoController {
     
     @Autowired
-    NotificacaoService notificacaoService;
+    EquipamentoService equipamentoService;
     
     @PostMapping
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
-    public ResponseEntity<Response> addNotificao(@RequestBody NotificacaoDTO notificacao) {
-        Notificacao nnotificacao = new Notificacao(notificacao);
-        NotificacaoDTO notificacaoDTO = new NotificacaoDTO(notificacaoService.persiste(nnotificacao));
-        Response response = new Response(notificacaoDTO);
+    public ResponseEntity<Response> addNotificao(@RequestBody EquipamentoDTO equipamentoDTO) {
+        Equipamento equipamento = new Equipamento(equipamentoDTO);
+        EquipamentoDTO nEquipamentoDTO = new EquipamentoDTO(equipamentoService.persiste(equipamento));
+        Response response = new Response(nEquipamentoDTO);
         return ResponseEntity.ok().body(response);
     }
     
     @GetMapping("/{id}")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
     public ResponseEntity<Response> buscarPorId(@PathVariable String id) {
-        Notificacao notificacao = notificacaoService.buscaPorId(Long.parseLong(id));
-        Response response = new Response(notificacao);
+        Equipamento equipamento = equipamentoService.buscaPorId(Long.parseLong(id));
+        Response response = new Response(equipamento);
         return ResponseEntity.ok().body(response);
     }
     
-    @GetMapping("/pessoa")
+    @GetMapping("/ativo")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
-    public ResponseEntity<Response> buscarPorPessoa(@RequestBody PessoaDTO pessoaDTO) {
-        Pessoa pessoa = new Pessoa(pessoaDTO);
-        Notificacao notificacao = notificacaoService.buscaPorPessoa(pessoa);
-        Response response = new Response(notificacao);
+    public ResponseEntity<Response> buscarAtivo() {
+        List<Equipamento> equipamentos = equipamentoService.buscaPorSituacao();
+        Response response = new Response(equipamentos);
+        return ResponseEntity.ok().body(response);
+    }
+    
+    @GetMapping("/todos")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
+    public ResponseEntity<Response> buscarTodos() {
+        List<Equipamento> equipamentos = equipamentoService.buscaTodos();
+        Response response = new Response(equipamentos);
         return ResponseEntity.ok().body(response);
     }
 }
