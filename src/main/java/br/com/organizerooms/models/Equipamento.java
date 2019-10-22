@@ -6,7 +6,7 @@
 package br.com.organizerooms.models;
 
 import br.com.organizerooms.dto.EquipamentoDTO;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
@@ -21,6 +21,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -32,44 +34,58 @@ import org.springframework.data.annotation.LastModifiedDate;
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 @Table(name = "equipamento")
-public class Equipamento {
-    
+public class Equipamento implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long equId;
 
     @Column
     private String equNome;
-    
+
     @Column
     private String equDescricao;
-    
+
+    @ManyToOne
+    @JoinColumn(name = "uniId")
+    private Unidade equUnidade;
+
     @Column
-    private boolean equAtiva;
-    
+    private Boolean equAtiva;
+
+    @ManyToOne
+    @JoinColumn(name = "equPesCadastro")
+    @CreatedBy
+    private Pessoa equPesCadastro;
+
     @Column
     @Temporal(TemporalType.TIMESTAMP)
-    @LastModifiedDate
+    @CreatedDate
     private Date equDtCadastro;
-    
+
     @Column
     @Temporal(TemporalType.TIMESTAMP)
     @LastModifiedDate
     private Date equDtAtualizacao;
-    
-    @JsonIgnore
+
     @ManyToOne
     @JoinColumn(name = "equPesAtualizacao")
     @LastModifiedBy
     private Pessoa equPesAtualizacao;
 
-    public Equipamento(Long equId, String equNome, String equDescricao, boolean equAtiva, Date equDtCadastro, Date equDtAtualizacao, Pessoa equPesAtualizacao) {
+    public Equipamento() {
+    }
+
+    public Equipamento(Long equId, String equNome, String equDescricao, Unidade equUnidade, Boolean equAtiva,
+            Pessoa equPesCadastro, Date equDtCadastro, Date equDtAtualizacao, Pessoa equPesAtualizacao) {
         this.equId = equId;
         this.equNome = equNome;
         this.equDescricao = equDescricao;
+        this.equUnidade = equUnidade;
         this.equAtiva = equAtiva;
+        this.equPesCadastro = equPesCadastro;
         this.equDtCadastro = equDtCadastro;
-        this.equDtAtualizacao = Calendar.getInstance().getTime();
+        this.equDtAtualizacao = equDtAtualizacao;
         this.equPesAtualizacao = equPesAtualizacao;
     }
 
@@ -78,6 +94,8 @@ public class Equipamento {
         this.equNome = equipamento.getEquNome();
         this.equDescricao = equipamento.getEquDescricao();
         this.equAtiva = equipamento.isEquAtiva();
+        this.equUnidade = equipamento.getEquUnidade();
+        this.equPesCadastro = equipamento.getEquPesCadastro();
         this.equDtCadastro = equipamento.getEquDtCadastro();
         this.equDtAtualizacao = Calendar.getInstance().getTime();
         this.equPesAtualizacao = equipamento.getEquPesAtualizacao();
@@ -107,12 +125,28 @@ public class Equipamento {
         this.equDescricao = equDescricao;
     }
 
-    public boolean isEquAtiva() {
+    public Unidade getEquUnidade() {
+        return equUnidade;
+    }
+
+    public void setEquUnidade(Unidade equUnidade) {
+        this.equUnidade = equUnidade;
+    }
+
+    public Boolean isEquAtiva() {
         return equAtiva;
     }
 
-    public void setEquAtiva(boolean equAtiva) {
+    public void setEquAtiva(Boolean equAtiva) {
         this.equAtiva = equAtiva;
+    }
+
+    public Pessoa getEquPesCadastro() {
+        return equPesCadastro;
+    }
+
+    public void setEquPesCadastro(Pessoa equPesCadastro) {
+        this.equPesCadastro = equPesCadastro;
     }
 
     public Date getEquDtCadastro() {
@@ -154,9 +188,6 @@ public class Equipamento {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
         if (obj == null) {
             return false;
         }
@@ -164,7 +195,7 @@ public class Equipamento {
             return false;
         }
         final Equipamento other = (Equipamento) obj;
-        if (this.equAtiva != other.equAtiva) {
+        if (!Objects.equals(this.equId, other.equId)) {
             return false;
         }
         if (!Objects.equals(this.equNome, other.equNome)) {
@@ -173,7 +204,7 @@ public class Equipamento {
         if (!Objects.equals(this.equDescricao, other.equDescricao)) {
             return false;
         }
-        if (!Objects.equals(this.equId, other.equId)) {
+        if (!Objects.equals(this.equAtiva, other.equAtiva)) {
             return false;
         }
         if (!Objects.equals(this.equDtCadastro, other.equDtCadastro)) {
@@ -187,8 +218,5 @@ public class Equipamento {
         }
         return true;
     }
-    
-    
-    
-    
+
 }

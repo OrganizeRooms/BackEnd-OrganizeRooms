@@ -5,12 +5,12 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import br.com.organizerooms.enums.PerfilEnum;
+import br.com.organizerooms.models.Equipamento;
 import br.com.organizerooms.models.Pessoa;
 import br.com.organizerooms.models.Unidade;
+import br.com.organizerooms.repositorios.EquipamentoRepository;
 import br.com.organizerooms.repositorios.PessoaRepository;
 import br.com.organizerooms.repositorios.UnidadeRepository;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
@@ -23,6 +23,9 @@ public class OrganizeRooms implements CommandLineRunner {
 
     @Autowired
     UnidadeRepository unidadeRepository;
+
+    @Autowired
+    EquipamentoRepository equipamentoRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(OrganizeRooms.class, args);
@@ -46,7 +49,7 @@ public class OrganizeRooms implements CommandLineRunner {
                 "ADIM",
                 "admin@admin.com",
                 "123",
-                PerfilEnum.ROLE_USUARIO,
+                PerfilEnum.ROLE_ADMIN, 
                 unidade1,
                 "47",
                 "992821333",
@@ -56,7 +59,7 @@ public class OrganizeRooms implements CommandLineRunner {
                 null,
                 null);
         pessoaRepository.save(pes);
-        
+
         Optional<Unidade> optUni = unidadeRepository.findById(1L);
         Unidade uni = optUni.get();
         unidade1 = new Unidade(uni.getUniId(),
@@ -141,6 +144,55 @@ public class OrganizeRooms implements CommandLineRunner {
         unidadeRepository.save(unidade8);
         unidadeRepository.save(unidade9);
         unidadeRepository.save(unidade10);
+
+        Equipamento equipamento1 = new Equipamento(
+                null,
+                "Notebook Acer",
+                "Notebook Acer Core i3 8 geração",
+                unidade1,
+                false,
+                pes,
+                null,
+                null,
+                pes);
+
+        Equipamento equipamento2 = new Equipamento(
+                null,
+                "Notebook Dell",
+                "Notebook Dell Core i5 8 geração",
+                unidade2,
+                true,
+                pes,
+                null,
+                null,
+                pes);
+
+        Equipamento equipamento3 = new Equipamento(
+                null,
+                "Notebook Positivo",
+                "Notebook Positivo Pentium",
+                unidade3,
+                false,
+                pes,
+                null,
+                null,
+                pes);
+
+        Equipamento equipamento4 = new Equipamento(
+                null,
+                "Notebook Phillips",
+                "Notebook Phillips Core i10 12 geração",
+                unidade4,
+                true,
+                pes,
+                null,
+                null,
+                pes);
+        
+        equipamentoRepository.save(equipamento1);
+        equipamentoRepository.save(equipamento2);
+        equipamentoRepository.save(equipamento3);
+        equipamentoRepository.save(equipamento4);
 
     }
 }

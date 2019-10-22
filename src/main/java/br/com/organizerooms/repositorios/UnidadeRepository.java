@@ -5,7 +5,6 @@
  */
 package br.com.organizerooms.repositorios;
 
-import br.com.organizerooms.models.Equipamento;
 import br.com.organizerooms.models.Unidade;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;

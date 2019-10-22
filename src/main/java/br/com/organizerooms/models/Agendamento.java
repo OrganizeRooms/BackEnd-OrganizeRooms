@@ -6,6 +6,7 @@
 package br.com.organizerooms.models;
 
 import br.com.organizerooms.dto.AgendamentoDTO;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 import javax.persistence.Column;
@@ -29,19 +30,19 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 @Table(name = "agendamento")
-public class Agendamento {
+public class Agendamento implements Serializable {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long agendamentoId;
     
-    @Column(unique = true)
+    @Column
     private String ageAssunto;
     
-    @Column(unique = true)
+    @Column
     private String ageDescricao;
     
-    @Column(unique = true)
+    @Column
     private String ageStatus;
     
     @Column

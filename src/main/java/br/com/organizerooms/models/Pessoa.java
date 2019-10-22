@@ -57,14 +57,6 @@ public class Pessoa implements Serializable {
     @JoinColumn(name = "uniId")
     private Unidade pesUnidade;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "uniPesCadastro")
-    private List<Unidade> unidadeCadastro;
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "uniPesAtualizacao")
-    private List<Unidade> unidadeAtualizacao;
-
     @Column
     private String pesDdd;
 
@@ -95,6 +87,23 @@ public class Pessoa implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     @LastModifiedDate
     private Date pesDtAtualizacao;
+
+    /////
+    @JsonIgnore
+    @OneToMany(mappedBy = "uniPesCadastro")
+    private List<Unidade> unidadeCadastro;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "uniPesAtualizacao")
+    private List<Unidade> unidadeAtualizacao;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "equPesCadastro")
+    private List<Equipamento> equipamentoCadastro;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "equPesAtualizacao")
+    private List<Equipamento> equipamentoAtualizacao;
 
     public Pessoa() {
     }
@@ -186,8 +195,6 @@ public class Pessoa implements Serializable {
     public void setPesUnidade(Unidade pesUnidade) {
         this.pesUnidade = pesUnidade;
     }
-
-
 
     public List<Unidade> getUnidadeAtualizacao() {
         return unidadeAtualizacao;

@@ -5,52 +5,30 @@
  */
 package br.com.organizerooms.dto;
 
-
 import br.com.organizerooms.models.*;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Calendar;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
 import java.util.Date;
-import java.util.List;
 import java.util.Objects;
-import javax.persistence.EntityListeners;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import org.springframework.data.annotation.LastModifiedBy;
-import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 /**
  *
  * @author Felipe
  */
-
 public class NotificacaoDTO {
-    
+
     private Long notId;
-
     private String notDescricao;
-    
-    private boolean notAtiva;
-    
+    private Boolean notAtiva;
     private Date notDtCadastro;
-
     private Date notDtAtualizacao;
-  
     private Pessoa notPesAtualizacao;
-
     private Pessoa pessoaId;
 
-    public NotificacaoDTO(Long notId, String notDescricao, boolean notAtiva, Date notDtCadastro, Date notDtAtualizacao, Pessoa notPesAtualizacao, Pessoa pessoaId) {
+    public NotificacaoDTO() {
+    }
+
+    public NotificacaoDTO(Long notId, String notDescricao, Boolean notAtiva, Date notDtCadastro, Date notDtAtualizacao, Pessoa notPesAtualizacao, Pessoa pessoaId) {
         this.notId = notId;
         this.notDescricao = notDescricao;
         this.notAtiva = notAtiva;
@@ -59,7 +37,7 @@ public class NotificacaoDTO {
         this.notPesAtualizacao = notPesAtualizacao;
         this.pessoaId = pessoaId;
     }
-    
+
     public NotificacaoDTO(Notificacao notificacao) {
         this.notId = notificacao.getNotId();
         this.notDescricao = notificacao.getNotDescricao();
@@ -86,11 +64,11 @@ public class NotificacaoDTO {
         this.notDescricao = notDescricao;
     }
 
-    public boolean isNotAtiva() {
+    public Boolean isNotAtiva() {
         return notAtiva;
     }
 
-    public void setNotAtiva(boolean notAtiva) {
+    public void setNotAtiva(Boolean notAtiva) {
         this.notAtiva = notAtiva;
     }
 
@@ -141,9 +119,6 @@ public class NotificacaoDTO {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
         if (obj == null) {
             return false;
         }
@@ -151,13 +126,13 @@ public class NotificacaoDTO {
             return false;
         }
         final NotificacaoDTO other = (NotificacaoDTO) obj;
-        if (this.notAtiva != other.notAtiva) {
+        if (!Objects.equals(this.notId, other.notId)) {
             return false;
         }
         if (!Objects.equals(this.notDescricao, other.notDescricao)) {
             return false;
         }
-        if (!Objects.equals(this.notId, other.notId)) {
+        if (!Objects.equals(this.notAtiva, other.notAtiva)) {
             return false;
         }
         if (!Objects.equals(this.notDtCadastro, other.notDtCadastro)) {
@@ -174,7 +149,5 @@ public class NotificacaoDTO {
         }
         return true;
     }
-    
-    
-    
+
 }
