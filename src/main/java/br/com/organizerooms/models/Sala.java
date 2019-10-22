@@ -66,12 +66,13 @@ public class Sala implements Serializable{
     
     @ManyToOne
     @JoinColumn(name = "uniId")
-    private Unidade uniId;
+    private Unidade salaUnidade;
 
     public Sala() {
     }
 
-    public Sala(Long salaId, String salaNome, Integer salaLotacao, Boolean salaAtiva, Date salaDtCadastro, Date salaDtAtualizacao, Pessoa pesIdCadastro, Pessoa pesIdAtualizacao, Unidade uniId) {
+    public Sala(Long salaId, String salaNome, Integer salaLotacao, Boolean salaAtiva, Date salaDtCadastro,
+            Date salaDtAtualizacao, Pessoa pesIdCadastro, Pessoa pesIdAtualizacao, Unidade salaUnidade) {
         this.salaId = salaId;
         this.salaNome = salaNome;
         this.salaLotacao = salaLotacao;
@@ -80,7 +81,7 @@ public class Sala implements Serializable{
         this.salaDtAtualizacao = salaDtAtualizacao;
         this.pesIdCadastro = pesIdCadastro;
         this.pesIdAtualizacao = pesIdAtualizacao;
-        this.uniId = uniId;
+        this.salaUnidade = salaUnidade;
     }
     
     public Sala(SalaDTO obj) {
@@ -92,7 +93,7 @@ public class Sala implements Serializable{
         this.salaDtAtualizacao = obj.getSalaDtAtualizacao();
         this.pesIdCadastro = obj.getPesIdCadastro();
         this.pesIdAtualizacao = obj.getPesIdAtualizacao();
-        this.uniId = obj.getUniId();
+        this.salaUnidade = obj.getSalaUnidade();
     }
 
     public Long getSalaId() {
@@ -159,12 +160,12 @@ public class Sala implements Serializable{
         this.pesIdAtualizacao = pesIdAtualizacao;
     }
 
-    public Unidade getUniId() {
-        return uniId;
+    public Unidade getSalaUnidade() {
+        return salaUnidade;
     }
 
-    public void setUniId(Unidade uniId) {
-        this.uniId = uniId;
+    public void setSalaUnidade(Unidade salaUnidade) {
+        this.salaUnidade = salaUnidade;
     }
 
     @Override
