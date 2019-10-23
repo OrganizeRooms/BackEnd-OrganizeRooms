@@ -17,8 +17,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 /**
@@ -28,42 +30,41 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 @Table(name = "sala")
-public class Sala implements Serializable{
+public class Sala implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long salaId;
-    
+
     @Column
     private String salaNome;
-    
+
     @Column
     private Integer salaLotacao;
-    
+
     @Column
     private Boolean salaAtiva;
-    
+
+    @ManyToOne
+    @JoinColumn(name = "salaPesCadastro")
+    @CreatedBy
+    private Pessoa salaPesCadastro;
+
     @Column
     @Temporal(TemporalType.TIMESTAMP)
     @CreatedDate
     private Date salaDtCadastro;
-    
+
     @Column
     @Temporal(TemporalType.TIMESTAMP)
-    @CreatedDate
+    @LastModifiedDate
     private Date salaDtAtualizacao;
-    
-    @JsonIgnore
+
     @ManyToOne
-    @JoinColumn(name = "pesIdCadastro")
+    @JoinColumn(name = "salaPesAtualizacao")
     @LastModifiedBy
-    private Pessoa pesIdCadastro;
-    
-    @JsonIgnore
-    @ManyToOne
-    @JoinColumn(name = "pesIdAtualizacao")
-    @LastModifiedBy
-    private Pessoa pesIdAtualizacao;
-    
+    private Pessoa salaPesAtualizacao;
+
     @ManyToOne
     @JoinColumn(name = "uniId")
     private Unidade salaUnidade;
@@ -71,19 +72,19 @@ public class Sala implements Serializable{
     public Sala() {
     }
 
-    public Sala(Long salaId, String salaNome, Integer salaLotacao, Boolean salaAtiva, Date salaDtCadastro,
-            Date salaDtAtualizacao, Pessoa pesIdCadastro, Pessoa pesIdAtualizacao, Unidade salaUnidade) {
+    public Sala(Long salaId, String salaNome, Integer salaLotacao, Boolean salaAtiva, Pessoa salaPesCadastro, 
+            Date salaDtCadastro, Date salaDtAtualizacao, Pessoa salaPesAtualizacao, Unidade salaUnidade) {
         this.salaId = salaId;
         this.salaNome = salaNome;
         this.salaLotacao = salaLotacao;
         this.salaAtiva = salaAtiva;
+        this.salaPesCadastro = salaPesCadastro;
         this.salaDtCadastro = salaDtCadastro;
         this.salaDtAtualizacao = salaDtAtualizacao;
-        this.pesIdCadastro = pesIdCadastro;
-        this.pesIdAtualizacao = pesIdAtualizacao;
+        this.salaPesAtualizacao = salaPesAtualizacao;
         this.salaUnidade = salaUnidade;
     }
-    
+
     public Sala(SalaDTO obj) {
         this.salaId = obj.getSalaId();
         this.salaNome = obj.getSalaNome();
@@ -91,8 +92,8 @@ public class Sala implements Serializable{
         this.salaAtiva = obj.getSalaAtiva();
         this.salaDtCadastro = obj.getSalaDtCadastro();
         this.salaDtAtualizacao = obj.getSalaDtAtualizacao();
-        this.pesIdCadastro = obj.getPesIdCadastro();
-        this.pesIdAtualizacao = obj.getPesIdAtualizacao();
+        this.salaPesCadastro = obj.getSalaPesCadastro();
+        this.salaPesAtualizacao = obj.getSalaPesAtualizacao();
         this.salaUnidade = obj.getSalaUnidade();
     }
 
@@ -144,20 +145,20 @@ public class Sala implements Serializable{
         this.salaDtAtualizacao = salaDtAtualizacao;
     }
 
-    public Pessoa getPesIdCadastro() {
-        return pesIdCadastro;
+    public Pessoa getSalaPesCadastro() {
+        return salaPesCadastro;
     }
 
-    public void setPesIdCadastro(Pessoa pesIdCadastro) {
-        this.pesIdCadastro = pesIdCadastro;
+    public void setSalaPesCadastro(Pessoa salaPesCadastro) {
+        this.salaPesCadastro = salaPesCadastro;
     }
 
-    public Pessoa getPesIdAtualizacao() {
-        return pesIdAtualizacao;
+    public Pessoa getSalaPesAtualizacao() {
+        return salaPesAtualizacao;
     }
 
-    public void setPesIdAtualizacao(Pessoa pesIdAtualizacao) {
-        this.pesIdAtualizacao = pesIdAtualizacao;
+    public void setSalaPesAtualizacao(Pessoa salaPesAtualizacao) {
+        this.salaPesAtualizacao = salaPesAtualizacao;
     }
 
     public Unidade getSalaUnidade() {
@@ -191,5 +192,5 @@ public class Sala implements Serializable{
             return false;
         }
         return true;
-    }    
+    }
 }

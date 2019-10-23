@@ -18,23 +18,23 @@ public class SalaDTO {
     private Boolean salaAtiva;
     private Date salaDtCadastro;
     private Date salaDtAtualizacao;
-    private Pessoa pesIdCadastro;
-    private Pessoa pesIdAtualizacao;
+    private Pessoa salaPesCadastro;
+    private Pessoa salaPesAtualizacao;
     private Unidade salaUnidade;
 
     public SalaDTO() {
     }
 
-    public SalaDTO(Long salaId, String salaNome, Integer salaLotacao, Boolean salaAtiva,
-            Date salaDtCadastro, Date salaDtAtualizacao, Pessoa pesIdCadastro, Pessoa pesIdAtualizacao, Unidade salaUnidade) {
+    public SalaDTO(Long salaId, String salaNome, Integer salaLotacao, Boolean salaAtiva, Date salaDtCadastro,
+            Date salaDtAtualizacao, Pessoa salaPesCadastro, Pessoa salaPesAtualizacao, Unidade salaUnidade) {
         this.salaId = salaId;
         this.salaNome = salaNome;
         this.salaLotacao = salaLotacao;
         this.salaAtiva = salaAtiva;
         this.salaDtCadastro = salaDtCadastro;
         this.salaDtAtualizacao = salaDtAtualizacao;
-        this.pesIdCadastro = pesIdCadastro;
-        this.pesIdAtualizacao = pesIdAtualizacao;
+        this.salaPesCadastro = salaPesCadastro;
+        this.salaPesAtualizacao = salaPesAtualizacao;
         this.salaUnidade = salaUnidade;
     }
 
@@ -45,8 +45,8 @@ public class SalaDTO {
         this.salaAtiva = obj.getSalaAtiva();
         this.salaDtCadastro = obj.getSalaDtCadastro();
         this.salaDtAtualizacao = obj.getSalaDtAtualizacao();
-        this.pesIdCadastro = obj.getPesIdCadastro();
-        this.pesIdAtualizacao = obj.getPesIdAtualizacao();
+        this.salaPesCadastro = obj.getSalaPesCadastro();
+        this.salaPesAtualizacao = obj.getSalaPesAtualizacao();
         this.salaUnidade = obj.getSalaUnidade();
     }
 
@@ -98,20 +98,20 @@ public class SalaDTO {
         this.salaDtAtualizacao = salaDtAtualizacao;
     }
 
-    public Pessoa getPesIdCadastro() {
-        return pesIdCadastro;
+    public Pessoa getSalaPesCadastro() {
+        return salaPesCadastro;
     }
 
-    public void setPesIdCadastro(Pessoa pesIdCadastro) {
-        this.pesIdCadastro = pesIdCadastro;
+    public void setSalaPesCadastro(Pessoa salaPesCadastro) {
+        this.salaPesCadastro = salaPesCadastro;
     }
 
-    public Pessoa getPesIdAtualizacao() {
-        return pesIdAtualizacao;
+    public Pessoa getSalaPesAtualizacao() {
+        return salaPesAtualizacao;
     }
 
-    public void setPesIdAtualizacao(Pessoa pesIdAtualizacao) {
-        this.pesIdAtualizacao = pesIdAtualizacao;
+    public void setSalaPesAtualizacao(Pessoa salaPesAtualizacao) {
+        this.salaPesAtualizacao = salaPesAtualizacao;
     }
 
     public Unidade getSalaUnidade() {
