@@ -49,7 +49,6 @@ public class Unidade implements Serializable {
     @CreatedDate
     private Date uniDtCadastro;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "uniPesCadastro")
     @CreatedBy
@@ -60,7 +59,6 @@ public class Unidade implements Serializable {
     @LastModifiedDate
     private Date uniDtAtualizacao;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "uniPesAtualizacao")
     @LastModifiedBy
@@ -74,6 +72,10 @@ public class Unidade implements Serializable {
     @JsonIgnore
     @OneToMany(mappedBy = "equUnidade")
     private List<Equipamento> equipamentos;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "salaUnidade")
+    private List<Sala> salas;
 
     public Unidade() {
     }
@@ -153,14 +155,6 @@ public class Unidade implements Serializable {
 
     public void setUniPesAtualizacao(Pessoa uniPesAtualizacao) {
         this.uniPesAtualizacao = uniPesAtualizacao;
-    }
-
-    public List<Pessoa> getPessoas() {
-        return pessoas;
-    }
-
-    public void setPessoas(List<Pessoa> pessoas) {
-        this.pessoas = pessoas;
     }
 
     @Override

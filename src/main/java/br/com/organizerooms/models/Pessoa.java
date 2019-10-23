@@ -45,14 +45,14 @@ public class Pessoa implements Serializable {
     private String pesEmail;
 
     @JsonIgnore
-    //@Column(updatable = false)
     @Column
     private String pesSenha;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "pesPermissao")
     private PerfilEnum pesPermissao;
-
+    
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "uniId")
     private Unidade pesUnidade;
@@ -104,6 +104,14 @@ public class Pessoa implements Serializable {
     @JsonIgnore
     @OneToMany(mappedBy = "equPesAtualizacao")
     private List<Equipamento> equipamentoAtualizacao;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "salaPesCadastro")
+    private List<Sala> salaCadastro;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "salaPesAtualizacao")
+    private List<Sala> salaAtualizacao;
 
     public Pessoa() {
     }

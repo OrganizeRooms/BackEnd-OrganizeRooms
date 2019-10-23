@@ -7,9 +7,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import br.com.organizerooms.enums.PerfilEnum;
 import br.com.organizerooms.models.Equipamento;
 import br.com.organizerooms.models.Pessoa;
+import br.com.organizerooms.models.Sala;
 import br.com.organizerooms.models.Unidade;
 import br.com.organizerooms.repositorios.EquipamentoRepository;
 import br.com.organizerooms.repositorios.PessoaRepository;
+import br.com.organizerooms.repositorios.SalaRepository;
 import br.com.organizerooms.repositorios.UnidadeRepository;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
@@ -26,6 +28,9 @@ public class OrganizeRooms implements CommandLineRunner {
 
     @Autowired
     EquipamentoRepository equipamentoRepository;
+
+    @Autowired
+    SalaRepository salaRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(OrganizeRooms.class, args);
@@ -49,7 +54,7 @@ public class OrganizeRooms implements CommandLineRunner {
                 "ADIM",
                 "admin@admin.com",
                 "123",
-                PerfilEnum.ROLE_ADMIN, 
+                PerfilEnum.ROLE_ADMIN,
                 unidade1,
                 "47",
                 "992821333",
@@ -188,11 +193,124 @@ public class OrganizeRooms implements CommandLineRunner {
                 null,
                 null,
                 pes);
-        
+
         equipamentoRepository.save(equipamento1);
         equipamentoRepository.save(equipamento2);
         equipamentoRepository.save(equipamento3);
         equipamentoRepository.save(equipamento4);
+
+        Sala sala1 = new Sala(
+                null,
+                "Sala Comercial 02",
+                10,
+                true,
+                pes,
+                null,
+                null,
+                pes,
+                unidade4);
+
+        Sala sala2 = new Sala(
+                null,
+                "Sala Comercial 01",
+                8,
+                false,
+                pes,
+                null,
+                null,
+                pes,
+                unidade4);
+        Sala sala3 = new Sala(
+                null,
+                "Sala de Guerra",
+                22,
+                true,
+                pes,
+                null,
+                null,
+                pes,
+                unidade4);
+        Sala sala4 = new Sala(
+                null,
+                "Sala de Reuniões Kanban 03",
+                10,
+                false,
+                pes,
+                null,
+                null,
+                pes,
+                unidade4);
+        Sala sala5 = new Sala(
+                null,
+                "Sala de Reuniões Kanban 06",
+                12,
+                false,
+                pes,
+                null,
+                null,
+                pes,
+                unidade4);
+        Sala sala6 = new Sala(
+                null,
+                "Sala de Reuniões Kanban 01",
+                12,
+                true,
+                pes,
+                null,
+                null,
+                pes,
+                unidade4);
+        Sala sala7 = new Sala(
+                null,
+                "Sala Reunião Stakeholders",
+                5,
+                true,
+                pes,
+                null,
+                null,
+                pes,
+                unidade4);
+        Sala sala8 = new Sala(
+                null,
+                "Sala Livre 02",
+                4,
+                true,
+                pes,
+                null,
+                null,
+                pes,
+                unidade4);
+        Sala sala9 = new Sala(
+                null,
+                "Sala Livre 01",
+                4,
+                true,
+                pes,
+                null,
+                null,
+                pes,
+                unidade5);
+        Sala sala10 = new Sala(
+                null,
+                "Sala Livre 03",
+                4,
+                false,
+                pes,
+                null,
+                null,
+                pes,
+                unidade2);
+
+        salaRepository.save(sala1);
+        salaRepository.save(sala2);
+        salaRepository.save(sala3);
+        salaRepository.save(sala4);
+        salaRepository.save(sala5);
+        salaRepository.save(sala6);
+        salaRepository.save(sala7);
+        salaRepository.save(sala8);
+        salaRepository.save(sala9);
+        salaRepository.save(sala10);
 
     }
 }
