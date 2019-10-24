@@ -49,20 +49,16 @@ public class Unidade implements Serializable {
     @CreatedDate
     private Date uniDtCadastro;
 
-    @ManyToOne
-    @JoinColumn(name = "uniPesCadastro")
-    @CreatedBy
-    private Pessoa uniPesCadastro;
+    @Column
+    private Long uniPesCadastro;
 
     @Column
     @Temporal(TemporalType.TIMESTAMP)
     @LastModifiedDate
     private Date uniDtAtualizacao;
 
-    @ManyToOne
-    @JoinColumn(name = "uniPesAtualizacao")
-    @LastModifiedBy
-    private Pessoa uniPesAtualizacao;
+    @Column
+    private Long uniPesAtualizacao;
 
     //
     @JsonIgnore
@@ -81,7 +77,7 @@ public class Unidade implements Serializable {
     }
 
     public Unidade(Long uniId, String uniNome, Boolean uniAtiva, Date uniDtCadastro,
-            Pessoa uniPesCadastro, Date uniDtAtualizacao, Pessoa uniPesAtualizacao) {
+            Long uniPesCadastro, Date uniDtAtualizacao, Long uniPesAtualizacao) {
         this.uniId = uniId;
         this.uniNome = uniNome;
         this.uniAtiva = uniAtiva;
@@ -141,20 +137,44 @@ public class Unidade implements Serializable {
         this.uniDtAtualizacao = uniDtAtualizacao;
     }
 
-    public Pessoa getUniPesCadastro() {
+    public Long getUniPesCadastro() {
         return uniPesCadastro;
     }
 
-    public void setUniPesCadastro(Pessoa uniPesCadastro) {
+    public void setUniPesCadastro(Long uniPesCadastro) {
         this.uniPesCadastro = uniPesCadastro;
     }
 
-    public Pessoa getUniPesAtualizacao() {
+    public Long getUniPesAtualizacao() {
         return uniPesAtualizacao;
     }
 
-    public void setUniPesAtualizacao(Pessoa uniPesAtualizacao) {
+    public void setUniPesAtualizacao(Long uniPesAtualizacao) {
         this.uniPesAtualizacao = uniPesAtualizacao;
+    }
+
+    public List<Pessoa> getPessoas() {
+        return pessoas;
+    }
+
+    public void setPessoas(List<Pessoa> pessoas) {
+        this.pessoas = pessoas;
+    }
+
+    public List<Equipamento> getEquipamentos() {
+        return equipamentos;
+    }
+
+    public void setEquipamentos(List<Equipamento> equipamentos) {
+        this.equipamentos = equipamentos;
+    }
+
+    public List<Sala> getSalas() {
+        return salas;
+    }
+
+    public void setSalas(List<Sala> salas) {
+        this.salas = salas;
     }
 
     @Override

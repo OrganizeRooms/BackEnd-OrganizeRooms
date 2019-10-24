@@ -19,17 +19,17 @@ public class UnidadeDTO {
 
     private Date uniDtCadastro;
 
-    private Pessoa uniPesCadastro;
+    private Long uniPesCadastro;
 
     private Date uniDtAtualizacao;
 
-    private Pessoa uniPesAtualizacao;
+    private Long uniPesAtualizacao;
 
     public UnidadeDTO() {
     }
 
     public UnidadeDTO(Long uniId, String uniNome, Boolean uniAtiva, Date uniDtCadastro,
-            Pessoa uniPesCadastro, Date uniDtAtualizacao, Pessoa uniPesAtualizacao) {
+            Long uniPesCadastro, Date uniDtAtualizacao, Long uniPesAtualizacao) {
         this.uniId = uniId;
         this.uniNome = uniNome;
         this.uniAtiva = uniAtiva;
@@ -89,19 +89,19 @@ public class UnidadeDTO {
         this.uniDtAtualizacao = uniDtAtualizacao;
     }
 
-    public Pessoa getUniPesCadastro() {
+    public Long getUniPesCadastro() {
         return uniPesCadastro;
     }
 
-    public void setUniPesCadastro(Pessoa uniPesCadastro) {
+    public void setUniPesCadastro(Long uniPesCadastro) {
         this.uniPesCadastro = uniPesCadastro;
     }
 
-    public Pessoa getUniPesAtualizacao() {
+    public Long getUniPesAtualizacao() {
         return uniPesAtualizacao;
     }
 
-    public void setUniPesAtualizacao(Pessoa uniPesAtualizacao) {
+    public void setUniPesAtualizacao(Long uniPesAtualizacao) {
         this.uniPesAtualizacao = uniPesAtualizacao;
     }
 

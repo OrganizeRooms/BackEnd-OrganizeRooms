@@ -71,74 +71,74 @@ public class OrganizeRooms implements CommandLineRunner {
                 uni.getUniNome(),
                 uni.getUniAtiva(),
                 uni.getUniDtCadastro(),
-                pes,
+                pes.getPesId(),
                 uni.getUniDtAtualizacao(),
-                pes);
+                pes.getPesId());
         unidadeRepository.save(unidade1);
 
         Unidade unidade2 = new Unidade(null,
                 "Rio de Janeiro",
                 true,
                 null,
-                pes,
+                pes.getPesId(),
                 null,
-                pes);
+                pes.getPesId());
         Unidade unidade3 = new Unidade(null,
                 "Blumenau",
                 true,
                 null,
-                pes,
+                pes.getPesId(),
                 null,
-                pes);
+                pes.getPesId());
         Unidade unidade4 = new Unidade(null,
                 "Apiuna",
                 false,
                 null,
-                pes,
+                pes.getPesId(),
                 null,
-                pes);
+                pes.getPesId());
         Unidade unidade5 = new Unidade(null,
                 "Florianópolis",
                 false,
                 null,
-                pes,
+                pes.getPesId(),
                 null,
-                pes);
+                pes.getPesId());
         Unidade unidade6 = new Unidade(null,
                 "Bahia",
                 true,
                 null,
-                pes,
+                pes.getPesId(),
                 null,
-                pes);
+                pes.getPesId());
         Unidade unidade7 = new Unidade(null,
                 "Lontras",
                 false,
                 null,
-                pes,
+                pes.getPesId(),
                 null,
-                pes);
+                pes.getPesId());
         Unidade unidade8 = new Unidade(null,
                 "Pomerode",
                 true,
                 null,
-                pes,
+                pes.getPesId(),
                 null,
-                pes);
+                pes.getPesId());
         Unidade unidade9 = new Unidade(null,
                 "Belo Horizonte",
                 false,
                 null,
-                pes,
+                pes.getPesId(),
                 null,
-                pes);
+                pes.getPesId());
         Unidade unidade10 = new Unidade(null,
                 "Acre",
                 true,
                 null,
-                pes,
+                pes.getPesId(),
                 null,
-                pes);
+                pes.getPesId());
 
         unidadeRepository.save(unidade2);
         unidadeRepository.save(unidade3);
