@@ -51,8 +51,7 @@ public class Pessoa implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(name = "pesPermissao")
     private PerfilEnum pesPermissao;
-    
-    @JsonIgnore
+
     @ManyToOne
     @JoinColumn(name = "uniId")
     private Unidade pesUnidade;
@@ -89,14 +88,6 @@ public class Pessoa implements Serializable {
     private Date pesDtAtualizacao;
 
     /////
-    @JsonIgnore
-    @OneToMany(mappedBy = "uniPesCadastro")
-    private List<Unidade> unidadeCadastro;
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "uniPesAtualizacao")
-    private List<Unidade> unidadeAtualizacao;
-
     @JsonIgnore
     @OneToMany(mappedBy = "equPesCadastro")
     private List<Equipamento> equipamentoCadastro;
@@ -204,14 +195,6 @@ public class Pessoa implements Serializable {
         this.pesUnidade = pesUnidade;
     }
 
-    public List<Unidade> getUnidadeAtualizacao() {
-        return unidadeAtualizacao;
-    }
-
-    public void setUnidadeAtualizacao(List<Unidade> unidadeAtualizacao) {
-        this.unidadeAtualizacao = unidadeAtualizacao;
-    }
-
     public String getPesDdd() {
         return pesDdd;
     }
@@ -234,14 +217,6 @@ public class Pessoa implements Serializable {
 
     public void setPesTipoInclusao(String pesTipoInclusao) {
         this.pesTipoInclusao = pesTipoInclusao;
-    }
-
-    public List<Unidade> getUnidadeCadastro() {
-        return unidadeCadastro;
-    }
-
-    public void setUnidadeCadastro(List<Unidade> unidadeCadastro) {
-        this.unidadeCadastro = unidadeCadastro;
     }
 
     public Pessoa getPesCadastro() {
@@ -300,7 +275,7 @@ public class Pessoa implements Serializable {
 
     @Override
     public String toString() {
-        return "Pessoa{" + "pesId=" + pesId + ", pesNome=" + pesNome + ", pesEmail=" + pesEmail + ", pesSenha=" + pesSenha + ", pesPermissao=" + pesPermissao + ", pesUnidade=" + pesUnidade + ", unidadeCadastro=" + unidadeCadastro + ", unidadeAtualizacao=" + unidadeAtualizacao + ", pesDdd=" + pesDdd + ", pesTelefone=" + pesTelefone + ", pesTipoInclusao=" + pesTipoInclusao + ", pesCadastro=" + pesCadastro + ", pesDtCadastro=" + pesDtCadastro + ", pesAtualizacao=" + pesAtualizacao + ", pesDtAtualizacao=" + pesDtAtualizacao + '}';
+        return "Pessoa{" + "pesId=" + pesId + ", pesNome=" + pesNome + ", pesEmail=" + pesEmail + ", pesSenha=" + pesSenha + ", pesPermissao=" + pesPermissao + ", pesUnidade=" + pesUnidade + ", pesDdd=" + pesDdd + ", pesTelefone=" + pesTelefone + ", pesTipoInclusao=" + pesTipoInclusao + ", pesCadastro=" + pesCadastro + ", pesDtCadastro=" + pesDtCadastro + ", pesAtualizacao=" + pesAtualizacao + ", pesDtAtualizacao=" + pesDtAtualizacao + '}';
     }
 
 }
