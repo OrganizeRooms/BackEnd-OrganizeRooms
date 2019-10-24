@@ -4,7 +4,9 @@ import java.util.Date;
 import br.com.organizerooms.models.Pessoa;
 import br.com.organizerooms.models.Sala;
 import br.com.organizerooms.models.Agendamento;
+import java.sql.Time;
 import java.util.Objects;
+import javax.persistence.Column;
 /**
  *
  * @author Eder Jean Dias
@@ -15,17 +17,36 @@ public class AgendamentoDTO {
     private String ageDescricao;
     private String ageStatus;
     private Date ageData;
-    private Date ageHoraInicio;
-    private Date ageHoraFim;
+    private Time ageHoraInicio;
+    private Time ageHoraFim;
     private Date ageDtCadastro;
     private Date ageDtAtualizacao;
     private Sala salaId;
     private Pessoa pesIdResponsavel;
+    private Long agePesCadastro;
+    private Long agePesAtualizacao;
+
+    public Long getAgePesCadastro() {
+        return agePesCadastro;
+    }
+
+    public void setAgePesCadastro(Long agePesCadastro) {
+        this.agePesCadastro = agePesCadastro;
+    }
+
+    public Long getAgePesAtualizacao() {
+        return agePesAtualizacao;
+    }
+
+    public void setAgePesAtualizacao(Long agePesAtualizacao) {
+        this.agePesAtualizacao = agePesAtualizacao;
+    }
 
     public AgendamentoDTO() {
     }
 
-    public AgendamentoDTO(Long agendamentoId, String ageAssunto, String ageDescricao, String ageStatus, Date ageData, Date ageHoraInicio, Date ageHoraFim, Date ageDtCadastro, Date ageDtAtualizacao, Sala salaId, Pessoa pesIdResponsavel) {
+    public AgendamentoDTO(Long agendamentoId, String ageAssunto, String ageDescricao, String ageStatus, Date ageData, Time ageHoraInicio, Time ageHoraFim, Date ageDtCadastro, Date ageDtAtualizacao, Sala salaId, Pessoa pesIdResponsavel,
+        Long agePesCadastro, Long agePesAtualizacao) {
         this.agendamentoId = agendamentoId;
         this.ageAssunto = ageAssunto;
         this.ageDescricao = ageDescricao;
@@ -36,7 +57,9 @@ public class AgendamentoDTO {
         this.ageDtCadastro = ageDtCadastro;
         this.ageDtAtualizacao = ageDtAtualizacao;
         this.salaId = salaId;
-        this.pesIdResponsavel = pesIdResponsavel;
+        this.pesIdResponsavel = pesIdResponsavel;        
+        this.agePesCadastro = agePesCadastro;
+        this.agePesAtualizacao = agePesAtualizacao;
     }
     
     public AgendamentoDTO(Agendamento obj) {
@@ -51,6 +74,8 @@ public class AgendamentoDTO {
         this.ageDtAtualizacao = obj.getAgeDtAtualizacao();
         this.salaId = obj.getSalaId();
         this.pesIdResponsavel = obj.getPesIdResponsavel();
+        this.agePesCadastro = obj.getAgePesCadastro();
+        this.agePesAtualizacao = obj.getAgePesAtualizacao();
     }
 
     public Long getAgendamentoId() {
@@ -93,19 +118,19 @@ public class AgendamentoDTO {
         this.ageData = ageData;
     }
 
-    public Date getAgeHoraInicio() {
+    public Time getAgeHoraInicio() {
         return ageHoraInicio;
     }
 
-    public void setAgeHoraInicio(Date ageHoraInicio) {
+    public void setAgeHoraInicio(Time ageHoraInicio) {
         this.ageHoraInicio = ageHoraInicio;
     }
 
-    public Date getAgeHoraFim() {
+    public Time getAgeHoraFim() {
         return ageHoraFim;
     }
 
-    public void setAgeHoraFim(Date ageHoraFim) {
+    public void setAgeHoraFim(Time ageHoraFim) {
         this.ageHoraFim = ageHoraFim;
     }
 

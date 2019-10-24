@@ -156,10 +156,10 @@ public class OrganizeRooms implements CommandLineRunner {
                 "Notebook Acer Core i3 8 geração",
                 unidade1,
                 false,
-                pes,
+                pes.getPesId(),
                 null,
                 null,
-                pes);
+                pes.getPesId());
 
         Equipamento equipamento2 = new Equipamento(
                 null,
@@ -167,10 +167,10 @@ public class OrganizeRooms implements CommandLineRunner {
                 "Notebook Dell Core i5 8 geração",
                 unidade2,
                 true,
-                pes,
+                pes.getPesId(),
                 null,
                 null,
-                pes);
+                pes.getPesId());
 
         Equipamento equipamento3 = new Equipamento(
                 null,
@@ -178,10 +178,10 @@ public class OrganizeRooms implements CommandLineRunner {
                 "Notebook Positivo Pentium",
                 unidade3,
                 false,
-                pes,
+                pes.getPesId(),
                 null,
                 null,
-                pes);
+                pes.getPesId());
 
         Equipamento equipamento4 = new Equipamento(
                 null,
@@ -189,10 +189,10 @@ public class OrganizeRooms implements CommandLineRunner {
                 "Notebook Phillips Core i10 12 geração",
                 unidade4,
                 true,
-                pes,
+                pes.getPesId(),
                 null,
                 null,
-                pes);
+                pes.getPesId());
 
         equipamentoRepository.save(equipamento1);
         equipamentoRepository.save(equipamento2);
@@ -204,10 +204,10 @@ public class OrganizeRooms implements CommandLineRunner {
                 "Sala Comercial 02",
                 10,
                 true,
-                pes,
+                pes.getPesId(),
                 null,
                 null,
-                pes,
+                pes.getPesId(),
                 unidade4);
 
         Sala sala2 = new Sala(
@@ -215,90 +215,90 @@ public class OrganizeRooms implements CommandLineRunner {
                 "Sala Comercial 01",
                 8,
                 false,
-                pes,
+                pes.getPesId(),
                 null,
                 null,
-                pes,
+                pes.getPesId(),
                 unidade4);
         Sala sala3 = new Sala(
                 null,
                 "Sala de Guerra",
                 22,
                 true,
-                pes,
+                pes.getPesId(),
                 null,
                 null,
-                pes,
+                pes.getPesId(),
                 unidade4);
         Sala sala4 = new Sala(
                 null,
                 "Sala de Reuniões Kanban 03",
                 10,
                 false,
-                pes,
+                pes.getPesId(),
                 null,
                 null,
-                pes,
+                pes.getPesId(),
                 unidade4);
         Sala sala5 = new Sala(
                 null,
                 "Sala de Reuniões Kanban 06",
                 12,
                 false,
-                pes,
+                pes.getPesId(),
                 null,
                 null,
-                pes,
+                pes.getPesId(),
                 unidade4);
         Sala sala6 = new Sala(
                 null,
                 "Sala de Reuniões Kanban 01",
                 12,
                 true,
-                pes,
+                pes.getPesId(),
                 null,
                 null,
-                pes,
+                pes.getPesId(),
                 unidade4);
         Sala sala7 = new Sala(
                 null,
                 "Sala Reunião Stakeholders",
                 5,
                 true,
-                pes,
+                pes.getPesId(),
                 null,
                 null,
-                pes,
+                pes.getPesId(),
                 unidade4);
         Sala sala8 = new Sala(
                 null,
                 "Sala Livre 02",
                 4,
                 true,
-                pes,
+                pes.getPesId(),
                 null,
                 null,
-                pes,
+                pes.getPesId(),
                 unidade4);
         Sala sala9 = new Sala(
                 null,
                 "Sala Livre 01",
                 4,
                 true,
-                pes,
+                pes.getPesId(),
                 null,
                 null,
-                pes,
+                pes.getPesId(),
                 unidade5);
         Sala sala10 = new Sala(
                 null,
                 "Sala Livre 03",
                 4,
                 false,
-                pes,
+                pes.getPesId(),
                 null,
                 null,
-                pes,
+                pes.getPesId(),
                 unidade2);
 
         salaRepository.save(sala1);

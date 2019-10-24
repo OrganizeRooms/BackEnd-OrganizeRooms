@@ -33,11 +33,11 @@ public class PessoaDTO {
     // IMP = Por Importação
     private String pesTipoInclusao;
 
-    private Pessoa pesCadastro;
+    private Long pesCadastro;
 
     private Date pesDtCadastro;
 
-    private Pessoa pesAtualizacao;
+    private Long pesAtualizacao;
 
     private Date pesDtAtualizacao;
 
@@ -46,7 +46,7 @@ public class PessoaDTO {
 
     public PessoaDTO(Long pesId, String pesNome, String pesEmail, PerfilEnum pesPermissao,
             String pesDescricaoPermissao, Unidade unidade, String pesDdd, String pesTelefone, String pesTipoInclusao,
-            Pessoa pesCadastro, Date pesDtCadastro, Pessoa pesAtualizacao, Date pesDtAtualizacao) {
+            Long pesCadastro, Date pesDtCadastro, Long pesAtualizacao, Date pesDtAtualizacao) {
         this.pesId = pesId;
         this.pesNome = pesNome;
         this.pesEmail = pesEmail;
@@ -156,11 +156,11 @@ public class PessoaDTO {
         this.pesTipoInclusao = pesTipoInclusao;
     }
 
-    public Pessoa getPesCadastro() {
+    public Long getPesCadastro() {
         return pesCadastro;
     }
 
-    public void setPesCadastro(Pessoa pesCadastro) {
+    public void setPesCadastro(Long pesCadastro) {
         this.pesCadastro = pesCadastro;
     }
 
@@ -172,11 +172,11 @@ public class PessoaDTO {
         this.pesDtCadastro = pesDtCadastro;
     }
 
-    public Pessoa getPesAtualizacao() {
+    public Long getPesAtualizacao() {
         return pesAtualizacao;
     }
 
-    public void setPesAtualizacao(Pessoa pesAtualizacao) {
+    public void setPesAtualizacao(Long pesAtualizacao) {
         this.pesAtualizacao = pesAtualizacao;
     }
 

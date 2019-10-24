@@ -22,13 +22,15 @@ public class NotificacaoDTO {
     private Boolean notAtiva;
     private Date notDtCadastro;
     private Date notDtAtualizacao;
-    private Pessoa notPesAtualizacao;
+    private Long notPesAtualizacao;
     private Pessoa pessoaId;
+    private Long notPesCadastro;  
 
     public NotificacaoDTO() {
     }
 
-    public NotificacaoDTO(Long notId, String notDescricao, Boolean notAtiva, Date notDtCadastro, Date notDtAtualizacao, Pessoa notPesAtualizacao, Pessoa pessoaId) {
+    public NotificacaoDTO(Long notId, String notDescricao, Boolean notAtiva, Date notDtCadastro, Date notDtAtualizacao, 
+            Long notPesAtualizacao, Pessoa pessoaId, Long notPesCadastro) {
         this.notId = notId;
         this.notDescricao = notDescricao;
         this.notAtiva = notAtiva;
@@ -36,6 +38,7 @@ public class NotificacaoDTO {
         this.notDtAtualizacao = notDtAtualizacao;
         this.notPesAtualizacao = notPesAtualizacao;
         this.pessoaId = pessoaId;
+        this.notPesCadastro = notPesCadastro;
     }
 
     public NotificacaoDTO(Notificacao notificacao) {
@@ -46,6 +49,7 @@ public class NotificacaoDTO {
         this.notDtAtualizacao = Calendar.getInstance().getTime();
         this.notPesAtualizacao = notificacao.getNotPesAtualizacao();
         this.pessoaId = notificacao.getPessoaId();
+        this.notPesCadastro = notificacao.getNotPesCadastro();
     }
 
     public Long getNotId() {
@@ -88,11 +92,11 @@ public class NotificacaoDTO {
         this.notDtAtualizacao = notDtAtualizacao;
     }
 
-    public Pessoa getNotPesAtualizacao() {
+    public Long getNotPesAtualizacao() {
         return notPesAtualizacao;
     }
 
-    public void setNotPesAtualizacao(Pessoa notPesAtualizacao) {
+    public void setNotPesAtualizacao(Long notPesAtualizacao) {
         this.notPesAtualizacao = notPesAtualizacao;
     }
 
@@ -102,6 +106,14 @@ public class NotificacaoDTO {
 
     public void setPessoaId(Pessoa pessoaId) {
         this.pessoaId = pessoaId;
+    }
+    
+    public Long getNotPesCadastro() {
+        return notPesCadastro;
+    }
+
+    public void setNotPesCadastro(Long notPesCadastro) {
+        this.notPesCadastro = notPesCadastro;
     }
 
     @Override

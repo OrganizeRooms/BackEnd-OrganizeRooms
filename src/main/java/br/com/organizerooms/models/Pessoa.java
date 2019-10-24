@@ -67,20 +67,16 @@ public class Pessoa implements Serializable {
     @Column
     private String pesTipoInclusao;
 
-    @ManyToOne
-    @JoinColumn(name = "pesCadastro")
-    @LastModifiedBy
-    private Pessoa pesCadastro;
+    @Column
+    private Long pesCadastro;
 
     @Column
     @Temporal(TemporalType.TIMESTAMP)
     @CreatedDate
     private Date pesDtCadastro;
 
-    @ManyToOne
-    @JoinColumn(name = "pesAtualizacao")
-    @LastModifiedBy
-    private Pessoa pesAtualizacao;
+    @Column
+    private Long pesAtualizacao;
 
     @Column
     @Temporal(TemporalType.TIMESTAMP)
@@ -108,7 +104,7 @@ public class Pessoa implements Serializable {
     }
 
     public Pessoa(Long pesId, String pesNome, String pesEmail, String pesSenha, PerfilEnum pesPermissao, Unidade pesUnidade,
-            String pesDdd, String pesTelefone, String pesTipoInclusao, Pessoa pesCadastro, Date pesDtCadastro, Pessoa pesAtualizacao, Date pesDtAtualizacao) {
+            String pesDdd, String pesTelefone, String pesTipoInclusao, Long pesCadastro, Date pesDtCadastro, Long pesAtualizacao, Date pesDtAtualizacao) {
         this.pesId = pesId;
         this.pesNome = pesNome;
         this.pesEmail = pesEmail;
@@ -219,11 +215,11 @@ public class Pessoa implements Serializable {
         this.pesTipoInclusao = pesTipoInclusao;
     }
 
-    public Pessoa getPesCadastro() {
+    public Long getPesCadastro() {
         return pesCadastro;
     }
 
-    public void setPesCadastro(Pessoa pesCadastro) {
+    public void setPesCadastro(Long pesCadastro) {
         this.pesCadastro = pesCadastro;
     }
 
@@ -235,11 +231,11 @@ public class Pessoa implements Serializable {
         this.pesDtCadastro = pesDtCadastro;
     }
 
-    public Pessoa getPesAtualizacao() {
+    public Long getPesAtualizacao() {
         return pesAtualizacao;
     }
 
-    public void setPesAtualizacao(Pessoa pesAtualizacao) {
+    public void setPesAtualizacao(Long pesAtualizacao) {
         this.pesAtualizacao = pesAtualizacao;
     }
 
