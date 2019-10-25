@@ -17,8 +17,8 @@ public class AgendamentoDTO {
     private String ageDescricao;
     private String ageStatus;
     private Date ageData;
-    private Time ageHoraInicio;
-    private Time ageHoraFim;
+    private Date ageHoraInicio;
+    private Date ageHoraFim;
     private Date ageDtCadastro;
     private Date ageDtAtualizacao;
     private Sala salaId;
@@ -118,7 +118,7 @@ public class AgendamentoDTO {
         this.ageData = ageData;
     }
 
-    public Time getAgeHoraInicio() {
+    public Date getAgeHoraInicio() {
         return ageHoraInicio;
     }
 
@@ -126,7 +126,7 @@ public class AgendamentoDTO {
         this.ageHoraInicio = ageHoraInicio;
     }
 
-    public Time getAgeHoraFim() {
+    public Date getAgeHoraFim() {
         return ageHoraFim;
     }
 

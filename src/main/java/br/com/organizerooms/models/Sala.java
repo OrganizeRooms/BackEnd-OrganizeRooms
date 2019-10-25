@@ -45,9 +45,7 @@ public class Sala implements Serializable {
     @Column
     private Boolean salaAtiva;
 
-    @ManyToOne
-    @JoinColumn(name = "salaPesCadastro")
-    @CreatedBy
+    @Column
     private Long salaPesCadastro;
 
     @Column
@@ -60,9 +58,7 @@ public class Sala implements Serializable {
     @LastModifiedDate
     private Date salaDtAtualizacao;
 
-    @ManyToOne
-    @JoinColumn(name = "salaPesAtualizacao")
-    @LastModifiedBy
+    @Column
     private Long salaPesAtualizacao;
 
     @ManyToOne
