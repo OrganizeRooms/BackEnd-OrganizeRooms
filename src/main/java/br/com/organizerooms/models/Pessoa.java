@@ -83,23 +83,6 @@ public class Pessoa implements Serializable {
     @LastModifiedDate
     private Date pesDtAtualizacao;
 
-    /////
-    @JsonIgnore
-    @OneToMany(mappedBy = "equPesCadastro")
-    private List<Equipamento> equipamentoCadastro;
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "equPesAtualizacao")
-    private List<Equipamento> equipamentoAtualizacao;
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "salaPesCadastro")
-    private List<Sala> salaCadastro;
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "salaPesAtualizacao")
-    private List<Sala> salaAtualizacao;
-
     public Pessoa() {
     }
 

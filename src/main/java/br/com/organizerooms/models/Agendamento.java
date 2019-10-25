@@ -52,14 +52,14 @@ public class Agendamento implements Serializable {
     private Date ageData;
     
     @Column
-    @Temporal(TemporalType.TIME)
+    @Temporal(TemporalType.TIMESTAMP)
     @CreatedDate
-    private Time ageHoraInicio;
+    private Date ageHoraInicio;
     
     @Column
-    @Temporal(TemporalType.TIME)
+    @Temporal(TemporalType.TIMESTAMP)
     @CreatedDate
-    private Time ageHoraFim;
+    private Date ageHoraFim;
     
     @Column
     @Temporal(TemporalType.TIMESTAMP)
@@ -178,7 +178,7 @@ public class Agendamento implements Serializable {
         this.ageData = ageData;
     }
 
-    public Time getAgeHoraInicio() {
+    public Date getAgeHoraInicio() {
         return ageHoraInicio;
     }
 
@@ -186,7 +186,7 @@ public class Agendamento implements Serializable {
         this.ageHoraInicio = ageHoraInicio;
     }
 
-    public Time getAgeHoraFim() {
+    public Date getAgeHoraFim() {
         return ageHoraFim;
     }
 
