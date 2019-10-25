@@ -53,10 +53,8 @@ public class Equipamento implements Serializable {
     @Column
     private Boolean equAtiva;
 
-    @ManyToOne
-    @JoinColumn(name = "equPesCadastro")
-    @CreatedBy
-    private Pessoa equPesCadastro;
+    @Column
+    private Long equPesCadastro;
 
     @Column
     @Temporal(TemporalType.TIMESTAMP)
@@ -68,16 +66,14 @@ public class Equipamento implements Serializable {
     @LastModifiedDate
     private Date equDtAtualizacao;
 
-    @ManyToOne
-    @JoinColumn(name = "equPesAtualizacao")
-    @LastModifiedBy
-    private Pessoa equPesAtualizacao;
+    @Column
+    private Long equPesAtualizacao;
 
     public Equipamento() {
     }
 
     public Equipamento(Long equId, String equNome, String equDescricao, Unidade equUnidade, Boolean equAtiva,
-            Pessoa equPesCadastro, Date equDtCadastro, Date equDtAtualizacao, Pessoa equPesAtualizacao) {
+            Long equPesCadastro, Date equDtCadastro, Date equDtAtualizacao, Long equPesAtualizacao) {
         this.equId = equId;
         this.equNome = equNome;
         this.equDescricao = equDescricao;
@@ -141,11 +137,11 @@ public class Equipamento implements Serializable {
         this.equAtiva = equAtiva;
     }
 
-    public Pessoa getEquPesCadastro() {
+    public Long getEquPesCadastro() {
         return equPesCadastro;
     }
 
-    public void setEquPesCadastro(Pessoa equPesCadastro) {
+    public void setEquPesCadastro(Long equPesCadastro) {
         this.equPesCadastro = equPesCadastro;
     }
 
@@ -165,11 +161,11 @@ public class Equipamento implements Serializable {
         this.equDtAtualizacao = equDtAtualizacao;
     }
 
-    public Pessoa getEquPesAtualizacao() {
+    public Long getEquPesAtualizacao() {
         return equPesAtualizacao;
     }
 
-    public void setEquPesAtualizacao(Pessoa equPesAtualizacao) {
+    public void setEquPesAtualizacao(Long equPesAtualizacao) {
         this.equPesAtualizacao = equPesAtualizacao;
     }
 

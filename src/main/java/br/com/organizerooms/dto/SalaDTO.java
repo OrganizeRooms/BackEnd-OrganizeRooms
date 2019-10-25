@@ -18,15 +18,15 @@ public class SalaDTO {
     private Boolean salaAtiva;
     private Date salaDtCadastro;
     private Date salaDtAtualizacao;
-    private Pessoa salaPesCadastro;
-    private Pessoa salaPesAtualizacao;
+    private Long salaPesCadastro;
+    private Long salaPesAtualizacao;
     private Unidade salaUnidade;
 
     public SalaDTO() {
     }
 
     public SalaDTO(Long salaId, String salaNome, Integer salaLotacao, Boolean salaAtiva, Date salaDtCadastro,
-            Date salaDtAtualizacao, Pessoa salaPesCadastro, Pessoa salaPesAtualizacao, Unidade salaUnidade) {
+            Date salaDtAtualizacao, Long salaPesCadastro, Long salaPesAtualizacao, Unidade salaUnidade) {
         this.salaId = salaId;
         this.salaNome = salaNome;
         this.salaLotacao = salaLotacao;
@@ -98,19 +98,19 @@ public class SalaDTO {
         this.salaDtAtualizacao = salaDtAtualizacao;
     }
 
-    public Pessoa getSalaPesCadastro() {
+    public Long getSalaPesCadastro() {
         return salaPesCadastro;
     }
 
-    public void setSalaPesCadastro(Pessoa salaPesCadastro) {
+    public void setSalaPesCadastro(Long salaPesCadastro) {
         this.salaPesCadastro = salaPesCadastro;
     }
 
-    public Pessoa getSalaPesAtualizacao() {
+    public Long getSalaPesAtualizacao() {
         return salaPesAtualizacao;
     }
 
-    public void setSalaPesAtualizacao(Pessoa salaPesAtualizacao) {
+    public void setSalaPesAtualizacao(Long salaPesAtualizacao) {
         this.salaPesAtualizacao = salaPesAtualizacao;
     }
 

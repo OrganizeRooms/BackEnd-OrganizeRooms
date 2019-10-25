@@ -59,18 +59,18 @@ public class Notificacao {
     @LastModifiedDate
     private Date notDtAtualizacao;
     
-    @JsonIgnore
-    @ManyToOne
-    @JoinColumn(name = "notPesAtualizacao")
-    @LastModifiedBy
-    private Pessoa notPesAtualizacao;
+    @Column
+    private Long notPesAtualizacao;
+    
+    @Column
+    private Long notPesCadastro;    
     
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "pesId")
     private Pessoa pessoaId;
 
-    public Notificacao(Long notId, String notDescricao, boolean notAtiva, Date notDtCadastro, Date notDtAtualizacao, Pessoa notPesAtualizacao, Pessoa pessoaId) {
+    public Notificacao(Long notId, String notDescricao, boolean notAtiva, Date notDtCadastro, Date notDtAtualizacao, Long notPesAtualizacao, Pessoa pessoaId, Long notPesCadastro) {
         this.notId = notId;
         this.notDescricao = notDescricao;
         this.notAtiva = notAtiva;
@@ -78,6 +78,7 @@ public class Notificacao {
         this.notDtAtualizacao = Calendar.getInstance().getTime();
         this.notPesAtualizacao = notPesAtualizacao;
         this.pessoaId = pessoaId;
+        this.notPesCadastro = notPesCadastro;
     }
     
     public Notificacao(NotificacaoDTO notificacao) {
@@ -88,6 +89,7 @@ public class Notificacao {
         this.notDtAtualizacao = Calendar.getInstance().getTime();
         this.notPesAtualizacao = notificacao.getNotPesAtualizacao();
         this.pessoaId = notificacao.getPessoaId();
+        this.notPesCadastro = notificacao.getNotPesCadastro();
     }
 
     public Long getNotId() {
@@ -130,11 +132,11 @@ public class Notificacao {
         this.notDtAtualizacao = notDtAtualizacao;
     }
 
-    public Pessoa getNotPesAtualizacao() {
+    public Long getNotPesAtualizacao() {
         return notPesAtualizacao;
     }
 
-    public void setNotPesAtualizacao(Pessoa notPesAtualizacao) {
+    public void setNotPesAtualizacao(Long notPesAtualizacao) {
         this.notPesAtualizacao = notPesAtualizacao;
     }
 
@@ -144,6 +146,14 @@ public class Notificacao {
 
     public void setPessoaId(Pessoa pessoaId) {
         this.pessoaId = pessoaId;
+    }
+    
+    public Long getNotPesCadastro() {
+        return notPesCadastro;
+    }
+
+    public void setNotPesCadastro(Long notPesCadastro) {
+        this.notPesCadastro = notPesCadastro;
     }
 
     @Override

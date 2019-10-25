@@ -7,6 +7,7 @@ package br.com.organizerooms.models;
 
 import br.com.organizerooms.dto.AgendamentoDTO;
 import java.io.Serializable;
+import java.sql.Time;
 import java.util.Date;
 import java.util.Objects;
 import javax.persistence.Column;
@@ -51,14 +52,14 @@ public class Agendamento implements Serializable {
     private Date ageData;
     
     @Column
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.TIME)
     @CreatedDate
-    private Date ageHoraInicio;
+    private Time ageHoraInicio;
     
     @Column
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.TIME)
     @CreatedDate
-    private Date ageHoraFim;
+    private Time ageHoraFim;
     
     @Column
     @Temporal(TemporalType.TIMESTAMP)
@@ -77,11 +78,35 @@ public class Agendamento implements Serializable {
     @ManyToOne
     @JoinColumn(name = "id_pessoa")
     private Pessoa pesIdResponsavel;
+    
+    @Column
+    private Long agePesCadastro;
+
+    @Column
+    private Long agePesAtualizacao;
+
+    public Long getAgePesCadastro() {
+        return agePesCadastro;
+    }
+
+    public void setAgePesCadastro(Long agePesCadastro) {
+        this.agePesCadastro = agePesCadastro;
+    }
+
+    public Long getAgePesAtualizacao() {
+        return agePesAtualizacao;
+    }
+
+    public void setAgePesAtualizacao(Long agePesAtualizacao) {
+        this.agePesAtualizacao = agePesAtualizacao;
+    }
 
     public Agendamento() {
     }
 
-    public Agendamento(Long agendamentoId, String ageAssunto, String ageDescricao, String ageStatus, Date ageData, Date ageHoraInicio, Date ageHoraFim, Date ageDtCadastro, Date ageDtAtualizacao, Sala salaId, Pessoa pesIdResponsavel) {
+    public Agendamento(Long agendamentoId, String ageAssunto, String ageDescricao, String ageStatus, Date ageData, 
+            Time ageHoraInicio, Time ageHoraFim, Date ageDtCadastro, Date ageDtAtualizacao, Sala salaId, 
+            Pessoa pesIdResponsavel, Long agePesCadastro, Long agePesAtualizacao) {
         this.agendamentoId = agendamentoId;
         this.ageAssunto = ageAssunto;
         this.ageDescricao = ageDescricao;
@@ -93,6 +118,8 @@ public class Agendamento implements Serializable {
         this.ageDtAtualizacao = ageDtAtualizacao;
         this.salaId = salaId;
         this.pesIdResponsavel = pesIdResponsavel;
+        this.agePesCadastro = agePesCadastro;
+        this.agePesAtualizacao = agePesAtualizacao;
     }
     
     public Agendamento(AgendamentoDTO obj) {
@@ -107,6 +134,8 @@ public class Agendamento implements Serializable {
         this.ageDtAtualizacao = obj.getAgeDtAtualizacao();
         this.salaId = obj.getSalaId();
         this.pesIdResponsavel = obj.getPesIdResponsavel();
+        this.agePesCadastro = obj.getAgePesCadastro();
+        this.agePesAtualizacao = obj.getAgePesAtualizacao();
     }
     
     public Long getAgendamentoId() {
@@ -149,19 +178,19 @@ public class Agendamento implements Serializable {
         this.ageData = ageData;
     }
 
-    public Date getAgeHoraInicio() {
+    public Time getAgeHoraInicio() {
         return ageHoraInicio;
     }
 
-    public void setAgeHoraInicio(Date ageHoraInicio) {
+    public void setAgeHoraInicio(Time ageHoraInicio) {
         this.ageHoraInicio = ageHoraInicio;
     }
 
-    public Date getAgeHoraFim() {
+    public Time getAgeHoraFim() {
         return ageHoraFim;
     }
 
-    public void setAgeHoraFim(Date ageHoraFim) {
+    public void setAgeHoraFim(Time ageHoraFim) {
         this.ageHoraFim = ageHoraFim;
     }
 

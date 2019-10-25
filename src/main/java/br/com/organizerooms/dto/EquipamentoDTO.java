@@ -21,16 +21,16 @@ public class EquipamentoDTO {
     private String equDescricao;
     private Unidade equUnidade;
     private Boolean equAtiva;
-    private Pessoa equPesCadastro;
+    private Long equPesCadastro;
     private Date equDtCadastro;
     private Date equDtAtualizacao;
-    private Pessoa equPesAtualizacao;
+    private Long equPesAtualizacao;
 
     public EquipamentoDTO() {
     }
 
     public EquipamentoDTO(Long equId, String equNome, String equDescricao, Unidade equUnidade, Boolean equAtiva,
-            Pessoa equPesCadastro, Date equDtCadastro, Date equDtAtualizacao, Pessoa equPesAtualizacao) {
+            Long equPesCadastro, Date equDtCadastro, Date equDtAtualizacao, Long equPesAtualizacao) {
         this.equId = equId;
         this.equNome = equNome;
         this.equDescricao = equDescricao;
@@ -94,11 +94,11 @@ public class EquipamentoDTO {
         this.equAtiva = equAtiva;
     }
 
-    public Pessoa getEquPesCadastro() {
+    public Long getEquPesCadastro() {
         return equPesCadastro;
     }
 
-    public void setEquPesCadastro(Pessoa equPesCadastro) {
+    public void setEquPesCadastro(Long equPesCadastro) {
         this.equPesCadastro = equPesCadastro;
     }
 
@@ -118,11 +118,11 @@ public class EquipamentoDTO {
         this.equDtAtualizacao = equDtAtualizacao;
     }
 
-    public Pessoa getEquPesAtualizacao() {
+    public Long getEquPesAtualizacao() {
         return equPesAtualizacao;
     }
 
-    public void setEquPesAtualizacao(Pessoa equPesAtualizacao) {
+    public void setEquPesAtualizacao(Long equPesAtualizacao) {
         this.equPesAtualizacao = equPesAtualizacao;
     }
 

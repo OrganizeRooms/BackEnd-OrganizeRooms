@@ -48,7 +48,7 @@ public class Sala implements Serializable {
     @ManyToOne
     @JoinColumn(name = "salaPesCadastro")
     @CreatedBy
-    private Pessoa salaPesCadastro;
+    private Long salaPesCadastro;
 
     @Column
     @Temporal(TemporalType.TIMESTAMP)
@@ -63,7 +63,7 @@ public class Sala implements Serializable {
     @ManyToOne
     @JoinColumn(name = "salaPesAtualizacao")
     @LastModifiedBy
-    private Pessoa salaPesAtualizacao;
+    private Long salaPesAtualizacao;
 
     @ManyToOne
     @JoinColumn(name = "uniId")
@@ -72,8 +72,8 @@ public class Sala implements Serializable {
     public Sala() {
     }
 
-    public Sala(Long salaId, String salaNome, Integer salaLotacao, Boolean salaAtiva, Pessoa salaPesCadastro, 
-            Date salaDtCadastro, Date salaDtAtualizacao, Pessoa salaPesAtualizacao, Unidade salaUnidade) {
+    public Sala(Long salaId, String salaNome, Integer salaLotacao, Boolean salaAtiva, Long salaPesCadastro, 
+            Date salaDtCadastro, Date salaDtAtualizacao, Long salaPesAtualizacao, Unidade salaUnidade) {
         this.salaId = salaId;
         this.salaNome = salaNome;
         this.salaLotacao = salaLotacao;
@@ -145,19 +145,19 @@ public class Sala implements Serializable {
         this.salaDtAtualizacao = salaDtAtualizacao;
     }
 
-    public Pessoa getSalaPesCadastro() {
+    public Long getSalaPesCadastro() {
         return salaPesCadastro;
     }
 
-    public void setSalaPesCadastro(Pessoa salaPesCadastro) {
+    public void setSalaPesCadastro(Long salaPesCadastro) {
         this.salaPesCadastro = salaPesCadastro;
     }
 
-    public Pessoa getSalaPesAtualizacao() {
+    public Long getSalaPesAtualizacao() {
         return salaPesAtualizacao;
     }
 
-    public void setSalaPesAtualizacao(Pessoa salaPesAtualizacao) {
+    public void setSalaPesAtualizacao(Long salaPesAtualizacao) {
         this.salaPesAtualizacao = salaPesAtualizacao;
     }
 
