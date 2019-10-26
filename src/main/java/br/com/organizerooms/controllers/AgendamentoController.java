@@ -69,7 +69,7 @@ public class AgendamentoController {
         return ResponseEntity.ok().body(response);
     }
     
-    @GetMapping("/pessoa")
+    @GetMapping("/sala")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
     public ResponseEntity<Response> buscarAgendamentoPorSala(@RequestBody SalaDTO salaDTO) {
         Sala sala = new Sala(salaDTO);
