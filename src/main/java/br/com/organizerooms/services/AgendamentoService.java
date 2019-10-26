@@ -1,6 +1,8 @@
 package br.com.organizerooms.services;
 
 import br.com.organizerooms.models.Agendamento;
+import br.com.organizerooms.models.Sala;
+import br.com.organizerooms.models.Pessoa;
 import br.com.organizerooms.repositorios.AgendamentoRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +33,14 @@ public class AgendamentoService {
     public Agendamento buscarAgendamentoPorId(Long id) {
         return this.agendamentoRepository.findById(id).get();
     }
+    
+    public List<Agendamento> buscaPorPessoa (Pessoa pessoa){
+        return this.agendamentoRepository.findByPesIdResponsavel(pessoa);
+    };
+    
+    public List<Agendamento> buscaPorSala (Sala sala){
+        return this.agendamentoRepository.findBySalaId(sala);
+    };
 
 }
 

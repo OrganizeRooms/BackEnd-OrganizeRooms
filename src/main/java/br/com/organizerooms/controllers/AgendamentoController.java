@@ -1,8 +1,12 @@
 package br.com.organizerooms.controllers;
 
 import br.com.organizerooms.dto.AgendamentoDTO;
+import br.com.organizerooms.dto.PessoaDTO;
+import br.com.organizerooms.dto.SalaDTO;
 import br.com.organizerooms.models.Response;
 import br.com.organizerooms.models.Agendamento;
+import br.com.organizerooms.models.Sala;
+import br.com.organizerooms.models.Pessoa;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,6 +56,24 @@ public class AgendamentoController {
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
     public ResponseEntity<Response> buscarAgendamentoPorId(@PathVariable String id) {
         Agendamento lista = agendamentoService.buscarAgendamentoPorId(Long.parseLong(id));
+        Response response = new Response(lista);
+        return ResponseEntity.ok().body(response);
+    }
+    
+    @GetMapping("/pessoa")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
+    public ResponseEntity<Response> buscarAgendamentoPorPessoa(@RequestBody PessoaDTO pessoaDTO) {
+        Pessoa pessoa = new Pessoa(pessoaDTO);
+        List<Agendamento> lista = agendamentoService.buscaPorPessoa(pessoa);
+        Response response = new Response(lista);
+        return ResponseEntity.ok().body(response);
+    }
+    
+    @GetMapping("/sala")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
+    public ResponseEntity<Response> buscarAgendamentoPorSala(@RequestBody SalaDTO salaDTO) {
+        Sala sala = new Sala(salaDTO);
+        List<Agendamento> lista = agendamentoService.buscaPorSala(sala);
         Response response = new Response(lista);
         return ResponseEntity.ok().body(response);
     }
