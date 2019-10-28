@@ -25,7 +25,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -38,22 +37,22 @@ public class Pessoa implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long pesId;
 
-    @Column
+    @Column(nullable = false)
     private String pesNome;
 
-    @Column
+    @Column(nullable = false)
     private String pesEmail;
 
     @JsonIgnore
-    @Column
+    @Column(nullable = false)
     private String pesSenha;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "pesPermissao")
+    @Column(name = "pesPermissao", nullable = false)
     private PerfilEnum pesPermissao;
 
     @ManyToOne
-    @JoinColumn(name = "uniId")
+    @JoinColumn(name = "uniId", nullable = false)
     private Unidade pesUnidade;
 
     @Column
@@ -64,13 +63,13 @@ public class Pessoa implements Serializable {
 
     // SIS = Cadastro manual
     // IMP = Por Importação
-    @Column
+    @Column(nullable = false)
     private String pesTipoInclusao;
 
     @Column
     private Long pesCadastro;
 
-    @Column
+    @Column(nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     @CreatedDate
     private Date pesDtCadastro;
@@ -78,10 +77,18 @@ public class Pessoa implements Serializable {
     @Column
     private Long pesAtualizacao;
 
-    @Column
+    @Column(nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     @LastModifiedDate
     private Date pesDtAtualizacao;
+
+    ///
+    @JsonIgnore
+    @OneToMany(mappedBy = "agePesResponsavel")
+    private List<Agendamento> agendamentoResponsavel;
+
+    @OneToMany(mappedBy = "parPessoa")
+    private List<Participante> participantes;
 
     public Pessoa() {
     }
@@ -91,7 +98,7 @@ public class Pessoa implements Serializable {
         this.pesId = pesId;
         this.pesNome = pesNome;
         this.pesEmail = pesEmail;
-        if (pesSenha.equalsIgnoreCase("senha")) {
+        if (pesSenha.equals("senha")) {
             this.pesSenha = pesSenha;
         } else {
             this.pesSenha = SenhaUtils.gerarBCrypt(pesSenha);
@@ -138,7 +145,7 @@ public class Pessoa implements Serializable {
         if (pesSenha.equalsIgnoreCase("senha")) {
             this.pesSenha = pesSenha;
         } else {
-            this.pesSenha = SenhaUtils.gerarBCrypt(pesSenha);
+            this.pesSenha = pesSenha;
         }
     }
 

@@ -9,26 +9,27 @@ import br.com.organizerooms.models.Participante;
  * @author Eder Jean Dias
  */
 public class ParticipanteDTO {
+
     private Long parId;
-    private Integer parTipo;   
-    private Pessoa pesId;
-    private Agendamento ageId;
+    private Integer parTipo;
+    private Pessoa parPessoa;
+    private Agendamento parAgendamento;
 
     public ParticipanteDTO() {
     }
 
-    public ParticipanteDTO(Long parId, Integer parTipo, Pessoa pesId, Agendamento ageId) {
+    public ParticipanteDTO(Long parId, Integer parTipo, Pessoa parPessoa, Agendamento parAgendamento) {
         this.parId = parId;
         this.parTipo = parTipo;
-        this.pesId = pesId;
-        this.ageId = ageId;
+        this.parPessoa = parPessoa;
+        this.parAgendamento = parAgendamento;
     }
-    
+
     public ParticipanteDTO(Participante obj) {
         this.parId = obj.getParId();
         this.parTipo = obj.getParTipo();
-        this.pesId = obj.getPesId();
-        this.ageId = obj.getAgeId();
+        this.parPessoa = obj.getParPessoa();
+        this.parAgendamento = obj.getParAgendamento();
     }
 
     public Long getParId() {
@@ -47,19 +48,20 @@ public class ParticipanteDTO {
         this.parTipo = parTipo;
     }
 
-    public Pessoa getPesId() {
-        return pesId;
+    public Pessoa getParPessoa() {
+        return parPessoa;
     }
 
-    public void setPesId(Pessoa pesId) {
-        this.pesId = pesId;
+    public void setParPessoa(Pessoa parPessoa) {
+        this.parPessoa = parPessoa;
     }
 
-    public Agendamento getAgeId() {
-        return ageId;
+    public Agendamento getParAgendamento() {
+        return parAgendamento;
     }
 
-    public void setAgeId(Agendamento ageId) {
-        this.ageId = ageId;
-    }  
+    public void setParAgendamento(Agendamento parAgendamento) {
+        this.parAgendamento = parAgendamento;
+    }
+
 }

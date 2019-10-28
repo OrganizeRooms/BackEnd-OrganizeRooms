@@ -1,6 +1,5 @@
 package br.com.organizerooms.models;
 
-
 import br.com.organizerooms.dto.ParticipanteDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
@@ -21,44 +20,43 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
  *
  * @author Eder Jean Dias
  */
-
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-@Table(name = "participacao")
-public class Participante implements Serializable{
-    
+@Table(name = "participante")
+public class Participante implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long parId;
 
     @Column
-    private Integer parTipo;   
-    
+    private Integer parTipo;
+
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "pesId")
-    private Pessoa pesId;
-    
+    @JoinColumn(name = "parPessoa")
+    private Pessoa parPessoa;
+
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "ageId")
-    private Agendamento ageId;
+    @JoinColumn(name = "parAgendamento")
+    private Agendamento parAgendamento;
 
     public Participante() {
     }
 
-    public Participante(Long parId, Integer parTipo, Pessoa pesId, Agendamento ageId) {
+    public Participante(Long parId, Integer parTipo, Pessoa parPessoa, Agendamento parAgendamento) {
         this.parId = parId;
         this.parTipo = parTipo;
-        this.pesId = pesId;
-        this.ageId = ageId;
+        this.parPessoa = parPessoa;
+        this.parAgendamento = parAgendamento;
     }
-    
+
     public Participante(ParticipanteDTO obj) {
         this.parId = obj.getParId();
         this.parTipo = obj.getParTipo();
-        this.pesId = obj.getPesId();
-        this.ageId = obj.getAgeId();
+        this.parPessoa = obj.getParPessoa();
+        this.parAgendamento = obj.getParAgendamento();
     }
 
     public Long getParId() {
@@ -77,20 +75,20 @@ public class Participante implements Serializable{
         this.parTipo = parTipo;
     }
 
-    public Pessoa getPesId() {
-        return pesId;
+    public Pessoa getParPessoa() {
+        return parPessoa;
     }
 
-    public void setPesId(Pessoa pesId) {
-        this.pesId = pesId;
+    public void setParPessoa(Pessoa parPessoa) {
+        this.parPessoa = parPessoa;
     }
 
-    public Agendamento getAgeId() {
-        return ageId;
+    public Agendamento getParAgendamento() {
+        return parAgendamento;
     }
 
-    public void setAgeId(Agendamento ageId) {
-        this.ageId = ageId;
+    public void setParAgendamento(Agendamento parAgendamento) {
+        this.parAgendamento = parAgendamento;
     }
 
     @Override
@@ -102,9 +100,6 @@ public class Participante implements Serializable{
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
         if (obj == null) {
             return false;
         }
@@ -117,4 +112,5 @@ public class Participante implements Serializable{
         }
         return true;
     }
+
 }

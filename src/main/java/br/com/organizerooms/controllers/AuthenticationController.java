@@ -29,6 +29,7 @@ import br.com.organizerooms.models.Pessoa;
 import br.com.organizerooms.models.Response;
 import br.com.organizerooms.services.PessoaService;
 import br.com.organizerooms.utils.JwtTokenUtil;
+import br.com.organizerooms.utils.SenhaUtils;
 import java.util.HashMap;
 import org.springframework.http.HttpHeaders;
 
@@ -137,7 +138,7 @@ public class AuthenticationController {
         Boolean resposta = false;
         if (pessoa.get().getPesSenha().equals(novaSenha.getPesSenha())) {
             
-            pessoa.get().setPesSenha(novaSenha.getPesNovaSenha());
+            pessoa.get().setPesSenha(SenhaUtils.gerarBCrypt(novaSenha.getPesNovaSenha()));
             novaPessoa = this.pessoaService.addPessoa(pessoa.get()); 
             if(novaPessoa != null && !novaPessoa.getPesSenha().equals(novaSenha.getPesSenha())){
                 resposta = true;

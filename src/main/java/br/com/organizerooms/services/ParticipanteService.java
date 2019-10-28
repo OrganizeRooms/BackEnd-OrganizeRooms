@@ -5,12 +5,15 @@ import br.com.organizerooms.repositorios.ParticipanteRepository;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author Eder Jean Dias
  */
+@Service
 public class ParticipanteService {
+    
     @Autowired
     ParticipanteRepository participanteRepository;
 
