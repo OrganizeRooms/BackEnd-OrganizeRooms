@@ -11,10 +11,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 import javax.persistence.EntityListeners;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.springframework.data.annotation.CreatedBy;
@@ -65,10 +67,15 @@ public class Sala implements Serializable {
     @JoinColumn(name = "uniId")
     private Unidade salaUnidade;
 
+    ///
+    @JsonIgnore
+    @OneToMany(mappedBy = "ageSala")
+    private List<Agendamento> agendamentos;
+
     public Sala() {
     }
 
-    public Sala(Long salaId, String salaNome, Integer salaLotacao, Boolean salaAtiva, Long salaPesCadastro, 
+    public Sala(Long salaId, String salaNome, Integer salaLotacao, Boolean salaAtiva, Long salaPesCadastro,
             Date salaDtCadastro, Date salaDtAtualizacao, Long salaPesAtualizacao, Unidade salaUnidade) {
         this.salaId = salaId;
         this.salaNome = salaNome;

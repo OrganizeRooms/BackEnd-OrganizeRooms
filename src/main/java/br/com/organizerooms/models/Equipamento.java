@@ -6,9 +6,11 @@
 package br.com.organizerooms.models;
 
 import br.com.organizerooms.dto.EquipamentoDTO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,6 +19,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -68,6 +71,10 @@ public class Equipamento implements Serializable {
 
     @Column
     private Long equPesAtualizacao;
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "equipamentos")
+    private List<Agendamento> agendamentos;
 
     public Equipamento() {
     }

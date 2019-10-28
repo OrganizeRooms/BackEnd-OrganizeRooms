@@ -4,15 +4,15 @@ import java.util.Date;
 import br.com.organizerooms.models.Pessoa;
 import br.com.organizerooms.models.Sala;
 import br.com.organizerooms.models.Agendamento;
-import java.sql.Time;
 import java.util.Objects;
-import javax.persistence.Column;
+
 /**
  *
  * @author Eder Jean Dias
  */
 public class AgendamentoDTO {
-    private Long agendamentoId;
+
+    private Long ageId;
     private String ageAssunto;
     private String ageDescricao;
     private String ageStatus;
@@ -21,33 +21,17 @@ public class AgendamentoDTO {
     private Date ageHoraFim;
     private Date ageDtCadastro;
     private Date ageDtAtualizacao;
-    private Sala salaId;
-    private Pessoa pesIdResponsavel;
+    private Sala ageSala;
+    private Pessoa agePesResponsavel;
     private Long agePesCadastro;
     private Long agePesAtualizacao;
-
-    public Long getAgePesCadastro() {
-        return agePesCadastro;
-    }
-
-    public void setAgePesCadastro(Long agePesCadastro) {
-        this.agePesCadastro = agePesCadastro;
-    }
-
-    public Long getAgePesAtualizacao() {
-        return agePesAtualizacao;
-    }
-
-    public void setAgePesAtualizacao(Long agePesAtualizacao) {
-        this.agePesAtualizacao = agePesAtualizacao;
-    }
 
     public AgendamentoDTO() {
     }
 
-    public AgendamentoDTO(Long agendamentoId, String ageAssunto, String ageDescricao, String ageStatus, Date ageData, Time ageHoraInicio, Time ageHoraFim, Date ageDtCadastro, Date ageDtAtualizacao, Sala salaId, Pessoa pesIdResponsavel,
-        Long agePesCadastro, Long agePesAtualizacao) {
-        this.agendamentoId = agendamentoId;
+    public AgendamentoDTO(Long ageId, String ageAssunto, String ageDescricao, String ageStatus, Date ageData, Date ageHoraInicio, Date ageHoraFim,
+            Date ageDtCadastro, Date ageDtAtualizacao, Sala ageSala, Pessoa agePesResponsavel, Long agePesCadastro, Long agePesAtualizacao) {
+        this.ageId = ageId;
         this.ageAssunto = ageAssunto;
         this.ageDescricao = ageDescricao;
         this.ageStatus = ageStatus;
@@ -56,14 +40,14 @@ public class AgendamentoDTO {
         this.ageHoraFim = ageHoraFim;
         this.ageDtCadastro = ageDtCadastro;
         this.ageDtAtualizacao = ageDtAtualizacao;
-        this.salaId = salaId;
-        this.pesIdResponsavel = pesIdResponsavel;        
+        this.ageSala = ageSala;
+        this.agePesResponsavel = agePesResponsavel;
         this.agePesCadastro = agePesCadastro;
         this.agePesAtualizacao = agePesAtualizacao;
     }
-    
+
     public AgendamentoDTO(Agendamento obj) {
-        this.agendamentoId = obj.getAgendamentoId();
+        this.ageId = obj.getAgeId();
         this.ageAssunto = obj.getAgeAssunto();
         this.ageDescricao = obj.getAgeDescricao();
         this.ageStatus = obj.getAgeStatus();
@@ -72,18 +56,18 @@ public class AgendamentoDTO {
         this.ageHoraFim = obj.getAgeHoraFim();
         this.ageDtCadastro = obj.getAgeDtCadastro();
         this.ageDtAtualizacao = obj.getAgeDtAtualizacao();
-        this.salaId = obj.getSalaId();
-        this.pesIdResponsavel = obj.getPesIdResponsavel();
+        this.ageSala = obj.getAgeSala();
+        this.agePesResponsavel = obj.getAgePesResponsavel();
         this.agePesCadastro = obj.getAgePesCadastro();
         this.agePesAtualizacao = obj.getAgePesAtualizacao();
     }
 
-    public Long getAgendamentoId() {
-        return agendamentoId;
+    public Long getAgeId() {
+        return ageId;
     }
 
-    public void setAgendamentoId(Long agendamentoId) {
-        this.agendamentoId = agendamentoId;
+    public void setAgeId(Long ageId) {
+        this.ageId = ageId;
     }
 
     public String getAgeAssunto() {
@@ -122,7 +106,7 @@ public class AgendamentoDTO {
         return ageHoraInicio;
     }
 
-    public void setAgeHoraInicio(Time ageHoraInicio) {
+    public void setAgeHoraInicio(Date ageHoraInicio) {
         this.ageHoraInicio = ageHoraInicio;
     }
 
@@ -130,7 +114,7 @@ public class AgendamentoDTO {
         return ageHoraFim;
     }
 
-    public void setAgeHoraFim(Time ageHoraFim) {
+    public void setAgeHoraFim(Date ageHoraFim) {
         this.ageHoraFim = ageHoraFim;
     }
 
@@ -150,34 +134,47 @@ public class AgendamentoDTO {
         this.ageDtAtualizacao = ageDtAtualizacao;
     }
 
-    public Sala getSalaId() {
-        return salaId;
+    public Sala getAgeSala() {
+        return ageSala;
     }
 
-    public void setSalaId(Sala salaId) {
-        this.salaId = salaId;
+    public void setAgeSala(Sala ageSala) {
+        this.ageSala = ageSala;
     }
 
-    public Pessoa getPesIdResponsavel() {
-        return pesIdResponsavel;
+    public Pessoa getAgePesResponsavel() {
+        return agePesResponsavel;
     }
 
-    public void setPesIdResponsavel(Pessoa pesIdResponsavel) {
-        this.pesIdResponsavel = pesIdResponsavel;
+    public void setAgePesResponsavel(Pessoa agePesResponsavel) {
+        this.agePesResponsavel = agePesResponsavel;
+    }
+
+    public Long getAgePesCadastro() {
+        return agePesCadastro;
+    }
+
+    public void setAgePesCadastro(Long agePesCadastro) {
+        this.agePesCadastro = agePesCadastro;
+    }
+
+    public Long getAgePesAtualizacao() {
+        return agePesAtualizacao;
+    }
+
+    public void setAgePesAtualizacao(Long agePesAtualizacao) {
+        this.agePesAtualizacao = agePesAtualizacao;
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 59 * hash + Objects.hashCode(this.agendamentoId);
+        int hash = 5;
+        hash = 43 * hash + Objects.hashCode(this.ageId);
         return hash;
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
         if (obj == null) {
             return false;
         }
@@ -185,9 +182,10 @@ public class AgendamentoDTO {
             return false;
         }
         final AgendamentoDTO other = (AgendamentoDTO) obj;
-        if (!Objects.equals(this.agendamentoId, other.agendamentoId)) {
+        if (!Objects.equals(this.ageId, other.ageId)) {
             return false;
         }
         return true;
     }
+
 }

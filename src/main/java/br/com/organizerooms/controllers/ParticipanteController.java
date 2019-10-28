@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class ParticipanteController {
 
     @Autowired
-    ParticipanteService participanteService;
+    ParticipanteService  participanteService;
 
     @GetMapping
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")

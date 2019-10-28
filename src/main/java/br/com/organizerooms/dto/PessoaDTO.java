@@ -18,7 +18,6 @@ public class PessoaDTO {
 
     private String pesEmail;
 
-   // private String pesSenha;
     private PerfilEnum pesPermissao;
 
     private String pesDescricaoPermissao;
@@ -44,9 +43,8 @@ public class PessoaDTO {
     public PessoaDTO() {
     }
 
-    public PessoaDTO(Long pesId, String pesNome, String pesEmail, PerfilEnum pesPermissao,
-            String pesDescricaoPermissao, Unidade unidade, String pesDdd, String pesTelefone, String pesTipoInclusao,
-            Long pesCadastro, Date pesDtCadastro, Long pesAtualizacao, Date pesDtAtualizacao) {
+    public PessoaDTO(Long pesId, String pesNome, String pesEmail, PerfilEnum pesPermissao, String pesDescricaoPermissao, Unidade pesUnidade,
+            String pesDdd, String pesTelefone, String pesTipoInclusao, Long pesCadastro, Date pesDtCadastro, Long pesAtualizacao, Date pesDtAtualizacao) {
         this.pesId = pesId;
         this.pesNome = pesNome;
         this.pesEmail = pesEmail;

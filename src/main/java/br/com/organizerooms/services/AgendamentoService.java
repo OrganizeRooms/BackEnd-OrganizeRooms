@@ -35,11 +35,11 @@ public class AgendamentoService {
     }
     
     public List<Agendamento> buscaPorPessoa (Pessoa pessoa){
-        return this.agendamentoRepository.findByPesIdResponsavel(pessoa);
+        return this.agendamentoRepository.findByAgePesResponsavel(pessoa);
     };
     
     public List<Agendamento> buscaPorSala (Sala sala){
-        return this.agendamentoRepository.findBySalaId(sala);
+        return this.agendamentoRepository.findByAgeSala(sala);
     };
 
 }

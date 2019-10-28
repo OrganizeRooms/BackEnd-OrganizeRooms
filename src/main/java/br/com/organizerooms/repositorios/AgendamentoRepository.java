@@ -18,9 +18,9 @@ public interface AgendamentoRepository extends JpaRepository <Agendamento, Long 
    
     public List<Agendamento> findAllByOrderByAgeDescricao();
     
-    public List<Agendamento> findByPesIdResponsavel(Pessoa pessoa);
+    public List<Agendamento> findByAgePesResponsavel(Pessoa pessoa);
     
-    public List<Agendamento> findBySalaId(Sala sala);
+    public List<Agendamento> findByAgeSala(Sala sala);
     
 }
 

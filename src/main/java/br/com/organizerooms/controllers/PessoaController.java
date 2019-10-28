@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.organizerooms.services.PessoaService;
 import br.com.organizerooms.utils.SenhaUtils;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -51,9 +52,12 @@ public class PessoaController {
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public ResponseEntity<Response> addPessoa(@RequestBody PessoaDTO pessoa) {
         Pessoa newPessoa = new Pessoa(pessoa);
-
+        Optional<Pessoa> oldpessoa = pessoaService.buscarPessoaPorId(pessoa.getPesId());
+        
         if (newPessoa.getPesId() == 0) {
             newPessoa.setPesSenha("senha");
+        }else{
+            newPessoa.setPesSenha(oldpessoa.get().getPesSenha());
         }
 
         PessoaDTO pesDTO = new PessoaDTO(pessoaService.addPessoa(newPessoa));
