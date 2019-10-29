@@ -49,6 +49,12 @@ public class Agendamento implements Serializable {
     @Column
     private String ageDescricao;
 
+    /*
+    EM ANDAMENTO
+    CANCELADO
+    CONCLUIDO
+    AGENDADO
+    */
     @Column
     private String ageStatus;
 
@@ -100,27 +106,14 @@ public class Agendamento implements Serializable {
     @OneToMany(mappedBy = "parAgendamento")
     private List<Participante> participantes;
 
-    public Long getAgePesCadastro() {
-        return agePesCadastro;
-    }
 
-    public void setAgePesCadastro(Long agePesCadastro) {
-        this.agePesCadastro = agePesCadastro;
-    }
-
-    public Long getAgePesAtualizacao() {
-        return agePesAtualizacao;
-    }
-
-    public void setAgePesAtualizacao(Long agePesAtualizacao) {
-        this.agePesAtualizacao = agePesAtualizacao;
-    }
 
     public Agendamento() {
     }
 
     public Agendamento(Long ageId, String ageAssunto, String ageDescricao, String ageStatus, Date ageData, Date ageHoraInicio,
-            Date ageHoraFim, Date ageDtCadastro, Date ageDtAtualizacao, Sala ageSala, Pessoa agePesResponsavel, Long agePesCadastro, Long agePesAtualizacao) {
+            Date ageHoraFim, Date ageDtCadastro, Date ageDtAtualizacao, Sala ageSala, Pessoa agePesResponsavel, Long agePesCadastro, Long agePesAtualizacao,
+            List<Equipamento> equipamentos, List<Participante> participantes) {
         this.ageId = ageId;
         this.ageAssunto = ageAssunto;
         this.ageDescricao = ageDescricao;
@@ -134,6 +127,8 @@ public class Agendamento implements Serializable {
         this.agePesResponsavel = agePesResponsavel;
         this.agePesCadastro = agePesCadastro;
         this.agePesAtualizacao = agePesAtualizacao;
+        this.equipamentos = equipamentos;
+        this.participantes = participantes;
     }
 
     public Agendamento(AgendamentoDTO obj) {
@@ -150,6 +145,8 @@ public class Agendamento implements Serializable {
         this.agePesResponsavel = obj.getAgePesResponsavel();
         this.agePesCadastro = obj.getAgePesCadastro();
         this.agePesAtualizacao = obj.getAgePesAtualizacao();
+        this.equipamentos = obj.getEquipamentos();
+        this.participantes = obj.getParticipantes();
     }
 
     public Long getAgeId() {
@@ -238,6 +235,38 @@ public class Agendamento implements Serializable {
 
     public void setAgePesResponsavel(Pessoa agePesResponsavel) {
         this.agePesResponsavel = agePesResponsavel;
+    }
+    
+        public List<Equipamento> getEquipamentos() {
+        return equipamentos;
+    }
+
+    public void setEquipamentos(List<Equipamento> equipamentos) {
+        this.equipamentos = equipamentos;
+    }
+
+    public List<Participante> getParticipantes() {
+        return participantes;
+    }
+
+    public void setParticipantes(List<Participante> participantes) {
+        this.participantes = participantes;
+    }
+
+    public Long getAgePesCadastro() {
+        return agePesCadastro;
+    }
+
+    public void setAgePesCadastro(Long agePesCadastro) {
+        this.agePesCadastro = agePesCadastro;
+    }
+
+    public Long getAgePesAtualizacao() {
+        return agePesAtualizacao;
+    }
+
+    public void setAgePesAtualizacao(Long agePesAtualizacao) {
+        this.agePesAtualizacao = agePesAtualizacao;
     }
 
     @Override
