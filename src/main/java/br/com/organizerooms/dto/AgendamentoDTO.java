@@ -28,15 +28,15 @@ public class AgendamentoDTO {
     private Pessoa agePesResponsavel;
     private Long agePesCadastro;
     private Long agePesAtualizacao;
-    private List<Equipamento> equipamentos;
-    private List<Participante> participantes;
+    private List<Equipamento> ageEquipamentos;
+    private List<Participante> ageParticipantes;
 
     public AgendamentoDTO() {
     }
 
-    public AgendamentoDTO(Long ageId, String ageAssunto, String ageDescricao, String ageStatus, Date ageData, Date ageHoraInicio, Date ageHoraFim,
-            Date ageDtCadastro, Date ageDtAtualizacao, Sala ageSala, Pessoa agePesResponsavel, Long agePesCadastro, Long agePesAtualizacao,
-            List<Equipamento> equipamentos, List<Participante> participantes) {
+    public AgendamentoDTO(Long ageId, String ageAssunto, String ageDescricao, String ageStatus, Date ageData, Date ageHoraInicio, Date ageHoraFim, 
+            Date ageDtCadastro, Date ageDtAtualizacao, Sala ageSala, Pessoa agePesResponsavel, Long agePesCadastro, Long agePesAtualizacao, 
+            List<Equipamento> ageEquipamentos, List<Participante> ageParticipantes) {
         this.ageId = ageId;
         this.ageAssunto = ageAssunto;
         this.ageDescricao = ageDescricao;
@@ -50,8 +50,8 @@ public class AgendamentoDTO {
         this.agePesResponsavel = agePesResponsavel;
         this.agePesCadastro = agePesCadastro;
         this.agePesAtualizacao = agePesAtualizacao;
-        this.equipamentos = equipamentos;
-        this.participantes = participantes;
+        this.ageEquipamentos = ageEquipamentos;
+        this.ageParticipantes = ageParticipantes;
     }
 
     public AgendamentoDTO(Agendamento obj) {
@@ -68,8 +68,8 @@ public class AgendamentoDTO {
         this.agePesResponsavel = obj.getAgePesResponsavel();
         this.agePesCadastro = obj.getAgePesCadastro();
         this.agePesAtualizacao = obj.getAgePesAtualizacao();
-        this.equipamentos = obj.getEquipamentos();
-        this.participantes = obj.getParticipantes();
+        this.ageEquipamentos = obj.getEquipamentos();
+        this.ageParticipantes = obj.getParticipantes();
     }
 
     public Long getAgeId() {
@@ -175,21 +175,21 @@ public class AgendamentoDTO {
     public void setAgePesAtualizacao(Long agePesAtualizacao) {
         this.agePesAtualizacao = agePesAtualizacao;
     }
-    
-    public List<Equipamento> getEquipamentos() {
-        return equipamentos;
+
+    public List<Equipamento> getAgeEquipamentos() {
+        return ageEquipamentos;
     }
 
-    public void setEquipamentos(List<Equipamento> equipamentos) {
-        this.equipamentos = equipamentos;
+    public void setAgeEquipamentos(List<Equipamento> ageEquipamentos) {
+        this.ageEquipamentos = ageEquipamentos;
     }
 
-    public List<Participante> getParticipantes() {
-        return participantes;
+    public List<Participante> getAgeParticipantes() {
+        return ageParticipantes;
     }
 
-    public void setParticipantes(List<Participante> participantes) {
-        this.participantes = participantes;
+    public void setAgeParticipantes(List<Participante> ageParticipantes) {
+        this.ageParticipantes = ageParticipantes;
     }
 
     @Override

@@ -29,10 +29,11 @@ public class Participante implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long parId;
 
+    // 1 Normal
+    // 2 Importante
     @Column
     private Integer parTipo;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "parPessoa")
     private Pessoa parPessoa;

@@ -28,6 +28,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 /**
@@ -60,17 +61,14 @@ public class Agendamento implements Serializable {
 
     @Column
     @Temporal(TemporalType.DATE)
-    @CreatedDate
     private Date ageData;
 
     @Column
     @Temporal(TemporalType.TIMESTAMP)
-    @CreatedDate
     private Date ageHoraInicio;
 
     @Column
     @Temporal(TemporalType.TIMESTAMP)
-    @CreatedDate
     private Date ageHoraFim;
 
     @Column
@@ -80,7 +78,7 @@ public class Agendamento implements Serializable {
 
     @Column
     @Temporal(TemporalType.TIMESTAMP)
-    @CreatedDate
+    @LastModifiedDate
     private Date ageDtAtualizacao;
 
     @ManyToOne
@@ -105,8 +103,6 @@ public class Agendamento implements Serializable {
     
     @OneToMany(mappedBy = "parAgendamento")
     private List<Participante> participantes;
-
-
 
     public Agendamento() {
     }
@@ -145,8 +141,8 @@ public class Agendamento implements Serializable {
         this.agePesResponsavel = obj.getAgePesResponsavel();
         this.agePesCadastro = obj.getAgePesCadastro();
         this.agePesAtualizacao = obj.getAgePesAtualizacao();
-        this.equipamentos = obj.getEquipamentos();
-        this.participantes = obj.getParticipantes();
+        this.equipamentos = obj.getAgeEquipamentos();
+        this.participantes = obj.getAgeParticipantes();
     }
 
     public Long getAgeId() {
