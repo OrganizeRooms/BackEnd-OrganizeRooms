@@ -47,7 +47,7 @@ public class Agendamento implements Serializable {
     @Column
     private Boolean ageAtiva;
 
-    @Column
+    @Column(nullable = false)
     private String ageAssunto;
 
     @Column
@@ -62,38 +62,38 @@ public class Agendamento implements Serializable {
     @Column
     private String ageStatus;
 
-    @Column
+    @Column(updatable = false, nullable = false)
     @Temporal(TemporalType.DATE)
     private Date ageData;
 
-    @Column
+    @Column(updatable = false, nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date ageHoraInicio;
 
-    @Column
+    @Column(updatable = false, nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date ageHoraFim;
 
-    @Column
+    @ManyToOne
+    @JoinColumn(name = "agePesResponsavel", updatable = false, nullable = false)
+    private Pessoa agePesResponsavel;
+
+    @ManyToOne
+    @JoinColumn(name = "ageSala", updatable = false, nullable = false)
+    private Sala ageSala;
+
+    @Column(updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
     @CreatedDate
     private Date ageDtCadastro;
 
-    @Column
+    @Column(updatable = false, nullable = false)
+    private Long agePesCadastro;
+
+    @Column(nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     @LastModifiedDate
     private Date ageDtAtualizacao;
-
-    @ManyToOne
-    @JoinColumn(name = "ageSala")
-    private Sala ageSala;
-
-    @ManyToOne
-    @JoinColumn(name = "agePesResponsavel")
-    private Pessoa agePesResponsavel;
-
-    @Column
-    private Long agePesCadastro;
 
     @Column
     private Long agePesAtualizacao;

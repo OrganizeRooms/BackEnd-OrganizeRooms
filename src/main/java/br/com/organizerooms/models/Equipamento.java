@@ -43,28 +43,28 @@ public class Equipamento implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long equId;
 
-    @Column
+    @Column(nullable = false)
     private String equNome;
 
     @Column
     private String equDescricao;
 
     @ManyToOne
-    @JoinColumn(name = "uniId")
+    @JoinColumn(name = "uniId", nullable = false)
     private Unidade equUnidade;
 
     @Column
     private Boolean equAtiva;
 
-    @Column
+    @Column(updatable = false, nullable = false)
     private Long equPesCadastro;
 
-    @Column
+    @Column(updatable = false, nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     @CreatedDate
     private Date equDtCadastro;
 
-    @Column
+    @Column(nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     @LastModifiedDate
     private Date equDtAtualizacao;

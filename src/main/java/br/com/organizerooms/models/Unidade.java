@@ -1,6 +1,5 @@
 package br.com.organizerooms.models;
 
-import br.com.organizerooms.dto.PessoaDTO;
 import br.com.organizerooms.dto.UnidadeDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
@@ -13,15 +12,11 @@ import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -38,21 +33,21 @@ public class Unidade implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long uniId;
 
-    @Column
+    @Column(nullable = false)
     private String uniNome;
 
     @Column
     private Boolean uniAtiva;
 
-    @Column
+    @Column(updatable = false, nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     @CreatedDate
     private Date uniDtCadastro;
 
-    @Column
+    @Column(updatable = false)
     private Long uniPesCadastro;
 
-    @Column
+    @Column(nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     @LastModifiedDate
     private Date uniDtAtualizacao;

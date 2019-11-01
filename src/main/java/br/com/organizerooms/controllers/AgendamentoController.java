@@ -51,23 +51,33 @@ public class AgendamentoController {
 
     @PostMapping
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
-    public ResponseEntity<Response> addOrUpdateAgendamento(@RequestBody AgendamentoDTO agendamento) {
+    public ResponseEntity<Response> adicionarAgendamento(@RequestBody AgendamentoDTO agendamento) {
         Agendamento newAgendamento = new Agendamento(agendamento);
         AgendamentoDTO agendamentoDTO = new AgendamentoDTO(agendamentoService.add(newAgendamento));
-        
+
         if (!newAgendamento.getParticipantes().isEmpty()) {
             List<Participante> parts = newAgendamento.getParticipantes();
-            
+
             int cont = 0;
             while (cont < parts.size()) {
                 Participante part = parts.get(cont);
-                
+
                 part.setParAgendamento(new Agendamento(agendamentoDTO));
                 participanteRepository.save(part);
-                cont ++;
+                cont++;
             }
         }
-        
+
+        Response response = new Response(agendamentoDTO);
+        return ResponseEntity.ok().body(response);
+    }
+
+    @PostMapping("/atualizar")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+    public ResponseEntity<Response> atualizarAgendamento(@RequestBody AgendamentoDTO agendamento) {
+        Agendamento newAgendamento = new Agendamento(agendamento);
+        AgendamentoDTO agendamentoDTO = new AgendamentoDTO(agendamentoService.add(newAgendamento));
+
         Response response = new Response(agendamentoDTO);
         return ResponseEntity.ok().body(response);
     }

@@ -63,13 +63,13 @@ public class Pessoa implements Serializable {
 
     // SIS = Cadastro manual
     // IMP = Por Importação
-    @Column(nullable = false)
+    @Column(nullable = false, updatable = false)
     private String pesTipoInclusao;
 
-    @Column
+    @Column(updatable = false)
     private Long pesCadastro;
 
-    @Column(nullable = false)
+    @Column(nullable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
     @CreatedDate
     private Date pesDtCadastro;
