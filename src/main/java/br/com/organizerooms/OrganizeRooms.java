@@ -351,6 +351,7 @@ public class OrganizeRooms implements CommandLineRunner {
         
         Agendamento age = new Agendamento(
                 null,
+                true,
                 "Reunião do Kanban com Equipe de Desenvolvimento",
                 "Reunião do Kanban com Equipe de Desenvolvimento",
                 "AGENDADO",
@@ -374,6 +375,7 @@ public class OrganizeRooms implements CommandLineRunner {
         
         Agendamento age2 = new Agendamento(
                 null,
+                true,
                 "Reunião do Kanban com Equipe de Desenvolvimento 02",
                 "Reunião do Kanban com Equipe de Desenvolvimento 02",
                 "AGENDADO",

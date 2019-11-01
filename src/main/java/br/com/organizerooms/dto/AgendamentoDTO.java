@@ -16,6 +16,7 @@ import java.util.Objects;
 public class AgendamentoDTO {
 
     private Long ageId;
+    private Boolean ageAtiva;
     private String ageAssunto;
     private String ageDescricao;
     private String ageStatus;
@@ -34,10 +35,9 @@ public class AgendamentoDTO {
     public AgendamentoDTO() {
     }
 
-    public AgendamentoDTO(Long ageId, String ageAssunto, String ageDescricao, String ageStatus, Date ageData, Date ageHoraInicio, Date ageHoraFim, 
-            Date ageDtCadastro, Date ageDtAtualizacao, Sala ageSala, Pessoa agePesResponsavel, Long agePesCadastro, Long agePesAtualizacao, 
-            List<Equipamento> ageEquipamentos, List<Participante> ageParticipantes) {
+    public AgendamentoDTO(Long ageId, Boolean ageAtiva, String ageAssunto, String ageDescricao, String ageStatus, Date ageData, Date ageHoraInicio, Date ageHoraFim, Date ageDtCadastro, Date ageDtAtualizacao, Sala ageSala, Pessoa agePesResponsavel, Long agePesCadastro, Long agePesAtualizacao, List<Equipamento> ageEquipamentos, List<Participante> ageParticipantes) {
         this.ageId = ageId;
+        this.ageAtiva = ageAtiva;
         this.ageAssunto = ageAssunto;
         this.ageDescricao = ageDescricao;
         this.ageStatus = ageStatus;
@@ -56,6 +56,7 @@ public class AgendamentoDTO {
 
     public AgendamentoDTO(Agendamento obj) {
         this.ageId = obj.getAgeId();
+        this.ageAtiva = obj.getAgeAtiva();
         this.ageAssunto = obj.getAgeAssunto();
         this.ageDescricao = obj.getAgeDescricao();
         this.ageStatus = obj.getAgeStatus();
@@ -78,6 +79,14 @@ public class AgendamentoDTO {
 
     public void setAgeId(Long ageId) {
         this.ageId = ageId;
+    }
+
+    public Boolean getAgeAtiva() {
+        return ageAtiva;
+    }
+
+    public void setAgeAtiva(Boolean ageAtiva) {
+        this.ageAtiva = ageAtiva;
     }
 
     public String getAgeAssunto() {

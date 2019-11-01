@@ -45,17 +45,20 @@ public class Agendamento implements Serializable {
     private Long ageId;
 
     @Column
+    private Boolean ageAtiva;
+
+    @Column
     private String ageAssunto;
 
     @Column
     private String ageDescricao;
 
     /*
-    EM ANDAMENTO
-    CANCELADO
-    CONCLUIDO
-    AGENDADO
-    */
+     EM ANDAMENTO
+     CANCELADO
+     CONCLUIDO
+     AGENDADO
+     */
     @Column
     private String ageStatus;
 
@@ -100,17 +103,16 @@ public class Agendamento implements Serializable {
             joinColumns = @JoinColumn(name = "equId"),
             inverseJoinColumns = @JoinColumn(name = "ageId"))
     private List<Equipamento> equipamentos;
-    
+
     @OneToMany(mappedBy = "parAgendamento")
     private List<Participante> participantes;
 
     public Agendamento() {
     }
 
-    public Agendamento(Long ageId, String ageAssunto, String ageDescricao, String ageStatus, Date ageData, Date ageHoraInicio,
-            Date ageHoraFim, Date ageDtCadastro, Date ageDtAtualizacao, Sala ageSala, Pessoa agePesResponsavel, Long agePesCadastro, Long agePesAtualizacao,
-            List<Equipamento> equipamentos, List<Participante> participantes) {
+    public Agendamento(Long ageId, Boolean ageAtiva, String ageAssunto, String ageDescricao, String ageStatus, Date ageData, Date ageHoraInicio, Date ageHoraFim, Date ageDtCadastro, Date ageDtAtualizacao, Sala ageSala, Pessoa agePesResponsavel, Long agePesCadastro, Long agePesAtualizacao, List<Equipamento> equipamentos, List<Participante> participantes) {
         this.ageId = ageId;
+        this.ageAtiva = ageAtiva;
         this.ageAssunto = ageAssunto;
         this.ageDescricao = ageDescricao;
         this.ageStatus = ageStatus;
@@ -129,6 +131,7 @@ public class Agendamento implements Serializable {
 
     public Agendamento(AgendamentoDTO obj) {
         this.ageId = obj.getAgeId();
+        this.ageAtiva = obj.getAgeAtiva();
         this.ageAssunto = obj.getAgeAssunto();
         this.ageDescricao = obj.getAgeDescricao();
         this.ageStatus = obj.getAgeStatus();
@@ -151,6 +154,14 @@ public class Agendamento implements Serializable {
 
     public void setAgeId(Long ageId) {
         this.ageId = ageId;
+    }
+
+    public Boolean getAgeAtiva() {
+        return ageAtiva;
+    }
+
+    public void setAgeAtiva(Boolean ageAtiva) {
+        this.ageAtiva = ageAtiva;
     }
 
     public String getAgeAssunto() {
@@ -232,8 +243,8 @@ public class Agendamento implements Serializable {
     public void setAgePesResponsavel(Pessoa agePesResponsavel) {
         this.agePesResponsavel = agePesResponsavel;
     }
-    
-        public List<Equipamento> getEquipamentos() {
+
+    public List<Equipamento> getEquipamentos() {
         return equipamentos;
     }
 

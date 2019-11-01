@@ -5,8 +5,10 @@ import br.com.organizerooms.dto.PessoaDTO;
 import br.com.organizerooms.dto.SalaDTO;
 import br.com.organizerooms.models.Response;
 import br.com.organizerooms.models.Agendamento;
+import br.com.organizerooms.models.Participante;
 import br.com.organizerooms.models.Sala;
 import br.com.organizerooms.models.Pessoa;
+import br.com.organizerooms.repositorios.ParticipanteRepository;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.organizerooms.services.AgendamentoService;
+import java.util.ArrayList;
 import java.util.stream.Collectors;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,6 +37,9 @@ public class AgendamentoController {
     @Autowired
     AgendamentoService agendamentoService;
 
+    @Autowired
+    ParticipanteRepository participanteRepository;
+
     @GetMapping
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
     public ResponseEntity<Response> buscarTodosAgendamentos() {
@@ -48,6 +54,20 @@ public class AgendamentoController {
     public ResponseEntity<Response> addOrUpdateAgendamento(@RequestBody AgendamentoDTO agendamento) {
         Agendamento newAgendamento = new Agendamento(agendamento);
         AgendamentoDTO agendamentoDTO = new AgendamentoDTO(agendamentoService.add(newAgendamento));
+        
+        if (!newAgendamento.getParticipantes().isEmpty()) {
+            List<Participante> parts = newAgendamento.getParticipantes();
+            
+            int cont = 0;
+            while (cont < parts.size()) {
+                Participante part = parts.get(cont);
+                
+                part.setParAgendamento(new Agendamento(agendamentoDTO));
+                participanteRepository.save(part);
+                cont ++;
+            }
+        }
+        
         Response response = new Response(agendamentoDTO);
         return ResponseEntity.ok().body(response);
     }
@@ -59,7 +79,7 @@ public class AgendamentoController {
         Response response = new Response(lista);
         return ResponseEntity.ok().body(response);
     }
-    
+
     @GetMapping("/pessoa")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
     public ResponseEntity<Response> buscarAgendamentoPorPessoa(@RequestBody PessoaDTO pessoaDTO) {
@@ -68,7 +88,7 @@ public class AgendamentoController {
         Response response = new Response(lista);
         return ResponseEntity.ok().body(response);
     }
-    
+
     @GetMapping("/sala")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
     public ResponseEntity<Response> buscarAgendamentoPorSala(@RequestBody SalaDTO salaDTO) {
@@ -79,4 +99,3 @@ public class AgendamentoController {
     }
 
 }
-
