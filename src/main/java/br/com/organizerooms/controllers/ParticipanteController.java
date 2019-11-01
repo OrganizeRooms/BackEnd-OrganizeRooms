@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import br.com.organizerooms.services.ParticipanteService;
+import java.util.ArrayList;
 import java.util.stream.Collectors;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,7 +26,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class ParticipanteController {
 
     @Autowired
-    ParticipanteService  participanteService;
+    ParticipanteService participanteService;
 
     @GetMapping
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
@@ -38,12 +39,37 @@ public class ParticipanteController {
 
     @PostMapping
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
-    public ResponseEntity<Response> addOrUpdateParticipante(@RequestBody ParticipanteDTO participante) {
+    public ResponseEntity<Response> adicionarParticipante(@RequestBody ParticipanteDTO participante) {
         Participante newParticipante = new Participante(participante);
         ParticipanteDTO participanteDTO = new ParticipanteDTO(participanteService.add(newParticipante));
         Response response = new Response(participanteDTO);
         return ResponseEntity.ok().body(response);
     }
+
+    /*@PostMapping("/listaParticipantes")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+    public ResponseEntity<Response> adicionarListaParticipantes(@RequestBody ArrayList<ParticipanteDTO> participantes) {
+
+        String retorno = "";
+        try {
+            if (!participantes.isEmpty()) {
+                int cont = 0;
+                while (cont < participantes.size()) {
+                    Participante part = new Participante(participantes.get(cont));
+
+                    participanteService.add(part);
+                    cont++;
+                }
+            }
+
+            retorno = "Sucesso";
+        } catch (Exception e) {
+            retorno = "Erro";
+        }
+
+        Response response = new Response(retorno);
+        return ResponseEntity.ok().body(response);
+    }*/
 
     @GetMapping("/{id}")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
@@ -54,5 +80,3 @@ public class ParticipanteController {
     }
 
 }
-
-
