@@ -24,6 +24,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.TimeZone;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @SpringBootApplication
@@ -54,9 +55,10 @@ public class OrganizeRooms implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        
+      
          SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-         Calendar calendar = Calendar.getInstance();
+         Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("America/Sao_Paulo"));
+         
          Unidade unidade1 = new Unidade(null,
          "São Paulo",
          true,
@@ -345,15 +347,14 @@ public class OrganizeRooms implements CommandLineRunner {
 
          Date ageData = new Date("2019/10/31");
 
-         Date ageHoraInicio1 = new Date(0, 0, 0, 14, 00);
-         Date ageHoraFim1 = new Date(0, 0, 0, 15, 00);
+         Date ageHoraInicio1 = new Date(2019, 10, 10, 14, 00);
+         Date ageHoraFim1 = new Date(2019, 10, 10, 15, 00);
 
          List<Equipamento> equips1 = new ArrayList<>();
          equips1.add(equipamento4);
 
          Agendamento age = new Agendamento(
          null,
-         true,
          "Reunião do Kanban com Equipe de Desenvolvimento",
          "Reunião do Kanban com Equipe de Desenvolvimento",
          "AGENDADO",
@@ -369,15 +370,14 @@ public class OrganizeRooms implements CommandLineRunner {
          equips1,
          null);
 
-         Date ageHoraInicio2 = new Date(0, 0, 0, 15, 00);
-         Date ageHoraFim2 = new Date(0, 0, 0, 16, 00);
+         Date ageHoraInicio2 = new Date(2019, 10, 10, 15, 00);
+         Date ageHoraFim2 = new Date(2019, 10, 10, 16, 00);
          List<Equipamento> equips2 = new ArrayList<>();
          equips2.add(equipamento2);
          equips2.add(equipamento4);
 
          Agendamento age2 = new Agendamento(
          null,
-         true,
          "Reunião do Kanban com Equipe de Desenvolvimento 02",
          "Reunião do Kanban com Equipe de Desenvolvimento 02",
          "AGENDADO",

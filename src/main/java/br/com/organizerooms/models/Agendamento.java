@@ -45,9 +45,6 @@ public class Agendamento implements Serializable {
     private Long ageId;
 
     @Column
-    private Boolean ageAtiva;
-
-    @Column(nullable = false)
     private String ageAssunto;
 
     @Column
@@ -62,24 +59,24 @@ public class Agendamento implements Serializable {
     @Column
     private String ageStatus;
 
-    @Column(updatable = false, nullable = false)
+    @Column(updatable = false)
     @Temporal(TemporalType.DATE)
     private Date ageData;
 
-    @Column(updatable = false, nullable = false)
+    @Column(updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date ageHoraInicio;
 
-    @Column(updatable = false, nullable = false)
+    @Column(updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date ageHoraFim;
 
     @ManyToOne
-    @JoinColumn(name = "agePesResponsavel", updatable = false, nullable = false)
+    @JoinColumn(name = "agePesResponsavel", updatable = false)
     private Pessoa agePesResponsavel;
 
     @ManyToOne
-    @JoinColumn(name = "ageSala", updatable = false, nullable = false)
+    @JoinColumn(name = "ageSala", updatable = false)
     private Sala ageSala;
 
     @Column(updatable = false)
@@ -87,10 +84,10 @@ public class Agendamento implements Serializable {
     @CreatedDate
     private Date ageDtCadastro;
 
-    @Column(updatable = false, nullable = false)
+    @Column(updatable = false)
     private Long agePesCadastro;
 
-    @Column(nullable = false)
+    @Column
     @Temporal(TemporalType.TIMESTAMP)
     @LastModifiedDate
     private Date ageDtAtualizacao;
@@ -110,9 +107,8 @@ public class Agendamento implements Serializable {
     public Agendamento() {
     }
 
-    public Agendamento(Long ageId, Boolean ageAtiva, String ageAssunto, String ageDescricao, String ageStatus, Date ageData, Date ageHoraInicio, Date ageHoraFim, Date ageDtCadastro, Date ageDtAtualizacao, Sala ageSala, Pessoa agePesResponsavel, Long agePesCadastro, Long agePesAtualizacao, List<Equipamento> equipamentos, List<Participante> participantes) {
+    public Agendamento(Long ageId, String ageAssunto, String ageDescricao, String ageStatus, Date ageData, Date ageHoraInicio, Date ageHoraFim, Date ageDtCadastro, Date ageDtAtualizacao, Sala ageSala, Pessoa agePesResponsavel, Long agePesCadastro, Long agePesAtualizacao, List<Equipamento> equipamentos, List<Participante> participantes) {
         this.ageId = ageId;
-        this.ageAtiva = ageAtiva;
         this.ageAssunto = ageAssunto;
         this.ageDescricao = ageDescricao;
         this.ageStatus = ageStatus;
@@ -131,7 +127,6 @@ public class Agendamento implements Serializable {
 
     public Agendamento(AgendamentoDTO obj) {
         this.ageId = obj.getAgeId();
-        this.ageAtiva = obj.getAgeAtiva();
         this.ageAssunto = obj.getAgeAssunto();
         this.ageDescricao = obj.getAgeDescricao();
         this.ageStatus = obj.getAgeStatus();
@@ -154,14 +149,6 @@ public class Agendamento implements Serializable {
 
     public void setAgeId(Long ageId) {
         this.ageId = ageId;
-    }
-
-    public Boolean getAgeAtiva() {
-        return ageAtiva;
-    }
-
-    public void setAgeAtiva(Boolean ageAtiva) {
-        this.ageAtiva = ageAtiva;
     }
 
     public String getAgeAssunto() {

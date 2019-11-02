@@ -38,7 +38,7 @@ public class ParticipanteController {
     }
 
     @PostMapping
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
     public ResponseEntity<Response> adicionarParticipante(@RequestBody ParticipanteDTO participante) {
         Participante newParticipante = new Participante(participante);
         ParticipanteDTO participanteDTO = new ParticipanteDTO(participanteService.add(newParticipante));

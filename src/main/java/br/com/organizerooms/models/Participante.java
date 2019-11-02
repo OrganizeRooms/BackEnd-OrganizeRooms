@@ -30,7 +30,7 @@ public class Participante implements Serializable {
     private Long parId;
 
     // 1 Normal
-    // 2 Importante
+    // 2 Obrigatório
     @Column
     private Integer parTipo;
 

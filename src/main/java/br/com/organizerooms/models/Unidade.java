@@ -33,13 +33,13 @@ public class Unidade implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long uniId;
 
-    @Column(nullable = false)
+    @Column
     private String uniNome;
 
     @Column
     private Boolean uniAtiva;
 
-    @Column(updatable = false, nullable = false)
+    @Column(updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
     @CreatedDate
     private Date uniDtCadastro;
@@ -47,7 +47,7 @@ public class Unidade implements Serializable {
     @Column(updatable = false)
     private Long uniPesCadastro;
 
-    @Column(nullable = false)
+    @Column
     @Temporal(TemporalType.TIMESTAMP)
     @LastModifiedDate
     private Date uniDtAtualizacao;

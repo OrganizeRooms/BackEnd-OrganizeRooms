@@ -36,7 +36,7 @@ public class Sala implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long salaId;
 
-    @Column(nullable = false)
+    @Column
     private String salaNome;
 
     @Column
@@ -45,15 +45,15 @@ public class Sala implements Serializable {
     @Column
     private Boolean salaAtiva;
 
-    @Column(updatable = false, nullable = false)
+    @Column(updatable = false)
     private Long salaPesCadastro;
 
-    @Column(updatable = false, nullable = false)
+    @Column(updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
     @CreatedDate
     private Date salaDtCadastro;
 
-    @Column(nullable = false)
+    @Column
     @Temporal(TemporalType.TIMESTAMP)
     @LastModifiedDate
     private Date salaDtAtualizacao;
@@ -62,7 +62,7 @@ public class Sala implements Serializable {
     private Long salaPesAtualizacao;
 
     @ManyToOne
-    @JoinColumn(name = "uniId", nullable = false)
+    @JoinColumn(name = "uniId")
     private Unidade salaUnidade;
 
     ///
