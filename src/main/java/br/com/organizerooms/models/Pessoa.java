@@ -37,22 +37,22 @@ public class Pessoa implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long pesId;
 
-    @Column(nullable = false)
+    @Column
     private String pesNome;
 
-    @Column(nullable = false)
+    @Column
     private String pesEmail;
 
     @JsonIgnore
-    @Column(nullable = false)
+    @Column
     private String pesSenha;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "pesPermissao", nullable = false)
+    @Column(name = "pesPermissao")
     private PerfilEnum pesPermissao;
 
     @ManyToOne
-    @JoinColumn(name = "uniId", nullable = false)
+    @JoinColumn(name = "uniId")
     private Unidade pesUnidade;
 
     @Column
@@ -63,13 +63,13 @@ public class Pessoa implements Serializable {
 
     // SIS = Cadastro manual
     // IMP = Por Importação
-    @Column(nullable = false, updatable = false)
+    @Column(updatable = false)
     private String pesTipoInclusao;
 
     @Column(updatable = false)
     private Long pesCadastro;
 
-    @Column(nullable = false, updatable = false)
+    @Column(updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
     @CreatedDate
     private Date pesDtCadastro;
@@ -77,7 +77,7 @@ public class Pessoa implements Serializable {
     @Column
     private Long pesAtualizacao;
 
-    @Column(nullable = false)
+    @Column
     @Temporal(TemporalType.TIMESTAMP)
     @LastModifiedDate
     private Date pesDtAtualizacao;

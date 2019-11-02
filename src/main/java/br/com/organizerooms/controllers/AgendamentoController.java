@@ -50,7 +50,7 @@ public class AgendamentoController {
     }
 
     @PostMapping
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
     public ResponseEntity<Response> adicionarAgendamento(@RequestBody AgendamentoDTO agendamento) {
         Agendamento newAgendamento = new Agendamento(agendamento);
         AgendamentoDTO agendamentoDTO = new AgendamentoDTO(agendamentoService.add(newAgendamento));
@@ -73,7 +73,7 @@ public class AgendamentoController {
     }
 
     @PostMapping("/atualizar")
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
     public ResponseEntity<Response> atualizarAgendamento(@RequestBody AgendamentoDTO agendamento) {
         Agendamento newAgendamento = new Agendamento(agendamento);
         AgendamentoDTO agendamentoDTO = new AgendamentoDTO(agendamentoService.add(newAgendamento));
