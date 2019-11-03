@@ -10,7 +10,7 @@
  DELIMITER $
  CREATE PROCEDURE organizerooms.FUNC_RECUPERA_DISPONIVEIS(idUnidade INT, lotacao INT, dataInicial DATETIME, dataFinal DATETIME, dataAgendamento DATE)
  BEGIN
-	 SELECT SALA_NOME, SALA_LOTACAO FROM  sala s
+	 SELECT SALA_ID, SALA_NOME, SALA_LOTACAO FROM  sala s
 	LEFT join agendamento a  ON age_sala = sala_id
 	WHERE s.uni_id = idUnidade
 	AND s.sala_lotacao >= lotacao
@@ -18,7 +18,7 @@
 	OR a.age_status IS NULL)
 	AND sala_ativa = 1
 	UNION 
-	SELECT SALA_NOME, SALA_LOTACAO FROM  sala s WHERE SALA_ID IN (
+	SELECT SALA_ID, SALA_NOME, SALA_LOTACAO FROM  sala s WHERE SALA_ID IN (
 	SELECT 
 	case 
 	when 

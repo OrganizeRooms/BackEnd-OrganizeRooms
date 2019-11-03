@@ -4,7 +4,12 @@ import br.com.organizerooms.models.Agendamento;
 import br.com.organizerooms.models.Sala;
 import br.com.organizerooms.models.Pessoa;
 import br.com.organizerooms.repositorios.AgendamentoRepository;
+import java.sql.CallableStatement;
+import java.sql.SQLException;
+import java.sql.Types;
 import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.StoredProcedureQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +22,19 @@ public class AgendamentoService {
 
     @Autowired
     AgendamentoRepository agendamentoRepository;
+    
+    /*
+    EntityManager em = new EntityManager
+    
+    public void t (){
+        StoredProcedureQuery findByYearProcedure = entityManager.createNamedStoredProcedureQuery("findByYearProcedure");
+         
+        StoredProcedureQuery storedProcedure = 
+          findByYearProcedure.setParameter("p_year", 2015);
+         
+        storedProcedure.getResultList()
+          .forEach(c -> Assert.assertEquals(new Integer(2015), ((Car) c).getYear())); 
+    }*/
 
     public List<Agendamento> buscarTodosAgendamentos() {
         return this.agendamentoRepository.findAllByOrderByAgeDescricao();
