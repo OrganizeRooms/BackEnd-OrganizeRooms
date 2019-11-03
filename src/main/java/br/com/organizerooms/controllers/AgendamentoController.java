@@ -1,6 +1,8 @@
 package br.com.organizerooms.controllers;
 
+import br.com.organizerooms.dao.AgendamentoDAO;
 import br.com.organizerooms.dto.AgendamentoDTO;
+import br.com.organizerooms.dto.AgrupamentoSalaDTO;
 import br.com.organizerooms.dto.PessoaDTO;
 import br.com.organizerooms.dto.SalaDTO;
 import br.com.organizerooms.models.Response;
@@ -18,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.organizerooms.services.AgendamentoService;
-import java.util.ArrayList;
 import java.util.stream.Collectors;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,6 +40,9 @@ public class AgendamentoController {
 
     @Autowired
     ParticipanteRepository participanteRepository;
+    
+    @Autowired
+    AgendamentoDAO agendamentoDAO;
 
     @GetMapping
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
@@ -96,6 +100,14 @@ public class AgendamentoController {
         Pessoa pessoa = new Pessoa(pessoaDTO);
         List<Agendamento> lista = agendamentoService.buscaPorPessoa(pessoa);
         Response response = new Response(lista);
+        return ResponseEntity.ok().body(response);
+    }
+    
+    @GetMapping("/salasdisp")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
+    public ResponseEntity<Response> buscarSalasDisponiveis(@RequestBody AgrupamentoSalaDTO agDTO) {
+        List<SalaDTO> salas = agendamentoDAO.recuperaSala(agDTO.getIdUnidade(), agDTO.getLotacao(), agDTO.getDataInicial(), agDTO.getDataFinal(), agDTO.getDataAgendamento());
+        Response response = new Response(salas);
         return ResponseEntity.ok().body(response);
     }
 
