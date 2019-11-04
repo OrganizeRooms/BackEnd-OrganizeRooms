@@ -1,3 +1,4 @@
+// abaixo
 CREATE DEFINER=`root`@`localhost` PROCEDURE `PROC_RECUPERA_DISPONIVEIS`(idUnidade INT, lotacao INT, dataInicial DATETIME, dataFinal DATETIME, dataAgendamento DATE)
 BEGIN
 	 SELECT SALA_ID, SALA_NOME, SALA_LOTACAO FROM  sala s
