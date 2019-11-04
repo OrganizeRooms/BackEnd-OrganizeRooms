@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.organizerooms.controllers;
 
 import br.com.organizerooms.dto.NotificacaoDTO;
@@ -10,10 +5,8 @@ import br.com.organizerooms.dto.PessoaDTO;
 import br.com.organizerooms.models.Notificacao;
 import br.com.organizerooms.models.Pessoa;
 import br.com.organizerooms.models.Response;
-import br.com.organizerooms.models.Unidade;
+import br.com.organizerooms.utils.EnviaEmail;
 import br.com.organizerooms.services.NotificacaoService;
-import java.util.List;
-import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -35,6 +28,9 @@ public class NotificacaoController {
     
     @Autowired
     NotificacaoService notificacaoService;
+    
+    @Autowired
+    EnviaEmail enviaEmail;
     
     @PostMapping
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
@@ -59,6 +55,14 @@ public class NotificacaoController {
         Pessoa pessoa = new Pessoa(pessoaDTO);
         Notificacao notificacao = notificacaoService.buscaPorPessoa(pessoa);
         Response response = new Response(notificacao);
+        return ResponseEntity.ok().body(response);
+    }
+    
+    @PostMapping  
+    public ResponseEntity<Response> enviarEmail(@PathVariable String emailDestino, @PathVariable String subject, 
+            @PathVariable String content) {
+        Boolean b = enviaEmail.enviar(emailDestino, subject, content);
+        Response response = new Response(b);
         return ResponseEntity.ok().body(response);
     }
 }
