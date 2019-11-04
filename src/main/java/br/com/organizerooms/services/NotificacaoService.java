@@ -8,6 +8,7 @@ package br.com.organizerooms.services;
 import br.com.organizerooms.models.Notificacao;
 import br.com.organizerooms.models.Pessoa;
 import br.com.organizerooms.repositorios.NotificacaoRepository;
+import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -29,7 +30,7 @@ public class NotificacaoService {
         return this.repository.findById(id).get();
     };
     
-    public Notificacao buscaPorPessoa (Pessoa pessoa){
-        return this.repository.findByPessoaId(pessoa);
+    public List<Notificacao> buscaPorPessoa (Pessoa pessoa){
+        return this.repository.findByNotPessoa(pessoa);
     };
 }

@@ -6,22 +6,14 @@
 package br.com.organizerooms.dao;
 
 import br.com.organizerooms.dto.SalaDTO;
-import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import javax.mail.Session;
-import javax.naming.spi.DirStateFactory.Result;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
-import javax.persistence.StoredProcedureQuery;
-import org.hibernate.engine.spi.SessionFactoryImplementor;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -40,6 +32,7 @@ public class AgendamentoDAO {
       List<SalaDTO> salas = new ArrayList<>();
       try {
             Connection sqlConnection  =  DriverManager.getConnection("jdbc:mysql://localhost:3306/organizerooms", "root", "");
+         //   Connection sqlConnection  =  DriverManager.getConnection("jdbc:mysql://localhost:3306/organizerooms", "root", "");
             Statement stmt = sqlConnection.createStatement();
             ResultSet rs = stmt.executeQuery("CALL PROC_RECUPERA_DISPONIVEIS("
                     + idUnidade + ","

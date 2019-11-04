@@ -23,22 +23,25 @@ public class NotificacaoDTO {
     private Date notDtCadastro;
     private Date notDtAtualizacao;
     private Long notPesAtualizacao;
-    private Pessoa pessoaId;
-    private Long notPesCadastro;  
+    private Pessoa notPessoa;
+    private Long notPesCadastro;
+    private Boolean notEnviado;
+    private EnviaEmailDTO enviaEmail;
 
     public NotificacaoDTO() {
     }
 
-    public NotificacaoDTO(Long notId, String notDescricao, Boolean notAtiva, Date notDtCadastro, Date notDtAtualizacao, 
-            Long notPesAtualizacao, Pessoa pessoaId, Long notPesCadastro) {
+    public NotificacaoDTO(Long notId, String notDescricao, Boolean notAtiva, Date notDtCadastro, Date notDtAtualizacao, Long notPesAtualizacao, Pessoa notPessoa, Long notPesCadastro, Boolean notEnviado, EnviaEmailDTO enviaEmail) {
         this.notId = notId;
         this.notDescricao = notDescricao;
         this.notAtiva = notAtiva;
         this.notDtCadastro = notDtCadastro;
         this.notDtAtualizacao = notDtAtualizacao;
         this.notPesAtualizacao = notPesAtualizacao;
-        this.pessoaId = pessoaId;
+        this.notPessoa = notPessoa;
         this.notPesCadastro = notPesCadastro;
+        this.notEnviado = notEnviado;
+        this.enviaEmail = enviaEmail;
     }
 
     public NotificacaoDTO(Notificacao notificacao) {
@@ -48,8 +51,9 @@ public class NotificacaoDTO {
         this.notDtCadastro = notificacao.getNotDtCadastro();
         this.notDtAtualizacao = Calendar.getInstance().getTime();
         this.notPesAtualizacao = notificacao.getNotPesAtualizacao();
-        this.pessoaId = notificacao.getPessoaId();
+        this.notPessoa = notificacao.getNotPessoa();
         this.notPesCadastro = notificacao.getNotPesCadastro();
+        this.notEnviado = notificacao.getNotEnviado();
     }
 
     public Long getNotId() {
@@ -100,14 +104,22 @@ public class NotificacaoDTO {
         this.notPesAtualizacao = notPesAtualizacao;
     }
 
-    public Pessoa getPessoaId() {
-        return pessoaId;
+    public Pessoa getNotPessoa() {
+        return notPessoa;
     }
 
-    public void setPessoaId(Pessoa pessoaId) {
-        this.pessoaId = pessoaId;
+    public void setNotPessoa(Pessoa notPessoa) {
+        this.notPessoa = notPessoa;
     }
-    
+
+    public EnviaEmailDTO getEnviaEmail() {
+        return enviaEmail;
+    }
+
+    public void setEnviaEmail(EnviaEmailDTO enviaEmail) {
+        this.enviaEmail = enviaEmail;
+    }
+
     public Long getNotPesCadastro() {
         return notPesCadastro;
     }
@@ -116,16 +128,18 @@ public class NotificacaoDTO {
         this.notPesCadastro = notPesCadastro;
     }
 
+    public Boolean getNotEnviado() {
+        return notEnviado;
+    }
+
+    public void setNotEnviado(Boolean notEnviado) {
+        this.notEnviado = notEnviado;
+    }
+
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 83 * hash + Objects.hashCode(this.notId);
-        hash = 83 * hash + Objects.hashCode(this.notDescricao);
-        hash = 83 * hash + (this.notAtiva ? 1 : 0);
-        hash = 83 * hash + Objects.hashCode(this.notDtCadastro);
-        hash = 83 * hash + Objects.hashCode(this.notDtAtualizacao);
-        hash = 83 * hash + Objects.hashCode(this.notPesAtualizacao);
-        hash = 83 * hash + Objects.hashCode(this.pessoaId);
+        hash = 73 * hash + Objects.hashCode(this.notId);
         return hash;
     }
 
@@ -139,24 +153,6 @@ public class NotificacaoDTO {
         }
         final NotificacaoDTO other = (NotificacaoDTO) obj;
         if (!Objects.equals(this.notId, other.notId)) {
-            return false;
-        }
-        if (!Objects.equals(this.notDescricao, other.notDescricao)) {
-            return false;
-        }
-        if (!Objects.equals(this.notAtiva, other.notAtiva)) {
-            return false;
-        }
-        if (!Objects.equals(this.notDtCadastro, other.notDtCadastro)) {
-            return false;
-        }
-        if (!Objects.equals(this.notDtAtualizacao, other.notDtAtualizacao)) {
-            return false;
-        }
-        if (!Objects.equals(this.notPesAtualizacao, other.notPesAtualizacao)) {
-            return false;
-        }
-        if (!Objects.equals(this.pessoaId, other.pessoaId)) {
             return false;
         }
         return true;
