@@ -1,22 +1,15 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-/**
- * Author:  Felipe
- * Created: 28/10/2019
- */
- DELIMITER $
- CREATE PROCEDURE organizerooms.FUNC_RECUPERA_DISPONIVEIS(idUnidade INT, lotacao INT, dataInicial DATETIME, dataFinal DATETIME, dataAgendamento DATE)
- BEGIN
+// abaixo
+CREATE DEFINER=`root`@`localhost` PROCEDURE `PROC_RECUPERA_DISPONIVEIS`(idUnidade INT, lotacao INT, dataInicial DATETIME, dataFinal DATETIME, dataAgendamento DATE)
+BEGIN
 	 SELECT SALA_ID, SALA_NOME, SALA_LOTACAO FROM  sala s
 	LEFT join agendamento a  ON age_sala = sala_id
-	WHERE s.uni_id = idUnidade
+	WHERE (s.uni_id = idUnidade
 	AND s.sala_lotacao >= lotacao
 	AND (a.age_status = 'CANCELADO'
 	OR a.age_status IS NULL)
-	AND sala_ativa = 1
+	AND sala_ativa = 1)
+    or (a.age_data is not null and a.age_data <> dataAgendamento)
+    GROUP BY SALA_ID, SALA_NOME, SALA_LOTACAO
 	UNION 
 	SELECT SALA_ID, SALA_NOME, SALA_LOTACAO FROM  sala s WHERE SALA_ID IN (
 	SELECT 
@@ -38,4 +31,3 @@
 	GROUP BY sala_id);
 
  END
- $
