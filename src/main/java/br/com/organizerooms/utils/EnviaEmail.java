@@ -14,8 +14,8 @@ public class EnviaEmail {
 
     private final String smtp = "smtp.gmail.com";
     private final Integer portaSmtp = 587;
-    private final String usuarioSmtp = "projetoblucake@gmail.com"; // ALTERAR PARA O NOVO EMAIL QUE DEVE DE SER CRIADO
-    private final String senhaUsuarioSmtp = "blucake2019"; // ALTERAR PARA O NOVO EMAIL QUE DEVE DE SER CRIADO
+    private final String usuarioSmtp = "projetoorganizerooms@gmail.com"; // ALTERAR PARA O NOVO EMAIL QUE DEVE DE SER CRIADO
+    private final String senhaUsuarioSmtp = "organizerooms2019"; // ALTERAR PARA O NOVO EMAIL QUE DEVE DE SER CRIADO
     private DefaultAuthenticator autenticador;
     private HtmlEmail email;
 

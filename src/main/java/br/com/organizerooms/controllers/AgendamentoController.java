@@ -103,7 +103,7 @@ public class AgendamentoController {
         return ResponseEntity.ok().body(response);
     }
     
-    @GetMapping("/salasdisp")
+    @PostMapping("/salasdisp")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
     public ResponseEntity<Response> buscarSalasDisponiveis(@RequestBody AgrupamentoSalaDTO agDTO) {
         List<SalaDTO> salas = agendamentoDAO.recuperaSala(agDTO.getIdUnidade(), agDTO.getLotacao(), agDTO.getDataInicial(), agDTO.getDataFinal(), agDTO.getDataAgendamento());

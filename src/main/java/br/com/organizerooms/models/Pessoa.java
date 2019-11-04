@@ -87,8 +87,13 @@ public class Pessoa implements Serializable {
     @OneToMany(mappedBy = "agePesResponsavel")
     private List<Agendamento> agendamentoResponsavel;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "parPessoa")
     private List<Participante> participantes;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "notPessoa")
+    private List<Notificacao> notificacoes;
 
     public Pessoa() {
     }
@@ -235,6 +240,30 @@ public class Pessoa implements Serializable {
 
     public void setPesDtAtualizacao(Date pesDtAtualizacao) {
         this.pesDtAtualizacao = pesDtAtualizacao;
+    }
+
+    public List<Agendamento> getAgendamentoResponsavel() {
+        return agendamentoResponsavel;
+    }
+
+    public void setAgendamentoResponsavel(List<Agendamento> agendamentoResponsavel) {
+        this.agendamentoResponsavel = agendamentoResponsavel;
+    }
+
+    public List<Participante> getParticipantes() {
+        return participantes;
+    }
+
+    public void setParticipantes(List<Participante> participantes) {
+        this.participantes = participantes;
+    }
+
+    public List<Notificacao> getNotificacoes() {
+        return notificacoes;
+    }
+
+    public void setNotificacoes(List<Notificacao> notificacoes) {
+        this.notificacoes = notificacoes;
     }
 
     @Override
