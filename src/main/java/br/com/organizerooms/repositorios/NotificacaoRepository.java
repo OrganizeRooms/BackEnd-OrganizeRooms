@@ -20,6 +20,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true )
 public interface NotificacaoRepository extends JpaRepository<Notificacao, Long> {
 
-    public List<Notificacao> findByNotPessoa(Pessoa pessoa);
+    public List<Notificacao> findByNotPessoaAndNotAtiva(Pessoa pessoa, Boolean ativa);
     
 }

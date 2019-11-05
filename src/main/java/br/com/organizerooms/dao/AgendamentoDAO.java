@@ -80,6 +80,7 @@ public class AgendamentoDAO {
             EquipamentoDTO equipamento =  new EquipamentoDTO();
             equipamento.setEquId(rs.getLong(1));
             equipamento.setEquNome(rs.getString(2));
+            equipamento.setEquDescricao(rs.getString(3));
             equipamentos.add(equipamento);
             }
             rs.close();

@@ -39,13 +39,13 @@ public class Notificacao implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long notId;
 
-    @Column
+    @Column(updatable = false)
     private String notDescricao;
 
     @Column
     private boolean notAtiva;
 
-    @Column
+    @Column(updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
     @LastModifiedDate
     private Date notDtCadastro;
@@ -58,21 +58,21 @@ public class Notificacao implements Serializable {
     @Column
     private Long notPesAtualizacao;
 
-    @Column
+    @Column(updatable = false)
     private Long notPesCadastro;
 
-    @Column
+    @Column(updatable = false)
     private Boolean notEnviado;
 
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "pesId")
+    @JoinColumn(name = "pesId", updatable = false)
     private Pessoa notPessoa;
 
     public Notificacao() {
     }
 
-    public Notificacao(Long notId, String notDescricao, boolean notAtiva, Date notDtCadastro, Date notDtAtualizacao, 
+    public Notificacao(Long notId, String notDescricao, boolean notAtiva, Date notDtCadastro, Date notDtAtualizacao,
             Long notPesAtualizacao, Long notPesCadastro, Boolean notEnviado, Pessoa notPessoa) {
         this.notId = notId;
         this.notDescricao = notDescricao;
@@ -168,6 +168,8 @@ public class Notificacao implements Serializable {
     public void setNotEnviado(Boolean notEnviado) {
         this.notEnviado = notEnviado;
     }
+    
+    
 
     @Override
     public int hashCode() {

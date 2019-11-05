@@ -111,14 +111,6 @@ public class AgendamentoController {
         Response response = new Response(salas);
         return ResponseEntity.ok().body(response);
     }
-    
-    @PostMapping("/equidisp")
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
-    public ResponseEntity<Response> buscarEquipamentosDisponiveis(@RequestBody AgendamentoContext ctx) {
-        List<EquipamentoDTO> equipamentos = agendamentoDAO.recuperaEquipamento(ctx.getIdUnidade(), ctx.getDataInicial(), ctx.getDataFinal());
-        Response response = new Response(equipamentos);
-        return ResponseEntity.ok().body(response);
-    }
 
     @GetMapping("/sala")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")

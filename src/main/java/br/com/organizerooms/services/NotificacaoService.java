@@ -30,7 +30,7 @@ public class NotificacaoService {
         return this.repository.findById(id).get();
     };
     
-    public List<Notificacao> buscaPorPessoa (Pessoa pessoa){
-        return this.repository.findByNotPessoa(pessoa);
+    public List<Notificacao> buscaPorPessoaAtivas (Pessoa pessoa){
+        return this.repository.findByNotPessoaAndNotAtiva(pessoa, true);
     };
 }

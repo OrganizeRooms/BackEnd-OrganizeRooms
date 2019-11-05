@@ -35,10 +35,16 @@ public class NotificacaoController {
 
     @PostMapping
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
-    public ResponseEntity<Response> addNotificao(@RequestBody NotificacaoDTO notificacao) {
+    public ResponseEntity<Response> alterarNotificacao(@RequestBody NotificacaoDTO notificacao) {
         Notificacao nnotificacao = new Notificacao(notificacao);
         NotificacaoDTO notificacaoDTO = new NotificacaoDTO(notificacaoService.persiste(nnotificacao));
-        Response response = new Response(notificacaoDTO);
+
+        Boolean retorno = false;
+        if (!notificacaoDTO.isNotAtiva()) {
+            retorno = true;
+        }
+
+        Response response = new Response(retorno);
         return ResponseEntity.ok().body(response);
     }
 
@@ -55,7 +61,7 @@ public class NotificacaoController {
     public ResponseEntity<Response> buscarPorPessoa(@PathVariable String id) {
         Pessoa pessoa = new Pessoa();
         pessoa.setPesId(Long.parseLong(id));
-        List<Notificacao> notificacao = notificacaoService.buscaPorPessoa(pessoa);
+        List<Notificacao> notificacao = notificacaoService.buscaPorPessoaAtivas(pessoa);
         Response response = new Response(notificacao);
         return ResponseEntity.ok().body(response);
     }

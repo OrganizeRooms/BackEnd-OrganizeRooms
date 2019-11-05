@@ -1,10 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.organizerooms.controllers;
 
+import br.com.organizerooms.context.AgendamentoContext;
+import br.com.organizerooms.dao.AgendamentoDAO;
 import br.com.organizerooms.dto.EquipamentoDTO;
 import br.com.organizerooms.models.Equipamento;
 import br.com.organizerooms.models.Response;
@@ -24,13 +21,15 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author Aluno
  */
-
 @RestController
 @RequestMapping("/equipamentos")
 public class EquipamentoController {
-    
+
     @Autowired
     EquipamentoService equipamentoService;
+    
+    @Autowired
+    AgendamentoDAO agendamentoDAO;
     
     @PostMapping
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
@@ -40,7 +39,7 @@ public class EquipamentoController {
         Response response = new Response(nEquipamentoDTO);
         return ResponseEntity.ok().body(response);
     }
-    
+
     @GetMapping("/{id}")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
     public ResponseEntity<Response> buscarPorId(@PathVariable String id) {
@@ -48,7 +47,7 @@ public class EquipamentoController {
         Response response = new Response(equipamento);
         return ResponseEntity.ok().body(response);
     }
-    
+
     @GetMapping("/ativo")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
     public ResponseEntity<Response> buscarAtivo() {
@@ -56,11 +55,20 @@ public class EquipamentoController {
         Response response = new Response(equipamentos);
         return ResponseEntity.ok().body(response);
     }
-    
+
     @GetMapping
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
     public ResponseEntity<Response> buscarTodos() {
         List<Equipamento> equipamentos = equipamentoService.buscaTodos();
+        Response response = new Response(equipamentos);
+        return ResponseEntity.ok().body(response);
+    }
+
+    // Somente Disponiveis
+    @PostMapping("/equidisp")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
+    public ResponseEntity<Response> buscarEquipamentosDisponiveis(@RequestBody AgendamentoContext ctx) {
+        List<EquipamentoDTO> equipamentos = agendamentoDAO.recuperaEquipamento(ctx.getIdUnidade(), ctx.getDataInicial(), ctx.getDataFinal());
         Response response = new Response(equipamentos);
         return ResponseEntity.ok().body(response);
     }

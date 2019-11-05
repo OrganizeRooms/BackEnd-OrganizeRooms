@@ -192,8 +192,8 @@ public class OrganizeRooms implements CommandLineRunner {
                 null,
                 "Notebook Acer",
                 "Notebook Acer Core i3 8 geração",
-                unidade1,
-                false,
+                unidade4,
+                true,
                 pes.getPesId(),
                 calendar.getTime(),
                 calendar.getTime(),
@@ -350,15 +350,13 @@ public class OrganizeRooms implements CommandLineRunner {
         salaRepository.save(sala9);
         salaRepository.save(sala10);
 
-        Date ageData = new Date("2019/11/04");
+        Date ageData = new Date("2019/11/06");
 
-        Date ageHoraInicio1 = new Date("2019/11/04 14:00:00");
-        Date ageHoraFim1 = new Date("2019/11/04 15:00:00");
-        //Date ageHoraInicio1 = new Date(2019, 10, 10, 14, 00);
-        //Date ageHoraFim1 = new Date(2019, 10, 10, 15, 00);
+        Date ageHoraInicio1 = new Date("2019/11/06 14:00:00");
+        Date ageHoraFim1 = new Date("2019/11/06 15:00:00");
 
         List<Equipamento> equips1 = new ArrayList<>();
-        equips1.add(equipamento4);
+        equips1.add(equipamento1);
 
         Agendamento age = new Agendamento(
                 null,
@@ -377,11 +375,10 @@ public class OrganizeRooms implements CommandLineRunner {
                 equips1,
                 null);
 
-        Date ageHoraInicio2 = new Date(2019, 10, 10, 15, 00);
-        Date ageHoraFim2 = new Date(2019, 10, 10, 16, 00);
+        //Date ageHoraInicio2 = new Date(2019, 10, 10, 15, 00);
+        //Date ageHoraFim2 = new Date(2019, 10, 10, 16, 00);
         List<Equipamento> equips2 = new ArrayList<>();
         equips2.add(equipamento2);
-        equips2.add(equipamento4);
 
         Agendamento age2 = new Agendamento(
                 null,
@@ -479,34 +476,10 @@ public class OrganizeRooms implements CommandLineRunner {
                 true,
                 pes);
 
-        Notificacao noti6 = new Notificacao(
-                null,
-                "Você possui um novo Agendamento Marcado 04",
-                true,
-                calendar.getTime(),
-                calendar.getTime(),
-                1l,
-                1l,
-                true,
-                pes);
-
-        Notificacao noti7 = new Notificacao(
-                null,
-                "Você possui um novo Agendamento Marcado TESTe",
-                true,
-                calendar.getTime(),
-                calendar.getTime(),
-                1l,
-                1l,
-                true,
-                pes2);
-
         notificacaoRepository.save(noti1);
         notificacaoRepository.save(noti2);
         notificacaoRepository.save(noti3);
         notificacaoRepository.save(noti4);
         notificacaoRepository.save(noti5);
-        notificacaoRepository.save(noti6);
-        notificacaoRepository.save(noti7);
     }
 }
