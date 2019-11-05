@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.organizerooms.dto;
+package br.com.organizerooms.context;
 
 import java.sql.Date;
 
@@ -11,7 +11,7 @@ import java.sql.Date;
  *
  * @author Pichau
  */
-public class AgrupamentoSalaDTO {
+public class AgendamentoContext {
     
     private String idUnidade;
     private String lotacao;
@@ -19,10 +19,10 @@ public class AgrupamentoSalaDTO {
     private String dataFinal;
     private String dataAgendamento;
 
-    public AgrupamentoSalaDTO() {
+    public AgendamentoContext() {
     }
 
-    public AgrupamentoSalaDTO(String idUnidade, String lotacao, String dataInicial, String dataFinal, String dataAgendamento) {
+    public AgendamentoContext(String idUnidade, String lotacao, String dataInicial, String dataFinal, String dataAgendamento) {
         this.idUnidade = idUnidade;
         this.lotacao = lotacao;
         this.dataInicial = dataInicial;

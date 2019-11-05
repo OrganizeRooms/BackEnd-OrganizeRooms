@@ -2,7 +2,8 @@ package br.com.organizerooms.controllers;
 
 import br.com.organizerooms.dao.AgendamentoDAO;
 import br.com.organizerooms.dto.AgendamentoDTO;
-import br.com.organizerooms.dto.AgrupamentoSalaDTO;
+import br.com.organizerooms.context.AgendamentoContext;
+import br.com.organizerooms.dto.EquipamentoDTO;
 import br.com.organizerooms.dto.PessoaDTO;
 import br.com.organizerooms.dto.SalaDTO;
 import br.com.organizerooms.models.Response;
@@ -105,9 +106,17 @@ public class AgendamentoController {
     
     @PostMapping("/salasdisp")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
-    public ResponseEntity<Response> buscarSalasDisponiveis(@RequestBody AgrupamentoSalaDTO agDTO) {
-        List<SalaDTO> salas = agendamentoDAO.recuperaSala(agDTO.getIdUnidade(), agDTO.getLotacao(), agDTO.getDataInicial(), agDTO.getDataFinal(), agDTO.getDataAgendamento());
+    public ResponseEntity<Response> buscarSalasDisponiveis(@RequestBody AgendamentoContext ctx) {
+        List<SalaDTO> salas = agendamentoDAO.recuperaSala(ctx.getIdUnidade(), ctx.getLotacao(), ctx.getDataInicial(), ctx.getDataFinal(), ctx.getDataAgendamento());
         Response response = new Response(salas);
+        return ResponseEntity.ok().body(response);
+    }
+    
+    @PostMapping("/equidisp")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
+    public ResponseEntity<Response> buscarEquipamentosDisponiveis(@RequestBody AgendamentoContext ctx) {
+        List<EquipamentoDTO> equipamentos = agendamentoDAO.recuperaEquipamento(ctx.getIdUnidade(), ctx.getDataInicial(), ctx.getDataFinal());
+        Response response = new Response(equipamentos);
         return ResponseEntity.ok().body(response);
     }
 
