@@ -41,9 +41,6 @@ public class AgendamentoController {
 
     @Autowired
     ParticipanteRepository participanteRepository;
-    
-    @Autowired
-    AgendamentoDAO agendamentoDAO;
 
     @GetMapping
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
@@ -103,14 +100,6 @@ public class AgendamentoController {
         Response response = new Response(lista);
         return ResponseEntity.ok().body(response);
     }
-    
-    @PostMapping("/salasdisp")
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
-    public ResponseEntity<Response> buscarSalasDisponiveis(@RequestBody AgendamentoContext ctx) {
-        List<SalaDTO> salas = agendamentoDAO.recuperaSala(ctx.getIdUnidade(), ctx.getLotacao(), ctx.getDataInicial(), ctx.getDataFinal(), ctx.getDataAgendamento());
-        Response response = new Response(salas);
-        return ResponseEntity.ok().body(response);
-    }
 
     @GetMapping("/sala")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
@@ -129,12 +118,12 @@ public class AgendamentoController {
         return ResponseEntity.ok().body(response);
     }
     
-    @PostMapping("/salas")
+    /*@PostMapping("/salas")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
     public ResponseEntity<Response> buscarAgendamentoPorSalaEData(@RequestBody AgendamentoContext ctx) {
         List<Agendamento> ag = agendamentoService.buscaPorSalaEData(Long.parseLong(ctx.getIdSala()), ctx.getDataComDate());
         Response response = new Response(ag);
         return ResponseEntity.ok().body(response);
-    }
+    }*/
     
 }

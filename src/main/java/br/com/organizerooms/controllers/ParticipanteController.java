@@ -46,30 +46,27 @@ public class ParticipanteController {
         return ResponseEntity.ok().body(response);
     }
 
-    /*@PostMapping("/listaParticipantes")
+    @PostMapping("/listaParticipantes")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public ResponseEntity<Response> adicionarListaParticipantes(@RequestBody ArrayList<ParticipanteDTO> participantes) {
 
-        String retorno = "";
+        Boolean retorno = false;
         try {
-            if (!participantes.isEmpty()) {
-                int cont = 0;
-                while (cont < participantes.size()) {
-                    Participante part = new Participante(participantes.get(cont));
+            if (participantes != null) {
+                for (int i = 0; i < participantes.size(); i++) {
+                    Participante part = new Participante(participantes.get(i));
 
                     participanteService.add(part);
-                    cont++;
                 }
+                retorno = true;
             }
-
-            retorno = "Sucesso";
         } catch (Exception e) {
-            retorno = "Erro";
+            //
         }
 
         Response response = new Response(retorno);
         return ResponseEntity.ok().body(response);
-    }*/
+    }
 
     @GetMapping("/{id}")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")

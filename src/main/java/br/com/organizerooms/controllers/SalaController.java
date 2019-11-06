@@ -1,5 +1,7 @@
 package br.com.organizerooms.controllers;
 
+import br.com.organizerooms.context.AgendamentoContext;
+import br.com.organizerooms.dao.AgendamentoDAO;
 import br.com.organizerooms.dto.SalaDTO;
 import br.com.organizerooms.models.Response;
 import br.com.organizerooms.models.Sala;
@@ -30,6 +32,9 @@ public class SalaController {
     @Autowired
     SalaService salaService;
 
+    @Autowired
+    AgendamentoDAO agendamentoDAO;
+
     @GetMapping
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
     public ResponseEntity<Response> buscarTodasSalas() {
@@ -54,6 +59,14 @@ public class SalaController {
 
         Sala lista = salaService.buscarSalaPorId(Long.parseLong(id));
         Response response = new Response(lista);
+        return ResponseEntity.ok().body(response);
+    }
+
+    @PostMapping("/salasdisp")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
+    public ResponseEntity<Response> buscarSalasDisponiveis(@RequestBody AgendamentoContext ctx) {
+        List<SalaDTO> salas = agendamentoDAO.recuperaSala(ctx.getIdUnidade(), ctx.getLotacao(), ctx.getDataInicial(), ctx.getDataFinal(), ctx.getDataAgendamento());
+        Response response = new Response(salas);
         return ResponseEntity.ok().body(response);
     }
 

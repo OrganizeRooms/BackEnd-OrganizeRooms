@@ -13,6 +13,7 @@ import javax.persistence.Table;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.EntityListeners;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -62,7 +63,7 @@ public class Sala implements Serializable {
     private Long salaPesAtualizacao;
 
     @ManyToOne
-    @JoinColumn(name = "uniId")
+    @JoinColumn(name = "uniId" )
     private Unidade salaUnidade;
 
     ///

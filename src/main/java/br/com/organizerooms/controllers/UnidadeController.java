@@ -21,6 +21,7 @@ import br.com.organizerooms.services.UnidadeService;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -70,6 +71,20 @@ public class UnidadeController {
         List<Unidade> unidades = unidadeService.buscaPorSituacao();
         Response response = new Response(unidades);
         return ResponseEntity.ok().body(response);
+    }
+    
+    @DeleteMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
+    public ResponseEntity<Response> deletarUnidade(@PathVariable String id) {
+        Boolean deletou = false;
+        try {
+            unidadeService.remover(Long.parseLong(id));
+            deletou = true;
+        } catch (NumberFormatException e) {
+            throw e;
+        }
+
+        return ResponseEntity.ok().body(new Response(deletou));
     }
 
 }

@@ -8,6 +8,7 @@ import br.com.organizerooms.models.Pessoa;
 import br.com.organizerooms.models.Response;
 import br.com.organizerooms.utils.EnviaEmail;
 import br.com.organizerooms.services.NotificacaoService;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -68,22 +69,25 @@ public class NotificacaoController {
 
     @PostMapping("/enviaEmail")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
-    public ResponseEntity<Response> enviarEmail(@RequestBody NotificacaoDTO notificacaoDTO) {
+    public ResponseEntity<Response> enviarEmail(@RequestBody ArrayList<NotificacaoDTO> notificacaoDTO) {
 
         Boolean retorno = false;
-        if (notificacaoDTO.getEnviaEmail() != null) {
-            retorno = enviaEmail.enviar(
-                    notificacaoDTO.getEnviaEmail().getDestinatario(),
-                    notificacaoDTO.getEnviaEmail().getAssunto(),
-                    notificacaoDTO.getEnviaEmail().getMensagem()
-            );
-        }
-
         if (notificacaoDTO != null) {
-            Notificacao newNoti = new Notificacao(notificacaoDTO);
+            for (int i = 0; i < notificacaoDTO.size(); i++) {
 
-            newNoti.setNotEnviado(retorno);
-            NotificacaoDTO newNotiDTO = new NotificacaoDTO(notificacaoService.persiste(newNoti));
+                if (notificacaoDTO.get(i).getEnviaEmail() != null) {
+                    retorno = enviaEmail.enviar(
+                            notificacaoDTO.get(i).getEnviaEmail().getDestinatario(),
+                            notificacaoDTO.get(i).getEnviaEmail().getAssunto(),
+                            notificacaoDTO.get(i).getEnviaEmail().getMensagem()
+                    );
+
+                    Notificacao newNoti = new Notificacao(notificacaoDTO.get(i));
+
+                    newNoti.setNotEnviado(retorno);
+                    NotificacaoDTO newNotiDTO = new NotificacaoDTO(notificacaoService.persiste(newNoti));
+                }
+            }
         }
 
         Response response = new Response(retorno);

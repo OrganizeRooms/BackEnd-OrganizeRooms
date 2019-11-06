@@ -65,9 +65,9 @@ public class AgendamentoService {
         return this.agendamentoRepository.recuperaAgendamentosParticipante(id, data);
     };
 
-    public List<Agendamento> buscaPorSalaEData (Long id, Date data){
+    /*public List<Agendamento> buscaPorSalaEData (Long id, Date data){
         return this.agendamentoRepository.recuperaAgendamentoSala(id, data);
-    };
+    };*/
     
 }
 
