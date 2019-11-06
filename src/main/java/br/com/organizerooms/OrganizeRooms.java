@@ -89,8 +89,8 @@ public class OrganizeRooms implements CommandLineRunner {
         pessoaRepository.save(pes);
 
         Pessoa pes2 = new Pessoa(null,
-                "USUARIO",
-                "user@user.com",
+                "Lucas Jansen",
+                "lucasrainoldojansen@gmail.com",
                 "123",
                 PerfilEnum.ROLE_USUARIO,
                 unidade1,
@@ -421,7 +421,7 @@ public class OrganizeRooms implements CommandLineRunner {
         participanteRepository.save(part1Age2);
         participanteRepository.save(part2Age2);
 
-        Notificacao noti1 = new Notificacao(
+        /*Notificacao noti1 = new Notificacao(
                 null,
                 "Você possui um novo Agendamento Marcado",
                 true,
@@ -480,6 +480,6 @@ public class OrganizeRooms implements CommandLineRunner {
         notificacaoRepository.save(noti2);
         notificacaoRepository.save(noti3);
         notificacaoRepository.save(noti4);
-        notificacaoRepository.save(noti5);
+        notificacaoRepository.save(noti5);*/
     }
 }
