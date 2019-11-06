@@ -7,6 +7,7 @@ import br.com.organizerooms.repositorios.AgendamentoRepository;
 import java.sql.CallableStatement;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.StoredProcedureQuery;
@@ -59,6 +60,14 @@ public class AgendamentoService {
     public List<Agendamento> buscaPorSala (Sala sala){
         return this.agendamentoRepository.findByAgeSala(sala);
     };
+    
+    public List<Agendamento> buscaPorPaticipanteEData (Long id, Date data){
+        return this.agendamentoRepository.recuperaAgendamentosParticipante(id, data);
+    };
 
+    public List<Agendamento> buscaPorSalaEData (Long id, Date data){
+        return this.agendamentoRepository.recuperaAgendamentoSala(id, data);
+    };
+    
 }
 
