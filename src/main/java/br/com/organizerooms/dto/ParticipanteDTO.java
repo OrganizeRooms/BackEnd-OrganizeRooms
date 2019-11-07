@@ -12,15 +12,17 @@ public class ParticipanteDTO {
 
     private Long parId;
     private Integer parTipo;
+    private Boolean parConfirmado;
     private Pessoa parPessoa;
     private Agendamento parAgendamento;
 
     public ParticipanteDTO() {
     }
 
-    public ParticipanteDTO(Long parId, Integer parTipo, Pessoa parPessoa, Agendamento parAgendamento) {
+    public ParticipanteDTO(Long parId, Integer parTipo, Boolean parConfirmado, Pessoa parPessoa, Agendamento parAgendamento) {
         this.parId = parId;
         this.parTipo = parTipo;
+        this.parConfirmado = parConfirmado;
         this.parPessoa = parPessoa;
         this.parAgendamento = parAgendamento;
     }
@@ -28,6 +30,7 @@ public class ParticipanteDTO {
     public ParticipanteDTO(Participante obj) {
         this.parId = obj.getParId();
         this.parTipo = obj.getParTipo();
+        this.parConfirmado = obj.getParConfirmado();
         this.parPessoa = obj.getParPessoa();
         this.parAgendamento = obj.getParAgendamento();
     }
@@ -46,6 +49,14 @@ public class ParticipanteDTO {
 
     public void setParTipo(Integer parTipo) {
         this.parTipo = parTipo;
+    }
+
+    public Boolean getParConfirmado() {
+        return parConfirmado;
+    }
+
+    public void setParConfirmado(Boolean parConfirmado) {
+        this.parConfirmado = parConfirmado;
     }
 
     public Pessoa getParPessoa() {

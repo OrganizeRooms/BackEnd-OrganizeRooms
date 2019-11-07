@@ -37,8 +37,8 @@ public class EnviaEmail {
                 email.setTLS(true);
                 email.setFrom(usuarioSmtp);
                 email.addTo(emailDestino.trim());
-                email.setSubject(subject);
-                email.setHtmlMsg(content);
+                email.setSubject(subject.trim());
+                email.setHtmlMsg(content.trim());
                 email.send();
             } catch (EmailException e) {
                 System.err.println("Falha ao enviar email para: " + emailDestino.trim() + " | Erro: " + e.toString());

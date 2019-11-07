@@ -400,16 +400,16 @@ public class OrganizeRooms implements CommandLineRunner {
         Agendamento ageGravado2 = agendamentoRepository.save(age2);
 
         /// PRIMEIRO
-        Participante part1Age1 = new Participante(null, 1, pes2, ageGravado);
-        Participante part2Age1 = new Participante(null, 1, pes, ageGravado);
+        Participante part1Age1 = new Participante(null, 1, true, pes2, ageGravado);
+        Participante part2Age1 = new Participante(null, 1, false, pes, ageGravado);
 
         List<Participante> parts1 = new ArrayList<>();
         parts1.add(part1Age1);
         parts1.add(part2Age1);
 
         /// SEGUNDO
-        Participante part1Age2 = new Participante(null, 1, pes2, ageGravado2);
-        Participante part2Age2 = new Participante(null, 1, pes, ageGravado2);
+        Participante part1Age2 = new Participante(null, 1, true, pes2, ageGravado2);
+        Participante part2Age2 = new Participante(null, 1, false, pes, ageGravado2);
 
         List<Participante> parts2 = new ArrayList<>();
         parts2.add(part1Age2);
@@ -422,64 +422,64 @@ public class OrganizeRooms implements CommandLineRunner {
         participanteRepository.save(part2Age2);
 
         /*Notificacao noti1 = new Notificacao(
-                null,
-                "Você possui um novo Agendamento Marcado",
-                true,
-                calendar.getTime(),
-                calendar.getTime(),
-                1l,
-                1l,
-                true,
-                pes);
+         null,
+         "Você possui um novo Agendamento Marcado",
+         true,
+         calendar.getTime(),
+         calendar.getTime(),
+         1l,
+         1l,
+         true,
+         pes);
 
-        Notificacao noti2 = new Notificacao(
-                null,
-                "Você possui um novo Agendamento Marcado 02",
-                true,
-                calendar.getTime(),
-                calendar.getTime(),
-                1l,
-                1l,
-                true,
-                pes);
+         Notificacao noti2 = new Notificacao(
+         null,
+         "Você possui um novo Agendamento Marcado 02",
+         true,
+         calendar.getTime(),
+         calendar.getTime(),
+         1l,
+         1l,
+         true,
+         pes);
 
-        Notificacao noti3 = new Notificacao(
-                null,
-                "Você possui um novo Agendamento Marcado 03",
-                true,
-                calendar.getTime(),
-                calendar.getTime(),
-                1l,
-                1l,
-                true,
-                pes);
+         Notificacao noti3 = new Notificacao(
+         null,
+         "Você possui um novo Agendamento Marcado 03",
+         true,
+         calendar.getTime(),
+         calendar.getTime(),
+         1l,
+         1l,
+         true,
+         pes);
 
-        Notificacao noti4 = new Notificacao(
-                null,
-                "Você possui um novo Agendamento Marcado 04",
-                true,
-                calendar.getTime(),
-                calendar.getTime(),
-                1l,
-                1l,
-                true,
-                pes);
+         Notificacao noti4 = new Notificacao(
+         null,
+         "Você possui um novo Agendamento Marcado 04",
+         true,
+         calendar.getTime(),
+         calendar.getTime(),
+         1l,
+         1l,
+         true,
+         pes);
 
-        Notificacao noti5 = new Notificacao(
-                null,
-                "Você possui um novo Agendamento Marcado 04",
-                true,
-                calendar.getTime(),
-                calendar.getTime(),
-                1l,
-                1l,
-                true,
-                pes);
+         Notificacao noti5 = new Notificacao(
+         null,
+         "Você possui um novo Agendamento Marcado 04",
+         true,
+         calendar.getTime(),
+         calendar.getTime(),
+         1l,
+         1l,
+         true,
+         pes);
 
-        notificacaoRepository.save(noti1);
-        notificacaoRepository.save(noti2);
-        notificacaoRepository.save(noti3);
-        notificacaoRepository.save(noti4);
-        notificacaoRepository.save(noti5);*/
+         notificacaoRepository.save(noti1);
+         notificacaoRepository.save(noti2);
+         notificacaoRepository.save(noti3);
+         notificacaoRepository.save(noti4);
+         notificacaoRepository.save(noti5);*/
     }
 }
