@@ -13,12 +13,20 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class ParticipanteService {
-    
+
     @Autowired
     ParticipanteRepository participanteRepository;
 
     public List<Participante> buscarTodosParticipantes() {
         return this.participanteRepository.findAllByOrderByParTipo();
+    }
+
+    public Participante buscarParticipantePorId(Long id) {
+        return this.participanteRepository.findById(id).get();
+    }
+
+    public List<Participante> buscarParticipantePorAgendamento(Participante part) {
+        return this.participanteRepository.findAllByParAgendamento(part);
     }
 
     public void remover(Long id) {
@@ -29,7 +37,8 @@ public class ParticipanteService {
         return this.participanteRepository.save(participante);
     }
 
-    public Participante buscarParticipantePorId(Long id) {
-        return this.participanteRepository.findById(id).get();
+    public void remove(Participante participante) {
+        this.participanteRepository.delete(participante);
     }
+
 }

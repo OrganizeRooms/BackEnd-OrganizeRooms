@@ -34,6 +34,9 @@ public class Participante implements Serializable {
     @Column
     private Integer parTipo;
 
+    @Column
+    private Boolean parConfirmado;
+
     @ManyToOne
     @JoinColumn(name = "parPessoa")
     private Pessoa parPessoa;
@@ -46,9 +49,10 @@ public class Participante implements Serializable {
     public Participante() {
     }
 
-    public Participante(Long parId, Integer parTipo, Pessoa parPessoa, Agendamento parAgendamento) {
+    public Participante(Long parId, Integer parTipo, Boolean parConfirmado, Pessoa parPessoa, Agendamento parAgendamento) {
         this.parId = parId;
         this.parTipo = parTipo;
+        this.parConfirmado = parConfirmado;
         this.parPessoa = parPessoa;
         this.parAgendamento = parAgendamento;
     }
@@ -56,6 +60,7 @@ public class Participante implements Serializable {
     public Participante(ParticipanteDTO obj) {
         this.parId = obj.getParId();
         this.parTipo = obj.getParTipo();
+        this.parConfirmado = obj.getParConfirmado();
         this.parPessoa = obj.getParPessoa();
         this.parAgendamento = obj.getParAgendamento();
     }
@@ -74,6 +79,14 @@ public class Participante implements Serializable {
 
     public void setParTipo(Integer parTipo) {
         this.parTipo = parTipo;
+    }
+
+    public Boolean getParConfirmado() {
+        return parConfirmado;
+    }
+
+    public void setParConfirmado(Boolean parConfirmado) {
+        this.parConfirmado = parConfirmado;
     }
 
     public Pessoa getParPessoa() {
