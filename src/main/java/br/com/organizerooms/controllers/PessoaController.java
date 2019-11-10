@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.organizerooms.services.PessoaService;
 import br.com.organizerooms.utils.SenhaUtils;
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -53,10 +54,10 @@ public class PessoaController {
     public ResponseEntity<Response> addPessoa(@RequestBody PessoaDTO pessoa) {
         Pessoa newPessoa = new Pessoa(pessoa);
         Optional<Pessoa> oldpessoa = pessoaService.buscarPessoaPorId(pessoa.getPesId());
-        
+
         if (newPessoa.getPesId() == 0) {
             newPessoa.setPesSenha("senha");
-        }else{
+        } else {
             newPessoa.setPesSenha(oldpessoa.get().getPesSenha());
         }
 
@@ -65,11 +66,38 @@ public class PessoaController {
         return ResponseEntity.ok().body(response);
     }
 
-    @PostMapping(value = "/resetarSenha") 
+    @PostMapping("/importar")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+    public ResponseEntity<Response> importarPessoas(@RequestBody ArrayList<PessoaDTO> pessoas) {
+
+        List<String> inconsistências = new ArrayList<>();
+
+        if (!pessoas.isEmpty()) {
+            for (PessoaDTO pessoa : pessoas) {
+                Pessoa newPessoa = new Pessoa(pessoa);
+                if (newPessoa.getPesNome().equals("")
+                        || newPessoa.getPesEmail().equals("")
+                        || newPessoa.getPesUnidade().getUniId().toString().equals("")) {
+                    inconsistências.add("Erro ao importar Pessoa: " + pessoa.getPesNome());
+                } else {
+                    newPessoa.setPesSenha("senha");
+                    PessoaDTO pesDTO = new PessoaDTO(pessoaService.addPessoa(newPessoa));
+                    if (pesDTO.getPesId() == null || pesDTO.getPesId() == 0) {
+                        inconsistências.add("Erro ao importar Pessoa: " + pessoa.getPesNome());
+                    }
+                }
+            }
+        }
+
+        Response response = new Response(inconsistências);
+        return ResponseEntity.ok().body(response);
+    }
+
+    @PostMapping(value = "/resetarSenha")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
     public ResponseEntity<Response> resetarSenha(@RequestBody PessoaDTO pessoa) {
         Pessoa newPessoa = new Pessoa(pessoa);
- 
+
         newPessoa.setPesSenha("senha");
 
         newPessoa = pessoaService.addPessoa(newPessoa);

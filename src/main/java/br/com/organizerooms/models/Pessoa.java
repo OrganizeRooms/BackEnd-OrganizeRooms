@@ -37,10 +37,10 @@ public class Pessoa implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long pesId;
 
-    @Column
+    @Column(nullable = true)
     private String pesNome;
 
-    @Column
+    @Column(nullable = true)
     private String pesEmail;
 
     @JsonIgnore
@@ -52,7 +52,7 @@ public class Pessoa implements Serializable {
     private PerfilEnum pesPermissao;
 
     @ManyToOne
-    @JoinColumn(name = "uniId")
+    @JoinColumn(name = "uniId", nullable = true)
     private Unidade pesUnidade;
 
     @Column

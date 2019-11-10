@@ -1,6 +1,8 @@
 package br.com.organizerooms.services;
 
+import br.com.organizerooms.models.Agendamento;
 import br.com.organizerooms.models.Participante;
+import br.com.organizerooms.models.Pessoa;
 import br.com.organizerooms.repositorios.ParticipanteRepository;
 import java.util.List;
 
@@ -23,6 +25,10 @@ public class ParticipanteService {
 
     public Participante buscarParticipantePorId(Long id) {
         return this.participanteRepository.findById(id).get();
+    }
+
+    public Participante buscarPorAgendamentoEPessoa(Agendamento agend, Pessoa pessoa) {
+        return this.participanteRepository.findByParAgendamentoAndParPessoa(agend, pessoa);
     }
 
     public List<Participante> buscarParticipantePorAgendamento(Participante part) {

@@ -93,9 +93,28 @@ public class ParticipanteController {
         return ResponseEntity.ok().body(response);
     }
 
+    @PostMapping("/alterar")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+    public ResponseEntity<Response> alterarParticipante(@RequestBody ParticipanteDTO participanteDTO) {
+
+        Participante partAlterado = new Participante();
+        if (participanteDTO != null) {
+
+            Participante part = participanteService.buscarPorAgendamentoEPessoa(participanteDTO.getParAgendamento(), participanteDTO.getParPessoa());
+            if (part != null) {
+                part.setParConfirmado(participanteDTO.getParConfirmado());
+                partAlterado = participanteService.add(part);
+            }
+        }
+
+        Response response = new Response(partAlterado);
+        return ResponseEntity.ok().body(response);
+    }
+
     @DeleteMapping("/deletar/{id}")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
-    public ResponseEntity<Response> deletarParticipante(@PathVariable String id) {
+    public ResponseEntity<Response> deletarParticipante(@PathVariable String id
+    ) {
 
         Boolean retorno = false;
         if (!id.equals("")) {
