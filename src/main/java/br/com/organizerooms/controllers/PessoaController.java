@@ -73,17 +73,35 @@ public class PessoaController {
         List<String> inconsistências = new ArrayList<>();
 
         if (!pessoas.isEmpty()) {
-            for (PessoaDTO pessoa : pessoas) {
-                Pessoa newPessoa = new Pessoa(pessoa);
-                if (newPessoa.getPesNome().equals("")
-                        || newPessoa.getPesEmail().equals("")
-                        || newPessoa.getPesUnidade().getUniId().toString().equals("")) {
-                    inconsistências.add("Erro ao importar Pessoa: " + pessoa.getPesNome());
+            for (int i = 0; i < pessoas.size(); i++) {
+
+                if (pessoas.get(i).getPesNome().equals("")
+                        || pessoas.get(i).getPesEmail().equals("")
+                        || pessoas.get(i).getPesUnidade().getUniId().toString().equals("")) {
+                    inconsistências.add("Erro ao importar registro da linha: " + (i + 2));
+
                 } else {
-                    newPessoa.setPesSenha("senha");
+                    Optional<Pessoa> optPessoa = pessoaService.buscarPessoaPorEmail(pessoas.get(i).getPesEmail());
+                    Pessoa newPessoa;
+                    if (optPessoa.isPresent()) {
+                        newPessoa = new Pessoa(optPessoa.get());
+                        newPessoa.setPesNome(pessoas.get(i).getPesNome());
+                        if (!pessoas.get(i).getPesDdd().equals("")) {
+                            newPessoa.setPesDdd(pessoas.get(i).getPesDdd());
+                        }
+                        if (!pessoas.get(i).getPesTelefone().equals("")) {
+                            newPessoa.setPesTelefone(pessoas.get(i).getPesTelefone());
+                        }
+                        newPessoa.setPesUnidade(pessoas.get(i).getPesUnidade());
+
+                    } else {
+                        newPessoa = new Pessoa(pessoas.get(i));
+                        newPessoa.setPesSenha("senha");
+                    }
+
                     PessoaDTO pesDTO = new PessoaDTO(pessoaService.addPessoa(newPessoa));
                     if (pesDTO.getPesId() == null || pesDTO.getPesId() == 0) {
-                        inconsistências.add("Erro ao importar Pessoa: " + pessoa.getPesNome());
+                        inconsistências.add("Erro ao importar registro da linha: " + (i + 2) + ", Pessoa: " + pessoas.get(i).getPesNome());
                     }
                 }
             }
