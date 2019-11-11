@@ -133,6 +133,26 @@ public class Pessoa implements Serializable {
         this.pesDtAtualizacao = obj.getPesDtAtualizacao();
         this.pesUnidade = obj.getPesUnidade();
     }
+    
+        public Pessoa(Pessoa obj) {
+        this.pesId = obj.getPesId();
+        this.pesNome = obj.getPesNome();
+        this.pesEmail = obj.getPesEmail();
+        if (obj.getPesSenha().equals("senha")) {
+            this.pesSenha = obj.getPesSenha();
+        } else {
+            this.pesSenha = SenhaUtils.gerarBCrypt(obj.getPesSenha());
+        }
+        this.pesPermissao = obj.getPesPermissao();
+        this.pesDdd = obj.getPesDdd();
+        this.pesTelefone = obj.getPesTelefone();
+        this.pesTipoInclusao = obj.getPesTipoInclusao();
+        this.pesCadastro = obj.getPesCadastro();
+        this.pesDtCadastro = obj.getPesDtCadastro();
+        this.pesAtualizacao = obj.getPesAtualizacao();
+        this.pesDtAtualizacao = obj.getPesDtAtualizacao();
+        this.pesUnidade = obj.getPesUnidade();
+    }
 
     public Long getPesId() {
         return pesId;
