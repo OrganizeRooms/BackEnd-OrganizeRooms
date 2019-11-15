@@ -102,6 +102,21 @@ public class OrganizeRooms implements CommandLineRunner {
                 null,
                 calendar.getTime());
         pessoaRepository.save(pes2);
+        
+        Pessoa pes3 = new Pessoa(null,
+                "Tablet",
+                "tablet@tablet.com",
+                "123",
+                PerfilEnum.ROLE_TABLET,
+                unidade1,
+                "47",
+                "992821333",
+                "SIS",
+                null,
+                calendar.getTime(),
+                null,
+                calendar.getTime());
+        pessoaRepository.save(pes3);
 
         Optional<Unidade> optUni = unidadeRepository.findById(1L);
         Unidade uni = optUni.get();
@@ -350,14 +365,14 @@ public class OrganizeRooms implements CommandLineRunner {
         salaRepository.save(sala9);
         salaRepository.save(sala10);
 
-        Date ageData = new Date("2019/11/06");
+        Date ageData = new Date("2019/11/14");
 
-        Date ageHoraInicio1 = new Date("2019/11/06 14:00:00");
-        Date ageHoraFim1 = new Date("2019/11/06 15:00:00");
+        Date ageHoraInicio1 = new Date("2019/11/14 14:00:00");
+        Date ageHoraFim1 = new Date("2019/11/14 15:00:00");
 
         List<Equipamento> equips1 = new ArrayList<>();
         equips1.add(equipamento1);
-
+        
         Agendamento age = new Agendamento(
                 null,
                 "Reunião do Kanban com Equipe de Desenvolvimento",

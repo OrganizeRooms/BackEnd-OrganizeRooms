@@ -70,7 +70,7 @@ public class NotificacaoController {
     @PostMapping("/enviaEmail")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
     public ResponseEntity<Response> enviarEmail(@RequestBody ArrayList<NotificacaoDTO> notificacaoDTO) {
-
+  
         Boolean retorno = false;
         if (notificacaoDTO != null) {
             for (int i = 0; i < notificacaoDTO.size(); i++) {

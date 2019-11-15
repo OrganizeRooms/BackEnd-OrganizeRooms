@@ -83,6 +83,9 @@ public class PessoaDTO {
         if (this.pesPermissao.equals(PerfilEnum.ROLE_USUARIO)) {
             return "Usuario";
         }
+        if (this.pesPermissao.equals(PerfilEnum.ROLE_TABLET)) {
+            return "Tablet";
+        }
         return "";
     }
 
