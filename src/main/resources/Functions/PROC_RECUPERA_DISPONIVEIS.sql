@@ -5,10 +5,10 @@ BEGIN
 	LEFT join agendamento a  ON age_sala = sala_id
 	WHERE (s.uni_id = idUnidade
 	AND s.sala_lotacao >= lotacao
-	AND (a.age_status = 'CANCELADO'
+	AND (a.age_status in ('CANCELADO','CONCLUIDO')
 	OR a.age_status IS NULL)
 	AND sala_ativa = 1)
-    or (a.age_data is not null and a.age_data <> dataAgendamento)
+    or (a.age_data is not null and a.age_data <> dataAgendamento) AND s.sala_lotacao >= lotacao
     GROUP BY SALA_ID, SALA_NOME, SALA_LOTACAO
 	UNION 
 	SELECT SALA_ID, SALA_NOME, SALA_LOTACAO FROM  sala s WHERE SALA_ID IN (

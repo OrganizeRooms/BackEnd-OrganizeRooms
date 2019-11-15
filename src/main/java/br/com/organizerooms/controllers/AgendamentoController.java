@@ -43,7 +43,7 @@ public class AgendamentoController {
     ParticipanteRepository participanteRepository;
 
     @GetMapping
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO','ROLE_TABLET')")
     public ResponseEntity<Response> buscarTodosAgendamentos() {
         List<Agendamento> list = agendamentoService.buscarTodosAgendamentos();
         List<AgendamentoDTO> listDto = list.stream().map(obj -> new AgendamentoDTO(obj)).collect(Collectors.toList());
@@ -75,7 +75,7 @@ public class AgendamentoController {
     }
 
     @PostMapping("/atualizar")
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO','ROLE_TABLET')")
     public ResponseEntity<Response> atualizarAgendamento(@RequestBody AgendamentoDTO agendamento) {
         Agendamento newAgendamento = new Agendamento(agendamento);
         AgendamentoDTO agendamentoDTO = new AgendamentoDTO(agendamentoService.add(newAgendamento));
@@ -102,7 +102,7 @@ public class AgendamentoController {
     }
 
     @GetMapping("/sala")
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO','ROLE_TABLET')")
     public ResponseEntity<Response> buscarAgendamentoPorSala(@RequestBody SalaDTO salaDTO) {
         Sala sala = new Sala(salaDTO);
         List<Agendamento> lista = agendamentoService.buscaPorSala(sala);

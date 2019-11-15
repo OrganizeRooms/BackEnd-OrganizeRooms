@@ -95,7 +95,7 @@ public class Agendamento implements Serializable {
     @Column
     private Long agePesAtualizacao;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
     @JoinTable(name = "reserva_equipamento",
             joinColumns = @JoinColumn(name = "equId"),
             inverseJoinColumns = @JoinColumn(name = "ageId"))
