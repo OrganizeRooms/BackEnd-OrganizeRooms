@@ -61,13 +61,13 @@ public class AgendamentoService {
         return this.agendamentoRepository.findByAgeSala(sala);
     };
     
-    public List<Agendamento> buscaPorPaticipanteEData (Long id, Date data){
+    public List<Agendamento> buscaPorPaticipanteEData (Long id, String data){
         return this.agendamentoRepository.recuperaAgendamentosParticipante(id, data);
     };
 
-    /*public List<Agendamento> buscaPorSalaEData (Long id, Date data){
+    public List<Agendamento> buscaPorSalaEData (Long id, String data){
         return this.agendamentoRepository.recuperaAgendamentoSala(id, data);
-    };*/
+    }
     
 }
 

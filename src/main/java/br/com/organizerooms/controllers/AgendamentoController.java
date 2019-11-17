@@ -113,17 +113,17 @@ public class AgendamentoController {
     @PostMapping("/participante")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
     public ResponseEntity<Response> buscarAgendamentoPorParticipanteEData(@RequestBody AgendamentoContext ctx) {
-        List<Agendamento> ag = agendamentoService.buscaPorPaticipanteEData(Long.parseLong(ctx.getIdParticipante()), ctx.getDataComDate());
+        List<Agendamento> ag = agendamentoService.buscaPorPaticipanteEData(Long.parseLong(ctx.getIdParticipante()), ctx.getDataAgendamento());
         Response response = new Response(ag);
         return ResponseEntity.ok().body(response);
     }
     
-    /*@PostMapping("/salas")
+    @PostMapping("/salas")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
     public ResponseEntity<Response> buscarAgendamentoPorSalaEData(@RequestBody AgendamentoContext ctx) {
-        List<Agendamento> ag = agendamentoService.buscaPorSalaEData(Long.parseLong(ctx.getIdSala()), ctx.getDataComDate());
+        List<Agendamento> ag = agendamentoService.buscaPorSalaEData(Long.parseLong(ctx.getIdSala()), ctx.getDataAgendamento());
         Response response = new Response(ag);
         return ResponseEntity.ok().body(response);
-    }*/
+    }
     
 }

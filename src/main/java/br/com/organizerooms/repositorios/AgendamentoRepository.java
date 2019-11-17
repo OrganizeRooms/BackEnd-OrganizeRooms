@@ -24,13 +24,18 @@ public interface AgendamentoRepository extends JpaRepository<Agendamento, Long> 
 
     public List<Agendamento> findByAgeSala(Sala sala);
 
-    @Query("select a.ageId, a.ageAssunto, a.ageData, a.ageDescricao, a.ageHoraInicio, a.ageHoraFim, a.ageStatus from Agendamento a "
+    /*@Query("select a.ageId, a.ageAssunto, a.ageData, a.ageDescricao, a.ageHoraInicio, a.ageHoraFim, a.ageStatus from Agendamento a "
             + "INNER JOIN Participante p ON a.ageId = p.parAgendamento "
-            + "WHERE p.parPessoa = ?1 and a.ageData = ?2 and a.ageStatus in ('AGENDADO', 'EM ANDAMENTO')")
-    /*@Query("select a from agendamento a INNER JOIN a.participante p INNER JOIN p.parPessoa pp WHERE pp.pesId = ?1 and a.ageData = ?2 and a.ageStatus = 'AGENDADO'")*/
-    public List<Agendamento> recuperaAgendamentosParticipante(Long idParticipante, Date dataAgrupamento);
+            + "WHERE p.parPessoa = ?1 and a.ageData = ?2 and a.ageStatus in ('AGENDADO', 'EM ANDAMENTO')")*/
+    @Query(nativeQuery=true, value = "select a.* from Agendamento a "
+            + "INNER JOIN Participante p ON a.age_Id = p.par_Agendamento "
+            + "INNER JOIN Pessoa pp ON p.par_Pessoa = pp.pes_Id "
+            + "WHERE pp.pes_Id = ?1 and a.age_Data = ?2 and a.age_Status = 'AGENDADO'")
+    public List<Agendamento> recuperaAgendamentosParticipante(Long idParticipante, String dataAgrupamento);
 
-    /*@Query("select a from Agendamento a INNER JOIN a.ageSala s where s.salaId = ?1 a.ageData = ?2 and a.ageStatus = 'AGENDADO'")
-    public List<Agendamento> recuperaAgendamentoSala(Long idSala, Date dataAgrupamento);*/
+    @Query(nativeQuery=true, value = "select a.* from Agendamento a "
+            + "INNER JOIN Sala s ON a.age_Sala = s.sala_Id "
+            + "where s.sala_Id = ?1 and a.age_Data = ?2 and a.age_Status = 'AGENDADO'")
+    public List<Agendamento> recuperaAgendamentoSala(Long idSala, String dataAgrupamento);
 
 }

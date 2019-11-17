@@ -8,7 +8,7 @@ BEGIN
 	AND (a.age_status in ('CANCELADO','CONCLUIDO')
 	OR a.age_status IS NULL)
 	AND sala_ativa = 1)
-    or (a.age_data is not null and a.age_data <> dataAgendamento) AND s.sala_lotacao >= lotacao
+    or (a.age_data is not null and a.age_data <> dataAgendamento) AND s.sala_lotacao >= lotacao AND s.uni_id = idUnidade
     GROUP BY SALA_ID, SALA_NOME, SALA_LOTACAO
 	UNION 
 	SELECT SALA_ID, SALA_NOME, SALA_LOTACAO FROM  sala s WHERE SALA_ID IN (
