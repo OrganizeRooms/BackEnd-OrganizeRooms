@@ -149,25 +149,20 @@ public class PessoaController {
         
         if (id != null) {
             List<Participante> listaParticipantes = participanteService.buscarPorPessoa(pessoa);
+            
+            if (!listaParticipantes.isEmpty()){
+                return ResponseEntity.ok().body(new Response(deletou));
+            }
+            
             List<Agendamento> listaAgendamentos = agendamentoService.buscaPorPessoa(pessoa);
             
-            if (listaParticipantes.isEmpty() && listaAgendamentos.isEmpty()){
+            if (listaAgendamentos.isEmpty()){
                 pessoaService.remover(Long.parseLong(id));
-
-                deletou = !pessoaService.buscarPessoaPorId(Long.parseLong(id)).isPresent();
+                deletou = !pessoaService.buscarPessoaPorId(Long.parseLong(id)).isPresent();             
             }
         
         }
         
-        
-
-        if (id != null) {
-            if (!existeIngredienteReceita(Long.parseLong(id))) {
-                ingredienteService.remover(Long.parseLong(id));
-
-                deletou = !ingredienteService.buscarPorId(Long.parseLong(id)).isPresent();
-            }
-        }
         return ResponseEntity.ok().body(new Response(deletou));
     }
 
