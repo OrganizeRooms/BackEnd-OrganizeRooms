@@ -31,4 +31,8 @@ public class PessoaService implements PessoaServiceInterface {
     public Optional<Pessoa> buscarPessoaPorId(Long pesId) {
         return this.pessoaRepository.findById(pesId);
     }
+    
+    public void remover(Long id) {
+        this.pessoaRepository.deleteById(id);
+    }
 }

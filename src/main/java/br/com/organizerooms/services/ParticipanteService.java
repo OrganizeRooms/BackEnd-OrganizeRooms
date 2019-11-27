@@ -34,6 +34,10 @@ public class ParticipanteService {
     public List<Participante> buscarParticipantePorAgendamento(Participante part) {
         return this.participanteRepository.findAllByParAgendamento(part);
     }
+    
+    public List<Participante> buscarPorPessoa(Pessoa pessoa) {
+        return this.participanteRepository.findAllByParPessoa(pessoa);
+    }
 
     public void remover(Long id) {
         this.participanteRepository.deleteById(id);

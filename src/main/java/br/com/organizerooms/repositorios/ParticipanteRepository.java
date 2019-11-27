@@ -22,5 +22,7 @@ public interface ParticipanteRepository extends JpaRepository <Participante, Lon
     
     public Participante findByParAgendamentoAndParPessoa(Agendamento agend, Pessoa pessoa);
     
+    public List<Participante> findAllByParPessoa(Pessoa pessoa);
+    
 }
 

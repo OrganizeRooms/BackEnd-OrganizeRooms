@@ -6,8 +6,12 @@
 package br.com.organizerooms.controllers;
 
 import br.com.organizerooms.dto.PessoaDTO;
+import br.com.organizerooms.models.Agendamento;
+import br.com.organizerooms.models.Participante;
 import br.com.organizerooms.models.Pessoa;
 import br.com.organizerooms.models.Response;
+import br.com.organizerooms.services.AgendamentoService;
+import br.com.organizerooms.services.ParticipanteService;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +26,9 @@ import java.util.ArrayList;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -36,6 +42,12 @@ public class PessoaController {
 
     @Autowired
     PessoaService pessoaService;
+    
+    @Autowired
+    ParticipanteService participanteService;
+    
+    @Autowired
+    AgendamentoService agendamentoService;
 
     @Autowired
     SenhaUtils senhaUtils;
@@ -126,6 +138,37 @@ public class PessoaController {
 
         Response response = new Response(resposta);
         return ResponseEntity.ok().body(response);
+    }
+    
+    @DeleteMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
+    public ResponseEntity<Response> deletarPessoa(@PathVariable String id) {
+        Boolean deletou = false;
+        Pessoa pessoa = new Pessoa();
+        pessoa.setPesId(Long.parseLong(id));
+        
+        if (id != null) {
+            List<Participante> listaParticipantes = participanteService.buscarPorPessoa(pessoa);
+            List<Agendamento> listaAgendamentos = agendamentoService.buscaPorPessoa(pessoa);
+            
+            if (listaParticipantes.isEmpty() && listaAgendamentos.isEmpty()){
+                pessoaService.remover(Long.parseLong(id));
+
+                deletou = !pessoaService.buscarPessoaPorId(Long.parseLong(id)).isPresent();
+            }
+        
+        }
+        
+        
+
+        if (id != null) {
+            if (!existeIngredienteReceita(Long.parseLong(id))) {
+                ingredienteService.remover(Long.parseLong(id));
+
+                deletou = !ingredienteService.buscarPorId(Long.parseLong(id)).isPresent();
+            }
+        }
+        return ResponseEntity.ok().body(new Response(deletou));
     }
 
 }
