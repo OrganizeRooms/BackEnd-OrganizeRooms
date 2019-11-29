@@ -6,51 +6,34 @@
 package br.com.organizerooms.context;
 
 import java.util.Date;
+
 /**
  *
  * @author Pichau
  */
 public class AgendamentoContext {
-    
+
     private String idUnidade;
     private String lotacao;
     private String dataInicial;
     private String dataFinal;
     private String dataAgendamento;
     private String idParticipante;
-    private Date dataComDate;
     private String idSala;
 
-    public AgendamentoContext() {}
-    
-    public AgendamentoContext(String idUnidade, String lotacao, String dataInicial, String dataFinal, String dataAgendamento, String idParticipante, Date dataComDate, String idSala) {
+    public AgendamentoContext() {
+    }
+
+    public AgendamentoContext(String idUnidade, String lotacao, String dataInicial, String dataFinal, String dataAgendamento, String idParticipante, String idSala) {
         this.idUnidade = idUnidade;
         this.lotacao = lotacao;
         this.dataInicial = dataInicial;
         this.dataFinal = dataFinal;
         this.dataAgendamento = dataAgendamento;
         this.idParticipante = idParticipante;
-        this.dataComDate = dataComDate;
         this.idSala = idSala;
     }
 
-    public String getIdSala() {
-        return idSala;
-    }
-
-    public void setIdSala(String idSala) {
-        this.idSala = idSala;
-    }
-
-    public Date getDataComDate() {
-        return dataComDate;
-    }
-
-    public void setDataComDate(Date dataComDate) {
-        this.dataComDate = dataComDate;
-    }
-
-    
     public String getIdUnidade() {
         return idUnidade;
     }
@@ -98,6 +81,14 @@ public class AgendamentoContext {
     public void setIdParticipante(String idParticipante) {
         this.idParticipante = idParticipante;
     }
- 
+
+    public String getIdSala() {
+        return idSala;
+    }
+
+    public void setIdSala(String idSala) {
+        this.idSala = idSala;
+    }
+
     
 }

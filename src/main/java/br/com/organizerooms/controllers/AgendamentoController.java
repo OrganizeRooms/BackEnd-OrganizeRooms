@@ -113,11 +113,12 @@ public class AgendamentoController {
     @PostMapping("/participante")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
     public ResponseEntity<Response> buscarAgendamentoPorParticipanteEData(@RequestBody AgendamentoContext ctx) {
-        List<Agendamento> ag = agendamentoService.buscaPorPaticipanteEData(Long.parseLong(ctx.getIdParticipante()), ctx.getDataAgendamento());
-        Response response = new Response(ag);
+        List<Agendamento> list = agendamentoService.buscaPorPaticipanteEData(Long.parseLong(ctx.getIdParticipante()), ctx.getDataAgendamento());
+        List<AgendamentoDTO> listDto = list.stream().map(obj -> new AgendamentoDTO(obj)).collect(Collectors.toList());
+        Response response = new Response(listDto);
         return ResponseEntity.ok().body(response);
     }
-    
+
     @PostMapping("/salas")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
     public ResponseEntity<Response> buscarAgendamentoPorSalaEData(@RequestBody AgendamentoContext ctx) {
@@ -125,5 +126,5 @@ public class AgendamentoController {
         Response response = new Response(ag);
         return ResponseEntity.ok().body(response);
     }
-    
+
 }
