@@ -36,7 +36,7 @@ public class AgendamentoDAO {
       List<SalaDTO> salas = new ArrayList<>();
       try {
             Connection sqlConnection  =  getConection();
-         //   Connection sqlConnection  =  DriverManager.getConnection("jdbc:mysql://localhost:3306/organizerooms", "root", "");
+            //Connection sqlConnection  =  DriverManager.getConnection("jdbc:mysql://localhost:3306/organizerooms", "root", "");
             Statement stmt = sqlConnection.createStatement();
             ResultSet rs = stmt.executeQuery("CALL PROC_RECUPERA_DISPONIVEIS("
                     + idUnidade + ","
@@ -68,7 +68,6 @@ public class AgendamentoDAO {
       List<EquipamentoDTO> equipamentos = new ArrayList<>();
       try {
             Connection sqlConnection  =  getConection();
-         //   Connection sqlConnection  =  DriverManager.getConnection("jdbc:mysql://localhost:3306/organizerooms", "root", "");
             Statement stmt = sqlConnection.createStatement();
             ResultSet rs = stmt.executeQuery("CALL PROC_RECUPERA_EQUIPAMENTOS("
                     + idUnidade + ","
@@ -96,7 +95,11 @@ public class AgendamentoDAO {
     
     private Connection getConection(){
         try {
+            // LocalHost
             return DriverManager.getConnection("jdbc:mysql://localhost:3306/organizerooms", "root", "");
+            
+            // Servidor
+            //return DriverManager.getConnection("jdbc:mysql://us-cdbr-iron-east-05.cleardb.net/heroku_f0529be4b8bcd9f?reconnect=true", "b79d80426e3788", "95369cb2");
         } catch (SQLException ex) {
             Logger.getLogger(AgendamentoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
