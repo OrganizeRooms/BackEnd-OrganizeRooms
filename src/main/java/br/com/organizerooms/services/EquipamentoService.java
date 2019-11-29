@@ -6,6 +6,7 @@
 package br.com.organizerooms.services;
 
 import br.com.organizerooms.models.Equipamento;
+import br.com.organizerooms.models.Unidade;
 import br.com.organizerooms.repositorios.EquipamentoRepository;
 import java.util.List;
 import org.springframework.stereotype.Service;
@@ -36,4 +37,8 @@ public class EquipamentoService {
     public  List<Equipamento> buscaTodos(){
         return this.repository.findAll();
     };
+    
+    public List<Equipamento> buscarPorUnidade(Unidade unidade) {
+        return this.repository.findAllByEquUnidade(unidade);
+    }
 }

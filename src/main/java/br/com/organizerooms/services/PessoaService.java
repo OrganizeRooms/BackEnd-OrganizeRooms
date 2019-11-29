@@ -1,6 +1,8 @@
 package br.com.organizerooms.services;
 
 import br.com.organizerooms.models.Pessoa;
+import br.com.organizerooms.models.Sala;
+import br.com.organizerooms.models.Unidade;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,5 +36,9 @@ public class PessoaService implements PessoaServiceInterface {
     
     public void remover(Long id) {
         this.pessoaRepository.deleteById(id);
+    }
+    
+    public List<Pessoa> buscarPorUnidade(Unidade unidade) {
+        return this.pessoaRepository.findAllByPesUnidade(unidade);
     }
 }
