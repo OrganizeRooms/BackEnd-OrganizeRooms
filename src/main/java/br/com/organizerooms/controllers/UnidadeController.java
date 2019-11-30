@@ -7,8 +7,13 @@ package br.com.organizerooms.controllers;
 
 import br.com.organizerooms.dto.UnidadeDTO;
 import br.com.organizerooms.models.Equipamento;
+import br.com.organizerooms.models.Pessoa;
 import br.com.organizerooms.models.Response;
+import br.com.organizerooms.models.Sala;
 import br.com.organizerooms.models.Unidade;
+import br.com.organizerooms.services.EquipamentoService;
+import br.com.organizerooms.services.PessoaService;
+import br.com.organizerooms.services.SalaService;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +42,16 @@ public class UnidadeController {
 
     @Autowired
     UnidadeService unidadeService;
+    
+    @Autowired
+    PessoaService pessoaService;
+    
+    @Autowired
+    SalaService salaService;
+    
+    @Autowired
+    EquipamentoService equipamentoService;
+    
 
     @GetMapping
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
@@ -84,6 +99,39 @@ public class UnidadeController {
             throw e;
         }
 
+        return ResponseEntity.ok().body(new Response(deletou));
+    }
+    
+    @DeleteMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
+    public ResponseEntity<Response> deletar(@PathVariable String id) {
+        Boolean deletou = false;
+        Unidade unidade = new Unidade();
+        unidade.setUniId(Long.parseLong(id));
+        
+        if (id != null) {
+            
+            List<Sala> listaSalas = salaService.buscarPorUnidade(unidade);
+            
+            if (!listaSalas.isEmpty()){
+                return ResponseEntity.ok().body(new Response(deletou));         
+            }
+            
+            List<Pessoa> listaPessoas = pessoaService.buscarPorUnidade(unidade);
+            
+            if (!listaPessoas.isEmpty()){
+                return ResponseEntity.ok().body(new Response(deletou));         
+            }
+            List<Equipamento> listaEquipamentos = equipamentoService.buscarPorUnidade(unidade);
+            
+            if (!listaEquipamentos.isEmpty()){
+                return ResponseEntity.ok().body(new Response(deletou));       
+            }
+            
+            salaService.remover(Long.parseLong(id));
+            deletou = true;
+        }
+        
         return ResponseEntity.ok().body(new Response(deletou));
     }
 

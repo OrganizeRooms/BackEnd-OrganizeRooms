@@ -6,6 +6,7 @@
 package br.com.organizerooms.repositorios;
 
 import br.com.organizerooms.models.Equipamento;
+import br.com.organizerooms.models.Unidade;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -20,5 +21,6 @@ import org.springframework.transaction.annotation.Transactional;
 public interface EquipamentoRepository extends JpaRepository<Equipamento, Long> {
 
     public  List<Equipamento> findByEquAtiva(boolean ativo);
+    public List<Equipamento> findAllByEquUnidade(Unidade unidade);
     
 }
