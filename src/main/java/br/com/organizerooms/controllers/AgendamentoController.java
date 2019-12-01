@@ -11,7 +11,9 @@ import br.com.organizerooms.models.Agendamento;
 import br.com.organizerooms.models.Participante;
 import br.com.organizerooms.models.Sala;
 import br.com.organizerooms.models.Pessoa;
+import br.com.organizerooms.models.ReservaEquipamento;
 import br.com.organizerooms.repositorios.ParticipanteRepository;
+import br.com.organizerooms.repositorios.ReservaEquipamentoRepository;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +44,9 @@ public class AgendamentoController {
     @Autowired
     ParticipanteRepository participanteRepository;
 
+    @Autowired
+    ReservaEquipamentoRepository reservaEquipamentoRepository;
+
     @GetMapping
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO','ROLE_TABLET')")
     public ResponseEntity<Response> buscarTodosAgendamentos() {
@@ -66,6 +71,19 @@ public class AgendamentoController {
 
                 part.setParAgendamento(new Agendamento(agendamentoDTO));
                 participanteRepository.save(part);
+                cont++;
+            }
+        }
+        
+        if (!newAgendamento.getEquipamentos().isEmpty()) {
+            List<ReservaEquipamento> reservas = newAgendamento.getEquipamentos();
+
+            int cont = 0;
+            while (cont < reservas.size()) {
+                ReservaEquipamento reserva = reservas.get(cont);
+
+                reserva.setAgendamento(new Agendamento(agendamentoDTO));
+                reservaEquipamentoRepository.save(reserva);
                 cont++;
             }
         }

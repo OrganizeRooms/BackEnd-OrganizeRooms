@@ -6,6 +6,7 @@ import br.com.organizerooms.models.Sala;
 import br.com.organizerooms.models.Agendamento;
 import br.com.organizerooms.models.Equipamento;
 import br.com.organizerooms.models.Participante;
+import br.com.organizerooms.models.ReservaEquipamento;
 import java.util.List;
 import java.util.Objects;
 
@@ -28,13 +29,16 @@ public class AgendamentoDTO {
     private Pessoa agePesResponsavel;
     private Long agePesCadastro;
     private Long agePesAtualizacao;
-    private List<Equipamento> ageEquipamentos;
+    private List<ReservaEquipamento> ageEquipamentos;
     private List<Participante> ageParticipantes;
 
     public AgendamentoDTO() {
     }
 
-    public AgendamentoDTO(Long ageId, String ageAssunto, String ageDescricao, String ageStatus, Date ageData, Date ageHoraInicio, Date ageHoraFim, Date ageDtCadastro, Date ageDtAtualizacao, Sala ageSala, Pessoa agePesResponsavel, Long agePesCadastro, Long agePesAtualizacao, List<Equipamento> ageEquipamentos, List<Participante> ageParticipantes) {
+    public AgendamentoDTO(Long ageId, String ageAssunto, String ageDescricao, String ageStatus,
+            Date ageData, Date ageHoraInicio, Date ageHoraFim, Date ageDtCadastro, Date ageDtAtualizacao,
+            Sala ageSala, Pessoa agePesResponsavel, Long agePesCadastro, Long agePesAtualizacao,
+            List<ReservaEquipamento> ageEquipamentos, List<Participante> ageParticipantes) {
         this.ageId = ageId;
         this.ageAssunto = ageAssunto;
         this.ageDescricao = ageDescricao;
@@ -174,11 +178,11 @@ public class AgendamentoDTO {
         this.agePesAtualizacao = agePesAtualizacao;
     }
 
-    public List<Equipamento> getAgeEquipamentos() {
+    public List<ReservaEquipamento> getAgeEquipamentos() {
         return ageEquipamentos;
     }
 
-    public void setAgeEquipamentos(List<Equipamento> ageEquipamentos) {
+    public void setAgeEquipamentos(List<ReservaEquipamento> ageEquipamentos) {
         this.ageEquipamentos = ageEquipamentos;
     }
 
