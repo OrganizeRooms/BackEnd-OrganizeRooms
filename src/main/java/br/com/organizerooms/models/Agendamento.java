@@ -95,11 +95,13 @@ public class Agendamento implements Serializable {
     @Column
     private Long agePesAtualizacao;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
-    @JoinTable(name = "reserva_equipamento",
-            joinColumns = @JoinColumn(name = "equId"),
-            inverseJoinColumns = @JoinColumn(name = "ageId"))
-    private List<Equipamento> equipamentos;
+    /*@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
+     @JoinTable(name = "reserva_equipamento",
+     joinColumns = @JoinColumn(name = "equId"),
+     inverseJoinColumns = @JoinColumn(name = "ageId"))
+     private List<Equipamento> equipamentos;*/
+    @OneToMany(mappedBy = "agendamento")
+    private List<ReservaEquipamento> equipamentos;
 
     @OneToMany(mappedBy = "parAgendamento")
     private List<Participante> participantes;
@@ -107,7 +109,10 @@ public class Agendamento implements Serializable {
     public Agendamento() {
     }
 
-    public Agendamento(Long ageId, String ageAssunto, String ageDescricao, String ageStatus, Date ageData, Date ageHoraInicio, Date ageHoraFim, Date ageDtCadastro, Date ageDtAtualizacao, Sala ageSala, Pessoa agePesResponsavel, Long agePesCadastro, Long agePesAtualizacao, List<Equipamento> equipamentos, List<Participante> participantes) {
+    public Agendamento(Long ageId, String ageAssunto, String ageDescricao, String ageStatus,
+            Date ageData, Date ageHoraInicio, Date ageHoraFim, Date ageDtCadastro, Date ageDtAtualizacao,
+            Sala ageSala, Pessoa agePesResponsavel, Long agePesCadastro, Long agePesAtualizacao,
+            List<ReservaEquipamento> equipamentos, List<Participante> participantes) {
         this.ageId = ageId;
         this.ageAssunto = ageAssunto;
         this.ageDescricao = ageDescricao;
@@ -121,6 +126,7 @@ public class Agendamento implements Serializable {
         this.agePesResponsavel = agePesResponsavel;
         this.agePesCadastro = agePesCadastro;
         this.agePesAtualizacao = agePesAtualizacao;
+        //this.equipamentos = equipamentos;
         this.equipamentos = equipamentos;
         this.participantes = participantes;
     }
@@ -139,6 +145,7 @@ public class Agendamento implements Serializable {
         this.agePesResponsavel = obj.getAgePesResponsavel();
         this.agePesCadastro = obj.getAgePesCadastro();
         this.agePesAtualizacao = obj.getAgePesAtualizacao();
+        //this.equipamentos = obj.getAgeEquipamentos();
         this.equipamentos = obj.getAgeEquipamentos();
         this.participantes = obj.getAgeParticipantes();
     }
@@ -231,11 +238,11 @@ public class Agendamento implements Serializable {
         this.agePesResponsavel = agePesResponsavel;
     }
 
-    public List<Equipamento> getEquipamentos() {
+    public List<ReservaEquipamento> getEquipamentos() {
         return equipamentos;
     }
 
-    public void setEquipamentos(List<Equipamento> equipamentos) {
+    public void setEquipamentos(List<ReservaEquipamento> equipamentos) {
         this.equipamentos = equipamentos;
     }
 

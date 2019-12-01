@@ -21,6 +21,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -72,9 +73,13 @@ public class Equipamento implements Serializable {
     @Column
     private Long equPesAtualizacao;
 
+    @OneToMany(mappedBy = "equipamento")
+    private List<ReservaEquipamento> reservaEquipamento;
+    
+    /*Retirada do joinTable
     @JsonIgnore
     @ManyToMany(mappedBy = "equipamentos")
-    private List<Agendamento> agendamentos;
+    private List<Agendamento> agendamentos;*/
 
     public Equipamento() {
     }

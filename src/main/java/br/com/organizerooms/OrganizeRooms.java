@@ -1,6 +1,5 @@
 package br.com.organizerooms;
 
-import br.com.organizerooms.dto.AgendamentoDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -8,9 +7,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import br.com.organizerooms.enums.PerfilEnum;
 import br.com.organizerooms.models.Agendamento;
 import br.com.organizerooms.models.Equipamento;
-import br.com.organizerooms.models.Notificacao;
 import br.com.organizerooms.models.Participante;
 import br.com.organizerooms.models.Pessoa;
+import br.com.organizerooms.models.ReservaEquipamento;
 import br.com.organizerooms.models.Sala;
 import br.com.organizerooms.models.Unidade;
 import br.com.organizerooms.repositorios.AgendamentoRepository;
@@ -18,6 +17,7 @@ import br.com.organizerooms.repositorios.EquipamentoRepository;
 import br.com.organizerooms.repositorios.NotificacaoRepository;
 import br.com.organizerooms.repositorios.ParticipanteRepository;
 import br.com.organizerooms.repositorios.PessoaRepository;
+import br.com.organizerooms.repositorios.ReservaEquipamentoRepository;
 import br.com.organizerooms.repositorios.SalaRepository;
 import br.com.organizerooms.repositorios.UnidadeRepository;
 import java.text.SimpleDateFormat;
@@ -52,7 +52,7 @@ public class OrganizeRooms implements CommandLineRunner {
     ParticipanteRepository participanteRepository;
 
     @Autowired
-    NotificacaoRepository notificacaoRepository;
+    ReservaEquipamentoRepository reservaEquipamentoRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(OrganizeRooms.class, args);
@@ -102,7 +102,7 @@ public class OrganizeRooms implements CommandLineRunner {
                 null,
                 calendar.getTime());
         pessoaRepository.save(pes2);
-        
+
         Pessoa pes3 = new Pessoa(null,
                 "Tablet",
                 "tablet@tablet.com",
@@ -370,9 +370,6 @@ public class OrganizeRooms implements CommandLineRunner {
         Date ageHoraInicio1 = new Date("2019/11/14 14:00:00");
         Date ageHoraFim1 = new Date("2019/11/14 15:00:00");
 
-        List<Equipamento> equips1 = new ArrayList<>();
-        equips1.add(equipamento1);
-        
         Agendamento age = new Agendamento(
                 null,
                 "Reunião do Kanban com Equipe de Desenvolvimento",
@@ -387,13 +384,8 @@ public class OrganizeRooms implements CommandLineRunner {
                 pes,
                 1l,
                 1l,
-                equips1,
+                null,
                 null);
-
-        //Date ageHoraInicio2 = new Date(2019, 10, 10, 15, 00);
-        //Date ageHoraFim2 = new Date(2019, 10, 10, 16, 00);
-        List<Equipamento> equips2 = new ArrayList<>();
-        equips2.add(equipamento2);
 
         Agendamento age2 = new Agendamento(
                 null,
@@ -409,7 +401,7 @@ public class OrganizeRooms implements CommandLineRunner {
                 pes2,
                 1l,
                 1l,
-                equips2,
+                null,
                 null);
         Agendamento ageGravado = agendamentoRepository.save(age);
         Agendamento ageGravado2 = agendamentoRepository.save(age2);
@@ -418,23 +410,28 @@ public class OrganizeRooms implements CommandLineRunner {
         Participante part1Age1 = new Participante(null, 1, null, pes2, ageGravado);
         Participante part2Age1 = new Participante(null, 1, null, pes, ageGravado);
 
-        List<Participante> parts1 = new ArrayList<>();
-        parts1.add(part1Age1);
-        parts1.add(part2Age1);
-
         /// SEGUNDO
         Participante part1Age2 = new Participante(null, 1, null, pes2, ageGravado2);
         Participante part2Age2 = new Participante(null, 1, null, pes, ageGravado2);
- 
-        List<Participante> parts2 = new ArrayList<>();
-        parts2.add(part1Age2);
-        parts2.add(part2Age2);
 
         participanteRepository.save(part1Age1);
         participanteRepository.save(part2Age1);
 
         participanteRepository.save(part1Age2);
         participanteRepository.save(part2Age2);
+
+        // RESERVA EQUIPAMENTO
+        ReservaEquipamento reserv1Age1 = new ReservaEquipamento(null, equipamento1, ageGravado);
+        ReservaEquipamento reserv2Age1 = new ReservaEquipamento(null, equipamento2, ageGravado);
+
+        ReservaEquipamento reserv1Age2 = new ReservaEquipamento(null, equipamento1, ageGravado2);
+        ReservaEquipamento reserv2Age2 = new ReservaEquipamento(null, equipamento2, ageGravado2);
+
+        reservaEquipamentoRepository.save(reserv1Age1);
+        reservaEquipamentoRepository.save(reserv2Age1);
+
+        reservaEquipamentoRepository.save(reserv1Age2);
+        reservaEquipamentoRepository.save(reserv2Age2);
 
         /*Notificacao noti1 = new Notificacao(
          null,
