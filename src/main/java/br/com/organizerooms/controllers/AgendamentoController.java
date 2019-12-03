@@ -1,9 +1,7 @@
 package br.com.organizerooms.controllers;
 
-import br.com.organizerooms.dao.AgendamentoDAO;
 import br.com.organizerooms.dto.AgendamentoDTO;
 import br.com.organizerooms.context.AgendamentoContext;
-import br.com.organizerooms.dto.EquipamentoDTO;
 import br.com.organizerooms.dto.PessoaDTO;
 import br.com.organizerooms.dto.SalaDTO;
 import br.com.organizerooms.models.Response;
@@ -138,7 +136,7 @@ public class AgendamentoController {
     }
 
     @PostMapping("/salas")
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO', 'ROLE_TABLET')")
     public ResponseEntity<Response> buscarAgendamentoPorSalaEData(@RequestBody AgendamentoContext ctx) {
         List<Agendamento> ag = agendamentoService.buscaPorSalaEData(Long.parseLong(ctx.getIdSala()), ctx.getDataAgendamento());
         Response response = new Response(ag);

@@ -114,7 +114,7 @@ public class UnidadeController {
                 return ResponseEntity.ok().body(new Response(deletou));       
             }
             
-            salaService.remover(Long.parseLong(id));
+            unidadeService.remover(Long.parseLong(id));
             deletou = true;
         }
         

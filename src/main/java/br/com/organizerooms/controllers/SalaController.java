@@ -42,7 +42,7 @@ public class SalaController {
     AgendamentoDAO agendamentoDAO;
 
     @GetMapping
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO','ROLE_TABLET')")
     public ResponseEntity<Response> buscarTodasSalas() {
         List<Sala> list = salaService.buscarTodasSalas();
         List<SalaDTO> listDto = list.stream().map(obj -> new SalaDTO(obj)).collect(Collectors.toList());
