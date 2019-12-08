@@ -152,7 +152,7 @@ public class OrganizeRooms implements CommandLineRunner {
                 pes.getPesId());
         Unidade unidade5 = new Unidade(null,
                 "Florianópolis",
-                false,
+                true,
                 calendar.getTime(),
                 pes.getPesId(),
                 calendar.getTime(),
@@ -403,8 +403,85 @@ public class OrganizeRooms implements CommandLineRunner {
                 1l,
                 null,
                 null);
+        
+        // Date ageData2 = new Date("2019/11/15");
+        Date ageHoraInicio2 = new Date("2019/11/14 15:00:00");
+        Date ageHoraFim2 = new Date("2019/11/14 16:00:00");
+
+        Agendamento age3 = new Agendamento(
+                null,
+                "Reunião do Kanban com Equipe de Desenvolvimento",
+                "Reunião do Kanban com Equipe de Desenvolvimento 02",
+                "AGENDADO",
+                ageData,
+                ageHoraInicio2,
+                ageHoraFim2,
+                calendar.getTime(),
+                calendar.getTime(),
+                sala5,
+                pes,
+                1l,
+                1l,
+                null,
+                null);
+
+        Agendamento age4 = new Agendamento(
+                null,
+                "Reunião do Kanban com Equipe de Desenvolvimento 02",
+                "Reunião do Kanban com Equipe de Desenvolvimento 02",
+                "AGENDADO",
+                ageData,
+                ageHoraInicio2,
+                ageHoraFim2,
+                calendar.getTime(),
+                calendar.getTime(),
+                sala4,
+                pes,
+                1l,
+                1l,
+                null,
+                null);
+
+        Agendamento age5 = new Agendamento(
+                null,
+                "Reunião do Kanban com Equipe de Desenvolvimento 02",
+                "Reunião do Kanban com Equipe de Desenvolvimento 02",
+                "AGENDADO",
+                ageData,
+                ageHoraInicio1,
+                ageHoraFim1,
+                calendar.getTime(),
+                calendar.getTime(),
+                sala2,
+                pes,
+                1l,
+                1l,
+                null,
+                null);
+
+        Agendamento age6 = new Agendamento(
+                null,
+                "Desenvolvimento 02",
+                "Desenvolvimento 02",
+                "AGENDADO",
+                ageData,
+                ageHoraInicio1,
+                ageHoraFim1,
+                calendar.getTime(),
+                calendar.getTime(),
+                sala1,
+                pes,
+                1l,
+                1l,
+                null,
+                null);
+
         Agendamento ageGravado = agendamentoRepository.save(age);
         Agendamento ageGravado2 = agendamentoRepository.save(age2);
+        Agendamento ageGravado3 = agendamentoRepository.save(age3);
+        Agendamento ageGravado4 = agendamentoRepository.save(age4);
+        Agendamento ageGravado5 = agendamentoRepository.save(age5);
+        Agendamento ageGravado6 = agendamentoRepository.save(age6);
 
         /// PRIMEIRO
         Participante part1Age1 = new Participante(null, 1, null, pes2, ageGravado);
@@ -413,13 +490,40 @@ public class OrganizeRooms implements CommandLineRunner {
         /// SEGUNDO
         Participante part1Age2 = new Participante(null, 1, null, pes2, ageGravado2);
         Participante part2Age2 = new Participante(null, 1, null, pes, ageGravado2);
+        
+        /// 3
+        Participante part1Age3 = new Participante(null, 1, null, pes2, ageGravado3);
+        Participante part2Age3 = new Participante(null, 1, null, pes, ageGravado3);
+        
+        /// 4
+        Participante part1Age4 = new Participante(null, 1, null, pes2, ageGravado4);
+        Participante part2Age4 = new Participante(null, 1, null, pes, ageGravado4);
+        
+        /// 5
+        Participante part1Age5 = new Participante(null, 1, null, pes2, ageGravado5);
+        Participante part2Age5 = new Participante(null, 1, null, pes, ageGravado5);
+        
+        /// 6
+        Participante part1Age6 = new Participante(null, 1, null, pes2, ageGravado6);
+        Participante part2Age6 = new Participante(null, 1, null, pes, ageGravado6);
 
         participanteRepository.save(part1Age1);
         participanteRepository.save(part2Age1);
 
         participanteRepository.save(part1Age2);
         participanteRepository.save(part2Age2);
+        
+        participanteRepository.save(part1Age3);
+        participanteRepository.save(part2Age3);
+        
+        participanteRepository.save(part1Age4);
+        participanteRepository.save(part2Age4);
+        
+        participanteRepository.save(part1Age5);
+        participanteRepository.save(part2Age5);
 
+        participanteRepository.save(part1Age6);
+        participanteRepository.save(part2Age6);
         // RESERVA EQUIPAMENTO
         ReservaEquipamento reserv1Age1 = new ReservaEquipamento(null, equipamento1, ageGravado);
         ReservaEquipamento reserv2Age1 = new ReservaEquipamento(null, equipamento2, ageGravado);

@@ -10,6 +10,7 @@ import br.com.organizerooms.models.Agendamento;
 import br.com.organizerooms.models.Participante;
 import br.com.organizerooms.models.Pessoa;
 import br.com.organizerooms.models.Response;
+import br.com.organizerooms.models.Unidade;
 import br.com.organizerooms.services.AgendamentoService;
 import br.com.organizerooms.services.ParticipanteService;
 import java.util.List;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.organizerooms.services.PessoaService;
+import br.com.organizerooms.services.UnidadeService;
 import br.com.organizerooms.utils.SenhaUtils;
 import java.util.ArrayList;
 import java.util.Optional;
@@ -42,12 +44,15 @@ public class PessoaController {
 
     @Autowired
     PessoaService pessoaService;
-    
+
     @Autowired
     ParticipanteService participanteService;
-    
+
     @Autowired
     AgendamentoService agendamentoService;
+
+    @Autowired
+    UnidadeService unidadeService;
 
     @Autowired
     SenhaUtils senhaUtils;
@@ -93,27 +98,33 @@ public class PessoaController {
                     inconsistências.add("Erro ao importar registro da linha: " + (i + 2));
 
                 } else {
-                    Optional<Pessoa> optPessoa = pessoaService.buscarPessoaPorEmail(pessoas.get(i).getPesEmail());
-                    Pessoa newPessoa;
-                    if (optPessoa.isPresent()) {
-                        newPessoa = new Pessoa(optPessoa.get());
-                        newPessoa.setPesNome(pessoas.get(i).getPesNome());
-                        if (!pessoas.get(i).getPesDdd().equals("")) {
-                            newPessoa.setPesDdd(pessoas.get(i).getPesDdd());
-                        }
-                        if (!pessoas.get(i).getPesTelefone().equals("")) {
-                            newPessoa.setPesTelefone(pessoas.get(i).getPesTelefone());
-                        }
-                        newPessoa.setPesUnidade(pessoas.get(i).getPesUnidade());
+                    Unidade impUnidade = unidadeService.buscarUnidadePorId(pessoas.get(i).getPesUnidade().getUniId());
+                    if (impUnidade != null) {
+                        Optional<Pessoa> optPessoa = pessoaService.buscarPessoaPorEmail(pessoas.get(i).getPesEmail());
+                        Pessoa newPessoa;
+                        if (optPessoa.isPresent()) {
+                            newPessoa = new Pessoa(optPessoa.get());
+                            newPessoa.setPesNome(pessoas.get(i).getPesNome());
+                            if (!pessoas.get(i).getPesDdd().equals("")) {
+                                newPessoa.setPesDdd(pessoas.get(i).getPesDdd());
+                            }
+                            if (!pessoas.get(i).getPesTelefone().equals("")) {
+                                newPessoa.setPesTelefone(pessoas.get(i).getPesTelefone());
+                            }
 
+                            newPessoa.setPesUnidade(pessoas.get(i).getPesUnidade());
+
+                        } else {
+                            newPessoa = new Pessoa(pessoas.get(i));
+                            newPessoa.setPesSenha("senha");
+                        }
+
+                        PessoaDTO pesDTO = new PessoaDTO(pessoaService.addPessoa(newPessoa));
+                        if (pesDTO.getPesId() == null || pesDTO.getPesId() == 0) {
+                            inconsistências.add("Erro ao importar registro da linha: " + (i + 2) + ", Pessoa: " + pessoas.get(i).getPesNome());
+                        }
                     } else {
-                        newPessoa = new Pessoa(pessoas.get(i));
-                        newPessoa.setPesSenha("senha");
-                    }
-
-                    PessoaDTO pesDTO = new PessoaDTO(pessoaService.addPessoa(newPessoa));
-                    if (pesDTO.getPesId() == null || pesDTO.getPesId() == 0) {
-                        inconsistências.add("Erro ao importar registro da linha: " + (i + 2) + ", Pessoa: " + pessoas.get(i).getPesNome());
+                        inconsistências.add("Erro ao importar registro da linha: " + (i + 2));
                     }
                 }
             }
@@ -139,30 +150,30 @@ public class PessoaController {
         Response response = new Response(resposta);
         return ResponseEntity.ok().body(response);
     }
-    
+
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public ResponseEntity<Response> deletarPessoa(@PathVariable String id) {
         Boolean deletou = false;
         Pessoa pessoa = new Pessoa();
         pessoa.setPesId(Long.parseLong(id));
-        
+
         if (id != null) {
             List<Participante> listaParticipantes = participanteService.buscarPorPessoa(pessoa);
-            
-            if (!listaParticipantes.isEmpty()){
+
+            if (!listaParticipantes.isEmpty()) {
                 return ResponseEntity.ok().body(new Response(deletou));
             }
-            
-            List<Agendamento> listaAgendamentos = agendamentoService.buscaPorPessoa(pessoa);
-            
-            if (listaAgendamentos.isEmpty()){
+
+            List<Agendamento> listaAgendamentos = agendamentoService.buscaPorResponsavel(pessoa);
+
+            if (listaAgendamentos.isEmpty()) {
                 pessoaService.remover(Long.parseLong(id));
-                deletou = !pessoaService.buscarPessoaPorId(Long.parseLong(id)).isPresent();             
+                deletou = !pessoaService.buscarPessoaPorId(Long.parseLong(id)).isPresent();
             }
-        
+
         }
-        
+
         return ResponseEntity.ok().body(new Response(deletou));
     }
 

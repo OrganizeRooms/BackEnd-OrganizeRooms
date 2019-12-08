@@ -89,7 +89,7 @@ public class UnidadeController {
     }
     
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public ResponseEntity<Response> deletar(@PathVariable String id) {
         Boolean deletou = false;
         Unidade unidade = new Unidade();
@@ -114,7 +114,7 @@ public class UnidadeController {
                 return ResponseEntity.ok().body(new Response(deletou));       
             }
             
-            salaService.remover(Long.parseLong(id));
+            unidadeService.remover(Long.parseLong(id));
             deletou = true;
         }
         

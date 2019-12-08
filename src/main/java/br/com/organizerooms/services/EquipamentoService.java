@@ -18,26 +18,30 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 @Service
 public class EquipamentoService {
-    
+
     @Autowired
     EquipamentoRepository repository;
-    
-    public Equipamento persiste (Equipamento equipamento){
+
+    public Equipamento persiste(Equipamento equipamento) {
         return this.repository.save(equipamento);
-    };
-    
-    public Equipamento buscaPorId (Long id){
+    }
+
+    public void remover(Long id) {
+        this.repository.deleteById(id);
+    }
+
+    public Equipamento buscaPorId(Long id) {
         return this.repository.findById(id).get();
-    };
-    
-    public  List<Equipamento> buscaPorSituacao (){
+    }
+
+    public List<Equipamento> buscaPorSituacao() {
         return this.repository.findByEquAtiva(true);
-    };
-    
-    public  List<Equipamento> buscaTodos(){
+    }
+
+    public List<Equipamento> buscaTodos() {
         return this.repository.findAll();
-    };
-    
+    }
+
     public List<Equipamento> buscarPorUnidade(Unidade unidade) {
         return this.repository.findAllByEquUnidade(unidade);
     }

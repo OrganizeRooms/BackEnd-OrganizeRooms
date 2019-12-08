@@ -23,19 +23,6 @@ public class AgendamentoService {
 
     @Autowired
     AgendamentoRepository agendamentoRepository;
-    
-    /*
-    EntityManager em = new EntityManager
-    
-    public void t (){
-        StoredProcedureQuery findByYearProcedure = entityManager.createNamedStoredProcedureQuery("findByYearProcedure");
-         
-        StoredProcedureQuery storedProcedure = 
-          findByYearProcedure.setParameter("p_year", 2015);
-         
-        storedProcedure.getResultList()
-          .forEach(c -> Assert.assertEquals(new Integer(2015), ((Car) c).getYear())); 
-    }*/
 
     public List<Agendamento> buscarTodosAgendamentos() {
         return this.agendamentoRepository.findAllByOrderByAgeDescricao();
@@ -52,22 +39,26 @@ public class AgendamentoService {
     public Agendamento buscarAgendamentoPorId(Long id) {
         return this.agendamentoRepository.findById(id).get();
     }
-    
-    public List<Agendamento> buscaPorPessoa (Pessoa pessoa){
-        return this.agendamentoRepository.findByAgePesResponsavel(pessoa);
-    };
-    
-    public List<Agendamento> buscaPorSala (Sala sala){
-        return this.agendamentoRepository.findByAgeSala(sala);
-    };
-    
-    public List<Agendamento> buscaPorPaticipanteEData (Long id, String data){
-        return this.agendamentoRepository.recuperaAgendamentosParticipante(id, data);
-    };
 
-    public List<Agendamento> buscaPorSalaEData (Long id, String data){
+    public List<Agendamento> buscaPorResponsavel(Pessoa pessoa) {
+        return this.agendamentoRepository.findByAgePesResponsavel(pessoa);
+    }
+
+    public List<Agendamento> buscaPorSala(Sala sala) {
+        return this.agendamentoRepository.findByAgeSala(sala);
+    }
+
+    public List<Agendamento> buscaPorPaticipanteEData(Long id, String data) {
+        return this.agendamentoRepository.recuperaAgendamentosParticipante(id, data);
+    }
+
+    public List<Agendamento> buscaPorSalaEData(Long id, String data) {
         return this.agendamentoRepository.recuperaAgendamentoSala(id, data);
     }
-    
-}
 
+    public List<Agendamento> buscaReservasResponsavel(
+            Long idResponsavel, String dataInicial, String dataFinal, Long idUnidade, String status) {
+        return this.agendamentoRepository.recuperaReservasResponsavel(idResponsavel, dataInicial, dataFinal, idUnidade, status);
+    }
+
+}
