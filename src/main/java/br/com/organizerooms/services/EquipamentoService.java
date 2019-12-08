@@ -41,4 +41,9 @@ public class EquipamentoService {
     public List<Equipamento> buscarPorUnidade(Unidade unidade) {
         return this.repository.findAllByEquUnidade(unidade);
     }
+    
+    public void remover(Long id) {
+        this.repository.deleteById(id);
+    }
+
 }

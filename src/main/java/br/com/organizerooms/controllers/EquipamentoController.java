@@ -4,12 +4,15 @@ import br.com.organizerooms.context.AgendamentoContext;
 import br.com.organizerooms.dao.AgendamentoDAO;
 import br.com.organizerooms.dto.EquipamentoDTO;
 import br.com.organizerooms.models.Equipamento;
+import br.com.organizerooms.models.ReservaEquipamento;
 import br.com.organizerooms.models.Response;
 import br.com.organizerooms.services.EquipamentoService;
+import br.com.organizerooms.services.ReservaEquipamentoService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,6 +33,9 @@ public class EquipamentoController {
     
     @Autowired
     AgendamentoDAO agendamentoDAO;
+    
+    @Autowired
+    ReservaEquipamentoService reservaEquipamentoService;
     
     @PostMapping
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
@@ -71,5 +77,24 @@ public class EquipamentoController {
         List<EquipamentoDTO> equipamentos = agendamentoDAO.recuperaEquipamento(ctx.getIdUnidade(), ctx.getDataInicial(), ctx.getDataFinal());
         Response response = new Response(equipamentos);
         return ResponseEntity.ok().body(response);
+    }
+    
+    @DeleteMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
+    public ResponseEntity<Response> deletarEquipamento(@PathVariable String id) {
+        Boolean deletou = false;
+        Equipamento equipamento = new Equipamento();
+        equipamento.setEquId(Long.parseLong(id));
+        
+        if (id != null) {          
+            List<ReservaEquipamento> listaReservaEquipamentos = reservaEquipamentoService.buscarPorEquipamento(equipamento);
+            
+            if (listaReservaEquipamentos.isEmpty()){
+                equipamentoService.remover(Long.parseLong(id));
+                deletou = true;            
+            }
+        }
+        
+        return ResponseEntity.ok().body(new Response(deletou));
     }
 }
