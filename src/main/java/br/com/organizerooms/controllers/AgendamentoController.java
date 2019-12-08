@@ -2,13 +2,11 @@ package br.com.organizerooms.controllers;
 
 import br.com.organizerooms.dto.AgendamentoDTO;
 import br.com.organizerooms.context.AgendamentoContext;
-import br.com.organizerooms.dto.PessoaDTO;
 import br.com.organizerooms.dto.SalaDTO;
 import br.com.organizerooms.models.Response;
 import br.com.organizerooms.models.Agendamento;
 import br.com.organizerooms.models.Participante;
 import br.com.organizerooms.models.Sala;
-import br.com.organizerooms.models.Pessoa;
 import br.com.organizerooms.models.ReservaEquipamento;
 import br.com.organizerooms.repositorios.ParticipanteRepository;
 import br.com.organizerooms.repositorios.ReservaEquipamentoRepository;
@@ -72,7 +70,7 @@ public class AgendamentoController {
                 cont++;
             }
         }
-        
+
         if (!newAgendamento.getEquipamentos().isEmpty()) {
             List<ReservaEquipamento> reservas = newAgendamento.getEquipamentos();
 
@@ -108,12 +106,22 @@ public class AgendamentoController {
         return ResponseEntity.ok().body(response);
     }
 
-    @GetMapping("/pessoa")
+    @PostMapping("/responsavel")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
-    public ResponseEntity<Response> buscarAgendamentoPorPessoa(@RequestBody PessoaDTO pessoaDTO) {
-        Pessoa pessoa = new Pessoa(pessoaDTO);
-        List<Agendamento> lista = agendamentoService.buscaPorPessoa(pessoa);
-        Response response = new Response(lista);
+    public ResponseEntity<Response> buscarAgendamentoPorResponsavel(@RequestBody AgendamentoContext ctx) {
+        /*
+         idParticipante = idResponsavel
+         lotacao        = Status do agendamento
+         */
+        List<Agendamento> list = agendamentoService.buscaReservasResponsavel(
+                Long.parseLong(ctx.getIdParticipante()),
+                ctx.getDataInicial(),
+                ctx.getDataFinal(),
+                Long.parseLong(ctx.getIdUnidade()),
+                ctx.getLotacao()
+        );
+        List<AgendamentoDTO> listDto = list.stream().map(obj -> new AgendamentoDTO(obj)).collect(Collectors.toList());
+        Response response = new Response(listDto);
         return ResponseEntity.ok().body(response);
     }
 

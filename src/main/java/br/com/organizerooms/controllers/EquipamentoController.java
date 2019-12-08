@@ -4,12 +4,15 @@ import br.com.organizerooms.context.AgendamentoContext;
 import br.com.organizerooms.dao.AgendamentoDAO;
 import br.com.organizerooms.dto.EquipamentoDTO;
 import br.com.organizerooms.models.Equipamento;
+import br.com.organizerooms.models.ReservaEquipamento;
 import br.com.organizerooms.models.Response;
 import br.com.organizerooms.services.EquipamentoService;
+import br.com.organizerooms.services.ReservaEquipamentoService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,10 +30,13 @@ public class EquipamentoController {
 
     @Autowired
     EquipamentoService equipamentoService;
-    
+
+    @Autowired
+    ReservaEquipamentoService reservaEquipamentoService;
+
     @Autowired
     AgendamentoDAO agendamentoDAO;
-    
+
     @PostMapping
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public ResponseEntity<Response> addEquipamento(@RequestBody EquipamentoDTO equipamentoDTO) {
@@ -71,5 +77,24 @@ public class EquipamentoController {
         List<EquipamentoDTO> equipamentos = agendamentoDAO.recuperaEquipamento(ctx.getIdUnidade(), ctx.getDataInicial(), ctx.getDataFinal());
         Response response = new Response(equipamentos);
         return ResponseEntity.ok().body(response);
+    }
+
+    @DeleteMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+    public ResponseEntity<Response> deletar(@PathVariable String id) {
+        Boolean deletou = false;
+        Equipamento equip = new Equipamento();
+        equip.setEquId(Long.parseLong(id));
+
+        if (id != null) {
+            List<ReservaEquipamento> listaReservas = reservaEquipamentoService.buscarPorEquipamento(equip);
+
+            if (listaReservas.isEmpty()) {
+                equipamentoService.remover(Long.parseLong(id));
+                deletou = true;
+            }
+        }
+
+        return ResponseEntity.ok().body(new Response(deletou));
     }
 }

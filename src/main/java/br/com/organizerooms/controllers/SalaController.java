@@ -77,7 +77,7 @@ public class SalaController {
     }
     
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public ResponseEntity<Response> deletar(@PathVariable String id) {
         Boolean deletou = false;
         Sala sala = new Sala();

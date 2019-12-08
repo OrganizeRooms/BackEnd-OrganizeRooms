@@ -35,7 +35,7 @@ public class NotificacaoController {
     EnviaEmail enviaEmail;
 
     @PostMapping
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
     public ResponseEntity<Response> alterarNotificacao(@RequestBody NotificacaoDTO notificacao) {
         Notificacao nnotificacao = new Notificacao(notificacao);
         NotificacaoDTO notificacaoDTO = new NotificacaoDTO(notificacaoService.persiste(nnotificacao));
