@@ -71,7 +71,7 @@ public class OrganizeRooms implements CommandLineRunner {
         unidadeRepository.save(unidade1);
 
         Pessoa pes = new Pessoa(null,
-                "ADIM",
+                "ADMIN",
                 "admin@admin.com",
                 "123",
                 PerfilEnum.ROLE_ADMIN,
