@@ -69,7 +69,7 @@ public class ReservaEquipamentoController {
     }
 
     @PostMapping("/listaReservas")
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
     public ResponseEntity<Response> adicionarListaReservas(@RequestBody ArrayList<ReservaEquipamentoDTO> reservas) {
 
         Boolean retorno = false;
