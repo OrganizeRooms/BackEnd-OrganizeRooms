@@ -72,7 +72,7 @@ public class ParticipanteController {
     }
 
     @PostMapping("/listaParticipantes")
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
     public ResponseEntity<Response> adicionarListaParticipantes(@RequestBody ArrayList<ParticipanteDTO> participantes) {
 
         Boolean retorno = false;
@@ -94,7 +94,7 @@ public class ParticipanteController {
     }
 
     @PostMapping("/alterar")
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
     public ResponseEntity<Response> alterarParticipante(@RequestBody ParticipanteDTO participanteDTO) {
 
         Participante partAlterado = new Participante();

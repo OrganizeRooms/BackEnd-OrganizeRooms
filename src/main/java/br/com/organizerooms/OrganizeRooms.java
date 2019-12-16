@@ -14,17 +14,14 @@ import br.com.organizerooms.models.Sala;
 import br.com.organizerooms.models.Unidade;
 import br.com.organizerooms.repositorios.AgendamentoRepository;
 import br.com.organizerooms.repositorios.EquipamentoRepository;
-import br.com.organizerooms.repositorios.NotificacaoRepository;
 import br.com.organizerooms.repositorios.ParticipanteRepository;
 import br.com.organizerooms.repositorios.PessoaRepository;
 import br.com.organizerooms.repositorios.ReservaEquipamentoRepository;
 import br.com.organizerooms.repositorios.SalaRepository;
 import br.com.organizerooms.repositorios.UnidadeRepository;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 import java.util.Optional;
 import java.util.TimeZone;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
@@ -65,7 +62,7 @@ public class OrganizeRooms implements CommandLineRunner {
         Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("America/Sao_Paulo"));
 
         Unidade unidade1 = new Unidade(null,
-                "São Paulo",
+                "Blumenau",
                 true,
                 calendar.getTime(),
                 null,
@@ -79,8 +76,8 @@ public class OrganizeRooms implements CommandLineRunner {
                 "123",
                 PerfilEnum.ROLE_ADMIN,
                 unidade1,
-                "47",
-                "992821333",
+                "",
+                "",
                 "SIS",
                 null,
                 calendar.getTime(),
@@ -89,8 +86,83 @@ public class OrganizeRooms implements CommandLineRunner {
         pessoaRepository.save(pes);
 
         Pessoa pes2 = new Pessoa(null,
-                "Lucas Jansen",
-                "lucasrainoldojansen@gmail.com",
+                "Tablet",
+                "tablet@tablet.com",
+                "123",
+                PerfilEnum.ROLE_TABLET,
+                unidade1,
+                "",
+                "",
+                "SIS",
+                null,
+                calendar.getTime(),
+                null,
+                calendar.getTime());
+        pessoaRepository.save(pes2);
+
+        Pessoa pes3 = new Pessoa(null,
+                "Usuario",
+                "usuario@usuario@.com",
+                "123",
+                PerfilEnum.ROLE_USUARIO,
+                unidade1,
+                "",
+                "",
+                "SIS",
+                null,
+                calendar.getTime(),
+                null,
+                calendar.getTime());
+        pessoaRepository.save(pes3);
+
+        Pessoa pes4 = new Pessoa(null,
+                "Boris Moser",
+                "boris.moser@edu.sc.senai.br",
+                "123",
+                PerfilEnum.ROLE_ADMIN,
+                unidade1,
+                "",
+                "",
+                "SIS",
+                null,
+                calendar.getTime(),
+                null,
+                calendar.getTime());
+        pessoaRepository.save(pes4);
+
+        Pessoa pes5 = new Pessoa(null,
+                "Matheus L. Krueger",
+                "matheus.krueger@sc.senai.br",
+                "123",
+                PerfilEnum.ROLE_ADMIN,
+                unidade1,
+                "",
+                "",
+                "SIS",
+                null,
+                calendar.getTime(),
+                null,
+                calendar.getTime());
+        pessoaRepository.save(pes5);
+
+        Pessoa pes6 = new Pessoa(null,
+                "Airan Arine Possamai",
+                "airan.possamai@edu.sc.senai.br",
+                "123",
+                PerfilEnum.ROLE_ADMIN,
+                unidade1,
+                "",
+                "",
+                "SIS",
+                null,
+                calendar.getTime(),
+                null,
+                calendar.getTime());
+        pessoaRepository.save(pes6);
+
+        Pessoa pes7 = new Pessoa(null,
+                "Lucas R Jansen",
+                "lucas@gmail.com",
                 "123",
                 PerfilEnum.ROLE_USUARIO,
                 unidade1,
@@ -101,22 +173,52 @@ public class OrganizeRooms implements CommandLineRunner {
                 calendar.getTime(),
                 null,
                 calendar.getTime());
-        pessoaRepository.save(pes2);
+        pessoaRepository.save(pes7);
 
-        Pessoa pes3 = new Pessoa(null,
-                "Tablet",
-                "tablet@tablet.com",
+        Pessoa pes8 = new Pessoa(null,
+                "Éder Jean Dias",
+                "eder@gmail.com",
                 "123",
-                PerfilEnum.ROLE_TABLET,
+                PerfilEnum.ROLE_USUARIO,
                 unidade1,
-                "47",
-                "992821333",
+                "",
+                "",
                 "SIS",
                 null,
                 calendar.getTime(),
                 null,
                 calendar.getTime());
-        pessoaRepository.save(pes3);
+        pessoaRepository.save(pes8);
+
+        Pessoa pes9 = new Pessoa(null,
+                "Felipe Haag de Lima",
+                "felipe@gmail.com",
+                "123",
+                PerfilEnum.ROLE_USUARIO,
+                unidade1,
+                "",
+                "",
+                "SIS",
+                null,
+                calendar.getTime(),
+                null,
+                calendar.getTime());
+        pessoaRepository.save(pes9);
+
+        Pessoa pes10 = new Pessoa(null,
+                "Patrício Henrique Lehn",
+                "patricio@gmail.com",
+                "123",
+                PerfilEnum.ROLE_USUARIO,
+                unidade1,
+                "",
+                "",
+                "SIS",
+                null,
+                calendar.getTime(),
+                null,
+                calendar.getTime());
+        pessoaRepository.save(pes10);
 
         Optional<Unidade> optUni = unidadeRepository.findById(1L);
         Unidade uni = optUni.get();
@@ -129,85 +231,11 @@ public class OrganizeRooms implements CommandLineRunner {
                 pes.getPesId());
         unidadeRepository.save(unidade1);
 
-        Unidade unidade2 = new Unidade(null,
-                "Rio de Janeiro",
-                true,
-                calendar.getTime(),
-                pes.getPesId(),
-                calendar.getTime(),
-                pes.getPesId());
-        Unidade unidade3 = new Unidade(null,
-                "Blumenau",
-                true,
-                calendar.getTime(),
-                pes.getPesId(),
-                calendar.getTime(),
-                pes.getPesId());
-        Unidade unidade4 = new Unidade(null,
-                "Apiuna",
-                true,
-                calendar.getTime(),
-                pes.getPesId(),
-                calendar.getTime(),
-                pes.getPesId());
-        Unidade unidade5 = new Unidade(null,
-                "Florianópolis",
-                true,
-                calendar.getTime(),
-                pes.getPesId(),
-                calendar.getTime(),
-                pes.getPesId());
-        Unidade unidade6 = new Unidade(null,
-                "Bahia",
-                true,
-                calendar.getTime(),
-                pes.getPesId(),
-                calendar.getTime(),
-                pes.getPesId());
-        Unidade unidade7 = new Unidade(null,
-                "Lontras",
-                false,
-                calendar.getTime(),
-                pes.getPesId(),
-                calendar.getTime(),
-                pes.getPesId());
-        Unidade unidade8 = new Unidade(null,
-                "Pomerode",
-                true,
-                calendar.getTime(),
-                pes.getPesId(),
-                calendar.getTime(),
-                pes.getPesId());
-        Unidade unidade9 = new Unidade(null,
-                "Belo Horizonte",
-                false,
-                calendar.getTime(),
-                pes.getPesId(),
-                calendar.getTime(),
-                pes.getPesId());
-        Unidade unidade10 = new Unidade(null,
-                "Acre",
-                true,
-                calendar.getTime(),
-                pes.getPesId(),
-                calendar.getTime(),
-                pes.getPesId());
-
-        unidadeRepository.save(unidade2);
-        unidadeRepository.save(unidade3);
-        unidadeRepository.save(unidade4);
-        unidadeRepository.save(unidade5);
-        unidadeRepository.save(unidade6);
-        unidadeRepository.save(unidade7);
-        unidadeRepository.save(unidade8);
-        unidadeRepository.save(unidade9);
-        unidadeRepository.save(unidade10);
-
         Equipamento equipamento1 = new Equipamento(
                 null,
                 "Notebook Acer",
-                "Notebook Acer Core i3 8 geração",
-                unidade4,
+                "Notebook Acer Core i3",
+                unidade1,
                 true,
                 pes.getPesId(),
                 calendar.getTime(),
@@ -217,8 +245,8 @@ public class OrganizeRooms implements CommandLineRunner {
         Equipamento equipamento2 = new Equipamento(
                 null,
                 "Notebook Dell",
-                "Notebook Dell Core i5 8 geração",
-                unidade2,
+                "Notebook Dell Core i5",
+                unidade1,
                 true,
                 pes.getPesId(),
                 calendar.getTime(),
@@ -227,9 +255,9 @@ public class OrganizeRooms implements CommandLineRunner {
 
         Equipamento equipamento3 = new Equipamento(
                 null,
-                "Notebook Positivo",
-                "Notebook Positivo Pentium",
-                unidade3,
+                "Projetor",
+                "Projetor",
+                unidade1,
                 false,
                 pes.getPesId(),
                 calendar.getTime(),
@@ -239,8 +267,8 @@ public class OrganizeRooms implements CommandLineRunner {
         Equipamento equipamento4 = new Equipamento(
                 null,
                 "Notebook Phillips",
-                "Notebook Phillips Core i10 12 geração",
-                unidade4,
+                "Notebook Phillips Core i9",
+                unidade1,
                 true,
                 pes.getPesId(),
                 calendar.getTime(),
@@ -254,215 +282,62 @@ public class OrganizeRooms implements CommandLineRunner {
 
         Sala sala1 = new Sala(
                 null,
-                "Sala Comercial 02",
+                "Setor Comercial Sala 2",
                 10,
                 true,
                 pes.getPesId(),
                 calendar.getTime(),
                 calendar.getTime(),
                 pes.getPesId(),
-                unidade4);
+                unidade1);
 
         Sala sala2 = new Sala(
                 null,
-                "Sala Comercial 01",
+                "Setor Comercial Sala 1",
                 8,
                 false,
                 pes.getPesId(),
                 calendar.getTime(),
                 calendar.getTime(),
                 pes.getPesId(),
-                unidade4);
+                unidade1);
         Sala sala3 = new Sala(
                 null,
-                "Sala de Guerra",
+                "Sala para Reuniões 1",
                 22,
                 true,
                 pes.getPesId(),
                 calendar.getTime(),
                 calendar.getTime(),
                 pes.getPesId(),
-                unidade4);
+                unidade1);
         Sala sala4 = new Sala(
                 null,
-                "Sala de Reuniões Kanban 03",
+                "Sala para Reuniões 2",
                 10,
-                false,
-                pes.getPesId(),
-                calendar.getTime(),
-                calendar.getTime(),
-                pes.getPesId(),
-                unidade4);
-        Sala sala5 = new Sala(
-                null,
-                "Sala de Reuniões Kanban 06",
-                12,
-                false,
-                pes.getPesId(),
-                calendar.getTime(),
-                calendar.getTime(),
-                pes.getPesId(),
-                unidade4);
-        Sala sala6 = new Sala(
-                null,
-                "Sala de Reuniões Kanban 01",
-                12,
                 true,
                 pes.getPesId(),
                 calendar.getTime(),
                 calendar.getTime(),
                 pes.getPesId(),
-                unidade4);
-        Sala sala7 = new Sala(
-                null,
-                "Sala Reunião Stakeholders",
-                5,
-                true,
-                pes.getPesId(),
-                calendar.getTime(),
-                calendar.getTime(),
-                pes.getPesId(),
-                unidade4);
-        Sala sala8 = new Sala(
-                null,
-                "Sala Livre 02",
-                4,
-                true,
-                pes.getPesId(),
-                calendar.getTime(),
-                calendar.getTime(),
-                pes.getPesId(),
-                unidade4);
-        Sala sala9 = new Sala(
-                null,
-                "Sala Livre 01",
-                4,
-                true,
-                pes.getPesId(),
-                calendar.getTime(),
-                calendar.getTime(),
-                pes.getPesId(),
-                unidade5);
-        Sala sala10 = new Sala(
-                null,
-                "Sala Livre 03",
-                4,
-                false,
-                pes.getPesId(),
-                calendar.getTime(),
-                calendar.getTime(),
-                pes.getPesId(),
-                unidade2);
+                unidade1);
 
         salaRepository.save(sala1);
         salaRepository.save(sala2);
         salaRepository.save(sala3);
         salaRepository.save(sala4);
-        salaRepository.save(sala5);
-        salaRepository.save(sala6);
-        salaRepository.save(sala7);
-        salaRepository.save(sala8);
-        salaRepository.save(sala9);
-        salaRepository.save(sala10);
 
-        Date ageData = new Date("2019/11/14");
-
-        Date ageHoraInicio1 = new Date("2019/11/14 14:00:00");
-        Date ageHoraFim1 = new Date("2019/11/14 15:00:00");
+        Date ageData = new Date("2019/12/17");
+        
+        
+        // COLOCAR UMA HORA A MAIS PARA NAO DAR DIFERENca NO FRONT
+        Date ageHoraInicio1 = new Date("2019/12/17 08:00:00");
+        Date ageHoraFim1 = new Date("2019/12/17 09:00:00");
 
         Agendamento age = new Agendamento(
                 null,
-                "Reunião do Kanban com Equipe de Desenvolvimento",
-                "Reunião do Kanban com Equipe de Desenvolvimento",
-                "AGENDADO",
-                ageData,
-                ageHoraInicio1,
-                ageHoraFim1,
-                calendar.getTime(),
-                calendar.getTime(),
-                sala6,
-                pes,
-                1l,
-                1l,
-                null,
-                null);
-
-        Agendamento age2 = new Agendamento(
-                null,
-                "Reunião do Kanban com Equipe de Desenvolvimento 02",
-                "Reunião do Kanban com Equipe de Desenvolvimento 02",
-                "AGENDADO",
-                ageData,
-                ageHoraInicio1,
-                ageHoraFim1,
-                calendar.getTime(),
-                calendar.getTime(),
-                sala7,
-                pes2,
-                1l,
-                1l,
-                null,
-                null);
-        
-        // Date ageData2 = new Date("2019/11/15");
-        Date ageHoraInicio2 = new Date("2019/11/14 15:00:00");
-        Date ageHoraFim2 = new Date("2019/11/14 16:00:00");
-
-        Agendamento age3 = new Agendamento(
-                null,
-                "Reunião do Kanban com Equipe de Desenvolvimento",
-                "Reunião do Kanban com Equipe de Desenvolvimento 02",
-                "AGENDADO",
-                ageData,
-                ageHoraInicio2,
-                ageHoraFim2,
-                calendar.getTime(),
-                calendar.getTime(),
-                sala5,
-                pes,
-                1l,
-                1l,
-                null,
-                null);
-
-        Agendamento age4 = new Agendamento(
-                null,
-                "Reunião do Kanban com Equipe de Desenvolvimento 02",
-                "Reunião do Kanban com Equipe de Desenvolvimento 02",
-                "AGENDADO",
-                ageData,
-                ageHoraInicio2,
-                ageHoraFim2,
-                calendar.getTime(),
-                calendar.getTime(),
-                sala4,
-                pes,
-                1l,
-                1l,
-                null,
-                null);
-
-        Agendamento age5 = new Agendamento(
-                null,
-                "Reunião do Kanban com Equipe de Desenvolvimento 02",
-                "Reunião do Kanban com Equipe de Desenvolvimento 02",
-                "AGENDADO",
-                ageData,
-                ageHoraInicio1,
-                ageHoraFim1,
-                calendar.getTime(),
-                calendar.getTime(),
-                sala2,
-                pes,
-                1l,
-                1l,
-                null,
-                null);
-
-        Agendamento age6 = new Agendamento(
-                null,
-                "Desenvolvimento 02",
-                "Desenvolvimento 02",
+                "Retirar Dúvidas",
+                "Retirar Dúvidas com Cliente referente as novas Solicitações dos Clientes",
                 "AGENDADO",
                 ageData,
                 ageHoraInicio1,
@@ -470,7 +345,65 @@ public class OrganizeRooms implements CommandLineRunner {
                 calendar.getTime(),
                 calendar.getTime(),
                 sala1,
-                pes,
+                pes7,
+                1l,
+                1l,
+                null,
+                null);
+
+        Date ageHoraInicio2 = new Date("2019/12/17 08:00:00");
+        Date ageHoraFim2 = new Date("2019/12/17 10:30:00");
+        Agendamento age2 = new Agendamento(
+                null,
+                "Planejamento do Novo projeto",
+                "Encontro com responsáveis para Planejamento do Novo projeto",
+                "AGENDADO",
+                ageData,
+                ageHoraInicio2,
+                ageHoraFim2, 
+                calendar.getTime(),
+                calendar.getTime(),
+                sala1,
+                pes9,
+                1l,
+                1l,
+                null,
+                null);
+
+        Date ageHoraInicio3 = new Date("2019/12/17 11:00:00");
+        Date ageHoraFim3 = new Date("2019/12/17 11:30:00");
+        Agendamento age3 = new Agendamento(
+                null,
+                "Repassar Demandas para Equipe",
+                "Repassar novos Testes e tempo de entrega de cada um para a Equipe",
+                "AGENDADO",
+                ageData,
+                ageHoraInicio3,
+                ageHoraFim3,
+                calendar.getTime(),
+                calendar.getTime(),
+                sala3,
+                pes10,
+                1l,
+                1l,
+                null,
+                null);
+
+        Date ageHoraInicio4 = new Date("2019/12/17 16:00:00");
+        Date ageHoraFim4 = new Date("2019/12/17 17:30:00");
+
+        Agendamento age4 = new Agendamento(
+                null,
+                "Planejar Kanban",
+                "Planejamento do Kanban da Sprint com Equipe de Desenvolvimento",
+                "AGENDADO",
+                ageData,
+                ageHoraInicio4,
+                ageHoraFim4,
+                calendar.getTime(),
+                calendar.getTime(),
+                sala4,
+                pes8,
                 1l,
                 1l,
                 null,
@@ -480,122 +413,61 @@ public class OrganizeRooms implements CommandLineRunner {
         Agendamento ageGravado2 = agendamentoRepository.save(age2);
         Agendamento ageGravado3 = agendamentoRepository.save(age3);
         Agendamento ageGravado4 = agendamentoRepository.save(age4);
-        Agendamento ageGravado5 = agendamentoRepository.save(age5);
-        Agendamento ageGravado6 = agendamentoRepository.save(age6);
 
         /// PRIMEIRO
-        Participante part1Age1 = new Participante(null, 1, null, pes2, ageGravado);
-        Participante part2Age1 = new Participante(null, 1, null, pes, ageGravado);
+        Participante part1Age1 = new Participante(null, 1, null, pes7, ageGravado);
+        Participante part2Age1 = new Participante(null, 1, null, pes8, ageGravado);
+        Participante part3Age1 = new Participante(null, 1, null, pes9, ageGravado);
+        Participante part4Age1 = new Participante(null, 1, null, pes10, ageGravado);
 
         /// SEGUNDO
-        Participante part1Age2 = new Participante(null, 1, null, pes2, ageGravado2);
-        Participante part2Age2 = new Participante(null, 1, null, pes, ageGravado2);
-        
+        Participante part1Age2 = new Participante(null, 1, null, pes7, ageGravado2);
+        Participante part2Age2 = new Participante(null, 1, null, pes8, ageGravado2);
+        Participante part3Age2 = new Participante(null, 1, null, pes9, ageGravado2);
+        Participante part4Age2 = new Participante(null, 1, null, pes10, ageGravado2);
+
         /// 3
-        Participante part1Age3 = new Participante(null, 1, null, pes2, ageGravado3);
-        Participante part2Age3 = new Participante(null, 1, null, pes, ageGravado3);
-        
+        Participante part1Age3 = new Participante(null, 1, null, pes7, ageGravado3);
+        Participante part2Age3 = new Participante(null, 1, null, pes8, ageGravado3);
+        Participante part3Age3 = new Participante(null, 1, null, pes9, ageGravado3);
+        Participante part4Age3 = new Participante(null, 1, null, pes10, ageGravado3);
+
         /// 4
-        Participante part1Age4 = new Participante(null, 1, null, pes2, ageGravado4);
-        Participante part2Age4 = new Participante(null, 1, null, pes, ageGravado4);
-        
-        /// 5
-        Participante part1Age5 = new Participante(null, 1, null, pes2, ageGravado5);
-        Participante part2Age5 = new Participante(null, 1, null, pes, ageGravado5);
-        
-        /// 6
-        Participante part1Age6 = new Participante(null, 1, null, pes2, ageGravado6);
-        Participante part2Age6 = new Participante(null, 1, null, pes, ageGravado6);
+        Participante part1Age4 = new Participante(null, 1, null, pes7, ageGravado4);
+        Participante part2Age4 = new Participante(null, 1, null, pes8, ageGravado4);
+        Participante part3Age4 = new Participante(null, 1, null, pes9, ageGravado4);
+        Participante part4Age4 = new Participante(null, 1, null, pes10, ageGravado4);
 
         participanteRepository.save(part1Age1);
         participanteRepository.save(part2Age1);
+        participanteRepository.save(part3Age1);
+        participanteRepository.save(part4Age1);
 
         participanteRepository.save(part1Age2);
         participanteRepository.save(part2Age2);
-        
+        participanteRepository.save(part3Age2);
+        participanteRepository.save(part4Age2);
+
         participanteRepository.save(part1Age3);
         participanteRepository.save(part2Age3);
-        
+        participanteRepository.save(part3Age3);
+        participanteRepository.save(part4Age3);
+
         participanteRepository.save(part1Age4);
         participanteRepository.save(part2Age4);
-        
-        participanteRepository.save(part1Age5);
-        participanteRepository.save(part2Age5);
+        participanteRepository.save(part3Age4);
+        participanteRepository.save(part4Age4);
 
-        participanteRepository.save(part1Age6);
-        participanteRepository.save(part2Age6);
         // RESERVA EQUIPAMENTO
         ReservaEquipamento reserv1Age1 = new ReservaEquipamento(null, equipamento1, ageGravado);
-        ReservaEquipamento reserv2Age1 = new ReservaEquipamento(null, equipamento2, ageGravado);
 
-        ReservaEquipamento reserv1Age2 = new ReservaEquipamento(null, equipamento1, ageGravado2);
         ReservaEquipamento reserv2Age2 = new ReservaEquipamento(null, equipamento2, ageGravado2);
+        
+        ReservaEquipamento reserv2Age4 = new ReservaEquipamento(null, equipamento2, ageGravado4);
 
         reservaEquipamentoRepository.save(reserv1Age1);
-        reservaEquipamentoRepository.save(reserv2Age1);
-
-        reservaEquipamentoRepository.save(reserv1Age2);
         reservaEquipamentoRepository.save(reserv2Age2);
+        reservaEquipamentoRepository.save(reserv2Age4);
 
-        /*Notificacao noti1 = new Notificacao(
-         null,
-         "Você possui um novo Agendamento Marcado",
-         true,
-         calendar.getTime(),
-         calendar.getTime(),
-         1l,
-         1l,
-         true,
-         pes);
-
-         Notificacao noti2 = new Notificacao(
-         null,
-         "Você possui um novo Agendamento Marcado 02",
-         true,
-         calendar.getTime(),
-         calendar.getTime(),
-         1l,
-         1l,
-         true,
-         pes);
-
-         Notificacao noti3 = new Notificacao(
-         null,
-         "Você possui um novo Agendamento Marcado 03",
-         true,
-         calendar.getTime(),
-         calendar.getTime(),
-         1l,
-         1l,
-         true,
-         pes);
-
-         Notificacao noti4 = new Notificacao(
-         null,
-         "Você possui um novo Agendamento Marcado 04",
-         true,
-         calendar.getTime(),
-         calendar.getTime(),
-         1l,
-         1l,
-         true,
-         pes);
-
-         Notificacao noti5 = new Notificacao(
-         null,
-         "Você possui um novo Agendamento Marcado 04",
-         true,
-         calendar.getTime(),
-         calendar.getTime(),
-         1l,
-         1l,
-         true,
-         pes);
-
-         notificacaoRepository.save(noti1);
-         notificacaoRepository.save(noti2);
-         notificacaoRepository.save(noti3);
-         notificacaoRepository.save(noti4);
-         notificacaoRepository.save(noti5);*/
     }
 }
