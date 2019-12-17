@@ -100,6 +100,7 @@ public class AgendamentoDAO {
             
             // Servidor
             //return DriverManager.getConnection("jdbc:mysql://us-cdbr-iron-east-05.cleardb.net/heroku_f0529be4b8bcd9f?reconnect=true", "b79d80426e3788", "95369cb2");
+            //return DriverManager.getConnection("jdbc:mysql://organizerooms.mysql.uhserver.com/organizerooms", "organizerooms", "P@ssw0rd");
         } catch (SQLException ex) {
             Logger.getLogger(AgendamentoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }

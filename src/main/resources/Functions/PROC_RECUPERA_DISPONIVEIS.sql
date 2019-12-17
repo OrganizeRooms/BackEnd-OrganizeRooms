@@ -1,33 +1,14 @@
-// abaixo
-CREATE DEFINER=`root`@`localhost` PROCEDURE `PROC_RECUPERA_DISPONIVEIS`(idUnidade INT, lotacao INT, dataInicial DATETIME, dataFinal DATETIME, dataAgendamento DATE)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `organizerooms`.`PROC_RECUPERA_DISPONIVEIS`(idUnidade INT, lotacao INT, dataInicial DATETIME, dataFinal DATETIME, dataAgendamento DATE)
 BEGIN
-	 SELECT SALA_ID, SALA_NOME, SALA_LOTACAO FROM  sala s
-	LEFT join agendamento a  ON age_sala = sala_id
-	WHERE (s.uni_id = idUnidade
-	AND s.sala_lotacao >= lotacao
-	AND (a.age_status in ('CANCELADO','CONCLUIDO')
-	OR a.age_status IS NULL)
-	AND sala_ativa = 1)
-    or (a.age_data is not null and a.age_data <> dataAgendamento) AND s.sala_lotacao >= lotacao AND s.uni_id = idUnidade
-    GROUP BY SALA_ID, SALA_NOME, SALA_LOTACAO
-	UNION 
-	SELECT SALA_ID, SALA_NOME, SALA_LOTACAO FROM  sala s WHERE SALA_ID IN (
-	SELECT 
-	case 
-	when 
-		case
-			when min(a.age_hora_inicio) > dataInicial then
-		min(a.age_hora_inicio) >= dataInicial
-	  AND min(a.age_hora_inicio) >= dataFinal
-  		else
-  		max(a.age_hora_fim) <= dataInicial
-	  AND max(a.age_hora_fim) < dataFinal
-  		end
-	  then s.sala_id ELSE NULL END  from sala s
-	inner join agendamento a  ON age_sala = sala_id
-	WHERE s.uni_id = idUnidade
-	AND s.sala_lotacao >= lotacao 
-	AND a.age_data = dataAgendamento 
-	GROUP BY sala_id);
+	 select SALA_ID, SALA_NOME, SALA_LOTACAO from sala s where s.sala_id not in (
+select s.sala_id from agendamento a
+inner join sala s on a.age_sala = s.sala_id
+where s.uni_id = idUnidade
+and s.sala_ativa = 1
+and a.age_hora_inicio >= dataInicial
+and a.age_hora_inicio <= dataFinal)
+and s.uni_id = idUnidade
+and s.sala_ativa = 1
+and s.sala_lotacao >= lotacao;
 
  END
