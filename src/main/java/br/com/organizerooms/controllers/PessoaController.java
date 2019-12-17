@@ -25,6 +25,7 @@ import br.com.organizerooms.services.PessoaService;
 import br.com.organizerooms.services.UnidadeService;
 import br.com.organizerooms.utils.SenhaUtils;
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -98,32 +99,37 @@ public class PessoaController {
                     inconsistências.add("Erro ao importar registro da linha: " + (i + 2));
 
                 } else {
-                    Unidade impUnidade = unidadeService.buscarUnidadePorId(pessoas.get(i).getPesUnidade().getUniId());
-                    if (impUnidade != null) {
-                        Optional<Pessoa> optPessoa = pessoaService.buscarPessoaPorEmail(pessoas.get(i).getPesEmail());
-                        Pessoa newPessoa;
-                        if (optPessoa.isPresent()) {
-                            newPessoa = new Pessoa(optPessoa.get());
-                            newPessoa.setPesNome(pessoas.get(i).getPesNome());
-                            if (!pessoas.get(i).getPesDdd().equals("")) {
-                                newPessoa.setPesDdd(pessoas.get(i).getPesDdd());
-                            }
-                            if (!pessoas.get(i).getPesTelefone().equals("")) {
-                                newPessoa.setPesTelefone(pessoas.get(i).getPesTelefone());
+                    Unidade impUnidade = new Unidade();
+                    try {
+                        impUnidade = unidadeService.buscarUnidadePorId(pessoas.get(i).getPesUnidade().getUniId());
+                        if (impUnidade != null) {
+                            Optional<Pessoa> optPessoa = pessoaService.buscarPessoaPorEmail(pessoas.get(i).getPesEmail());
+                            Pessoa newPessoa;
+                            if (optPessoa.isPresent()) {
+                                newPessoa = new Pessoa(optPessoa.get());
+                                newPessoa.setPesNome(pessoas.get(i).getPesNome());
+                                if (!pessoas.get(i).getPesDdd().equals("")) {
+                                    newPessoa.setPesDdd(pessoas.get(i).getPesDdd());
+                                }
+                                if (!pessoas.get(i).getPesTelefone().equals("")) {
+                                    newPessoa.setPesTelefone(pessoas.get(i).getPesTelefone());
+                                }
+
+                                newPessoa.setPesUnidade(pessoas.get(i).getPesUnidade());
+
+                            } else {
+                                newPessoa = new Pessoa(pessoas.get(i));
+                                newPessoa.setPesSenha("senha");
                             }
 
-                            newPessoa.setPesUnidade(pessoas.get(i).getPesUnidade());
-
+                            PessoaDTO pesDTO = new PessoaDTO(pessoaService.addPessoa(newPessoa));
+                            if (pesDTO.getPesId() == null || pesDTO.getPesId() == 0) {
+                                inconsistências.add("Erro ao importar registro da linha: " + (i + 2) + ", Pessoa: " + pessoas.get(i).getPesNome());
+                            }
                         } else {
-                            newPessoa = new Pessoa(pessoas.get(i));
-                            newPessoa.setPesSenha("senha");
+                            inconsistências.add("Erro ao importar registro da linha: " + (i + 2));
                         }
-
-                        PessoaDTO pesDTO = new PessoaDTO(pessoaService.addPessoa(newPessoa));
-                        if (pesDTO.getPesId() == null || pesDTO.getPesId() == 0) {
-                            inconsistências.add("Erro ao importar registro da linha: " + (i + 2) + ", Pessoa: " + pessoas.get(i).getPesNome());
-                        }
-                    } else {
+                    } catch (NoSuchElementException e) {
                         inconsistências.add("Erro ao importar registro da linha: " + (i + 2));
                     }
                 }

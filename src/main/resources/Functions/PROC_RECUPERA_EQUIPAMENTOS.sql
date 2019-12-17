@@ -1,20 +1,17 @@
-CREATE PROCEDURE `PROC_RECUPERA_EQUIPAMENTOS` (idUnidade INT, dataInicial DATETIME, dataFinal DATETIME)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `organizerooms`.`PROC_RECUPERA_EQUIPAMENTOS`(idUnidade INT, dataInicial DATETIME, dataFinal DATETIME)
 BEGIN
-select eq.equ_id, eq.equ_nome, eq.equ_descricao from equipamento eq
-left join reserva_equipamento rs on rs.equ_id = eq.equ_id
-left join agendamento ag on ag.age_id = rs.age_id
-where eq.equ_ativa = 1 and eq.uni_id = idUnidade
-and 
-
-((
-case
-	when ag.age_hora_inicio > dataInicial then
-	ag.age_hora_inicio >= dataInicial
-	AND ag.age_hora_inicio >= dataFinal
-else
-	ag.age_hora_fim <= dataInicial
-	AND ag.age_hora_fim < dataFinal
-end) or (
-	ag.age_data is null
-));
+    select eq.equ_id, eq.equ_nome, eq.equ_descricao 
+      from equipamento eq 
+     where eq.equ_id 
+        not in (
+            select e.equ_id from agendamento a
+        inner join reserva_equipamento r on r.age_id = a.age_id
+        inner join equipamento e on e.equ_id = r.equ_id
+             where e.uni_id = idUnidade
+               and e.equ_ativa = 1
+               and a.age_hora_inicio >= dataInicial
+               and a.age_hora_inicio <= dataFinal
+        )
+       and eq.uni_id = idUnidade
+       and eq.equ_ativa = 1;
 END
